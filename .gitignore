@@ -2,10 +2,13 @@
 ### Maven ###
 target/
 
-## Directory-based project format
+### Directory-based project format ###
 .idea/
 
-## File-based project format
+### File-based project format ###
 *.ipr
 *.iws
 *.iml
+
+### Mac OSX ###
+**/.DS_Store

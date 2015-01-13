@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User extends OtdEntity{
 
     @Column(nullable = false, unique = true)
@@ -23,8 +24,7 @@ public class User extends OtdEntity{
     @Enumerated(EnumType.STRING)
     @CollectionTable(
             name="authorities",
-            joinColumns=@JoinColumn(name="username"))
-
+            joinColumns=@JoinColumn(name="user_id"))
     @Column(name="authority")
     private Set<Role> authorities;
 
