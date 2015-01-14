@@ -20,8 +20,20 @@ public class SwaggerConfiguration {
         @Bean
         public SwaggerSpringMvcPlugin customImplementation(){
             return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
+                    .apiInfo(apiInfo())
                     .includePatterns(".*api/v1.*");
         }
 
-
+        // Todo: later
+        private ApiInfo apiInfo() {
+            ApiInfo apiInfo = new ApiInfo(
+                    "Online Tower Defense",
+                    "Online Tower Defense lts you play both sides of a regular Tower Defense game. Take the role of the attacker, of the defender.",
+                    "",
+                    "maximilian.hoeflich@googlemail.com",
+                    "None Yet",
+                    ""
+            );
+            return apiInfo;
+        }
 }

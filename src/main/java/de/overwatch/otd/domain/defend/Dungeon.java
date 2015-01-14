@@ -7,6 +7,9 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 @Entity
 public class Dungeon  extends OtdEntity {
@@ -21,7 +24,7 @@ public class Dungeon  extends OtdEntity {
 
     @OneToMany(mappedBy = "dungeon")
     @Fetch(FetchMode.SUBSELECT)
-    private Collection<Tower> towers;
+    private Set<Tower> towers = new HashSet<Tower>();
 
     public User getUser() {
         return user;
@@ -39,11 +42,11 @@ public class Dungeon  extends OtdEntity {
         this.dungeonBlueprintId = dungeonBlueprintId;
     }
 
-    public Collection<Tower> getTowers() {
+    public Set<Tower> getTowers() {
         return towers;
     }
 
-    public void setTowers(Collection<Tower> towers) {
+    public void setTowers(Set<Tower> towers) {
         this.towers = towers;
     }
 

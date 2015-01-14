@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -15,10 +16,9 @@ public class AttackForcePattern  extends OtdEntity {
     @Column(nullable = false)
     private String patternName;
 
-    @OneToMany(mappedBy = "attackForcePattern")
+    @OneToMany(mappedBy = "attackForcePattern", fetch = FetchType.EAGER)
     @OrderBy("dispatchesAfter ASC")
-    @Fetch(FetchMode.SUBSELECT)
-    private List<WaveBlueprint> waves;
+    private List<WaveBlueprint> waveBlueprints = new LinkedList<WaveBlueprint>();
 
     public String getPatternName() {
         return patternName;
@@ -28,12 +28,19 @@ public class AttackForcePattern  extends OtdEntity {
         this.patternName = patternName;
     }
 
-    public List<WaveBlueprint> getWaves() {
-        return waves;
+    public List<WaveBlueprint> getWaveBlueprints() {
+        return waveBlueprints;
     }
 
-    public void setWaves(List<WaveBlueprint> waves) {
-        this.waves = waves;
+    public void setWaveBlueprints(List<WaveBlueprint> waveBlueprints) {
+        this.waveBlueprints = waveBlueprints;
+    }
+
+    @Override
+    public String toString() {
+        return "AttackForcePattern{" +
+                "patternName='" + patternName + '\'' +
+                '}';
     }
 
     @Override
@@ -43,26 +50,17 @@ public class AttackForcePattern  extends OtdEntity {
 
         AttackForcePattern that = (AttackForcePattern) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (!patternName.equals(that.patternName)) return false;
-        if (waves != null ? !waves.equals(that.waves) : that.waves != null) return false;
+        if (patternName != null ? !patternName.equals(that.patternName) : that.patternName != null) return false;
+        if (waveBlueprints != null ? !waveBlueprints.equals(that.waveBlueprints) : that.waveBlueprints != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + patternName.hashCode();
-        result = 31 * result + (waves != null ? waves.hashCode() : 0);
+        int result = patternName != null ? patternName.hashCode() : 0;
+        result = 31 * result + (waveBlueprints != null ? waveBlueprints.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "AttackForcePattern{" +
-                "patternName='" + patternName + '\'' +
-                ", id=" + id +
-                '}';
     }
 }

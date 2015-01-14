@@ -6,31 +6,33 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class DungeonBlueprint  extends OtdEntity {
 
     @OneToMany(mappedBy = "dungeonBlueprint")
     @Fetch(FetchMode.SUBSELECT)
-    private Collection<DungeonNode> dungeonNodes;
+    private Set<DungeonNode> dungeonNodes = new HashSet<DungeonNode>();
 
     @OneToMany(mappedBy = "dungeonBlueprint")
     @Fetch(FetchMode.SUBSELECT)
-    private Collection<ConstructionSite> constructionSites;
+    private Set<ConstructionSite> constructionSites = new HashSet<ConstructionSite>();
 
-    public Collection<DungeonNode> getDungeonNodes() {
+    public Set<DungeonNode> getDungeonNodes() {
         return dungeonNodes;
     }
 
-    public void setDungeonNodes(Collection<DungeonNode> dungeonNodes) {
+    public void setDungeonNodes(Set<DungeonNode> dungeonNodes) {
         this.dungeonNodes = dungeonNodes;
     }
 
-    public Collection<ConstructionSite> getConstructionSites() {
+    public Set<ConstructionSite> getConstructionSites() {
         return constructionSites;
     }
 
-    public void setConstructionSites(Collection<ConstructionSite> constructionSites) {
+    public void setConstructionSites(Set<ConstructionSite> constructionSites) {
         this.constructionSites = constructionSites;
     }
 

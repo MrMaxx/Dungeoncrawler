@@ -1,14 +1,15 @@
 package de.overwatch.otd.controller;
 
 
+import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
 import de.overwatch.otd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping(ApiConstants.API_PATH_PREFIX+"/users")
@@ -17,9 +18,36 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody List<User> index() {
+        return userRepository.findAll();
+    }
+
     @RequestMapping(value="{id}", method = RequestMethod.GET)
     public @ResponseBody User show(@PathVariable("id") Integer id) {
         return userRepository.findOne(id);
     }
 
+    /**
+     * Todo: Add Validation for Emails and Hashing of Passwords (after Spring Security is configured)
+     */
+    @RequestMapping( method = RequestMethod.POST)
+    public @ResponseBody User create(
+            @RequestParam String email, @RequestParam String username, @RequestParam String password) {
+
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setEnabled(true);
+        user.setPassword(password);
+
+        HashSet<Role> roles = new HashSet<Role>();
+        roles.add(Role.USER);
+
+        user.setAuthorities(roles);
+
+        userRepository.save(user);
+
+        return user;
+    }
 }

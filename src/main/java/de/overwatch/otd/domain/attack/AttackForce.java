@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class AttackForce  extends OtdEntity {
     @OneToMany(mappedBy = "attackForce")
     @OrderBy("dispatchesAfter ASC")
     @Fetch(FetchMode.SUBSELECT)
-    private List<Wave> waves;
+    private List<Wave> waves = new LinkedList<Wave>();
 
     public User getUser() {
         return user;

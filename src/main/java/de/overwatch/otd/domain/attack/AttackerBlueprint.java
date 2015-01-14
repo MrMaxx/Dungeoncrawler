@@ -9,17 +9,21 @@ import javax.persistence.*;
 public class AttackerBlueprint  extends OtdEntity {
 
     @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private int damage;
-    @Column(nullable = false)
-    private int timeToReload;
-    @Column(nullable = false)
-    private int range;
+    private String type;
     @Column(nullable = false)
     private int price;
     @Column(nullable = false)
     private int speed;
+    @Column(nullable = false)
+    private int maxHealth;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getPrice() {
         return price;
@@ -37,36 +41,12 @@ public class AttackerBlueprint  extends OtdEntity {
         this.speed = speed;
     }
 
-    public String getName() {
-        return name;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public int getTimeToReload() {
-        return timeToReload;
-    }
-
-    public void setTimeToReload(int timeToReload) {
-        this.timeToReload = timeToReload;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     @Override
@@ -76,39 +56,30 @@ public class AttackerBlueprint  extends OtdEntity {
 
         AttackerBlueprint that = (AttackerBlueprint) o;
 
-        if (damage != that.damage) return false;
+        if (maxHealth != that.maxHealth) return false;
         if (price != that.price) return false;
-        if (range != that.range) return false;
         if (speed != that.speed) return false;
-        if (timeToReload != that.timeToReload) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + damage;
-        result = 31 * result + timeToReload;
-        result = 31 * result + range;
+        int result = type != null ? type.hashCode() : 0;
         result = 31 * result + price;
         result = 31 * result + speed;
+        result = 31 * result + maxHealth;
         return result;
     }
 
     @Override
     public String toString() {
         return "AttackerBlueprint{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", damage=" + damage +
-                ", timeToReload=" + timeToReload +
-                ", range=" + range +
+                "type='" + type + '\'' +
                 ", price=" + price +
                 ", speed=" + speed +
+                ", maxHealth=" + maxHealth +
                 '}';
     }
 }

@@ -19,7 +19,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         "de.overwatch.otd.controller",
         "de.overwatch.otd.service",
         "de.overwatch.otd.repository",
-        "de.overwatch.otd.domain"
+        "de.overwatch.otd.domain",
+        "de.overwatch.otd.job",
+        "de.overwatch.otd.repository",
+        "de.overwatch.otd.game"
 })
 @Import({
         SpringMvcConfiguration.class,
