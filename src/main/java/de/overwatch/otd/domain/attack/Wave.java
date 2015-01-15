@@ -1,6 +1,7 @@
 package de.overwatch.otd.domain.attack;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.overwatch.otd.domain.OtdEntity;
 
 import javax.persistence.*;
@@ -9,17 +10,10 @@ import javax.persistence.*;
 public class Wave  extends OtdEntity {
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attack_force_id", nullable = false)
     private AttackForce attackForce;
-
-    // which is a copy of the corresponding waveblueprint
-    @Column(nullable = false)
-    private int dispatchesAfter;
-
-    // which is a copy of the corresponding waveblueprint
-    @Column(nullable = false)
-    private int slots;
 
     @Column(nullable = false)
     private Integer attackerBlueprintId;
@@ -33,22 +27,6 @@ public class Wave  extends OtdEntity {
 
     public void setAttackForce(AttackForce attackForce) {
         this.attackForce = attackForce;
-    }
-
-    public int getDispatchesAfter() {
-        return dispatchesAfter;
-    }
-
-    public void setDispatchesAfter(int dispatchesAfter) {
-        this.dispatchesAfter = dispatchesAfter;
-    }
-
-    public int getSlots() {
-        return slots;
-    }
-
-    public void setSlots(int slots) {
-        this.slots = slots;
     }
 
     public Integer getAttackerBlueprintId() {
@@ -75,8 +53,6 @@ public class Wave  extends OtdEntity {
         Wave wave = (Wave) o;
 
         if (id != null ? !id.equals(wave.id) : wave.id != null) return false;
-        if (dispatchesAfter != wave.dispatchesAfter) return false;
-        if (slots != wave.slots) return false;
         if (attackerBlueprintId != null ? !attackerBlueprintId.equals(wave.attackerBlueprintId) : wave.attackerBlueprintId != null)
             return false;
         if (waveBlueprintId != null ? !waveBlueprintId.equals(wave.waveBlueprintId) : wave.waveBlueprintId != null)
@@ -88,8 +64,6 @@ public class Wave  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + dispatchesAfter;
-        result = 31 * result + slots;
         result = 31 * result + (attackerBlueprintId != null ? attackerBlueprintId.hashCode() : 0);
         result = 31 * result + (waveBlueprintId != null ? waveBlueprintId.hashCode() : 0);
         return result;
@@ -99,8 +73,6 @@ public class Wave  extends OtdEntity {
     public String toString() {
         return "Wave{" +
                 "id=" + id +
-                ", dispatchesAfter=" + dispatchesAfter +
-                ", slots=" + slots +
                 ", attackerBlueprintId=" + attackerBlueprintId +
                 ", waveBlueprintId=" + waveBlueprintId +
                 '}';

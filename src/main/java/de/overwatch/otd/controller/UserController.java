@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @Controller
-@RequestMapping(ApiConstants.API_PATH_PREFIX+"/users")
+@RequestMapping(ApiConstants.API_PATH_PREFIX+"/user")
 public class UserController {
 
     @Autowired
@@ -33,7 +33,9 @@ public class UserController {
      */
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody User create(
-            @RequestParam String email, @RequestParam String username, @RequestParam String password) {
+            @RequestParam(required = true) String email,
+            @RequestParam(required = true) String username,
+            @RequestParam(required = true) String password) {
 
         User user = new User();
         user.setEmail(email);

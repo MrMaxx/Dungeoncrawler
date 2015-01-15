@@ -31,3 +31,11 @@ insert into construction_site (id, dungeon_blueprint_id, x, y) values (2, 1, 3, 
 
 insert into tower_blueprint (id, name, damage, time_to_reload, range, price) values (1, 'GATTLING', 100, 100, 100, 100);
 insert into tower_blueprint (id, name, damage, time_to_reload, range, price) values (2, 'FLAMER', 800, 1500, 50, 200);
+
+insert into attack_force (id, user_id, attack_force_pattern_id) values (1, 1, 1);
+insert into attack_force (id, user_id, attack_force_pattern_id) values (2, 2, 1);
+
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (1, 1, 1, 1);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (2, 1, 2, 2);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (3, 2, 2, 1);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (4, 2, 2, 2);

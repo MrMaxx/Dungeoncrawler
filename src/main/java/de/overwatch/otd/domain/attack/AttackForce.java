@@ -1,18 +1,30 @@
 package de.overwatch.otd.domain.attack;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.overwatch.otd.domain.OtdEntity;
 import de.overwatch.otd.domain.User;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "graph.attackForce.withWaves",
+                attributeNodes = {
+                        @NamedAttributeNode("waves")
+                }
+        )
+})
 @Entity
 public class AttackForce  extends OtdEntity {
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -21,9 +33,9 @@ public class AttackForce  extends OtdEntity {
     private Integer attackForcePatternId;
 
     @OneToMany(mappedBy = "attackForce")
-    @OrderBy("dispatchesAfter ASC")
     @Fetch(FetchMode.SUBSELECT)
-    private List<Wave> waves = new LinkedList<Wave>();
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private Set<Wave> waves = new HashSet<Wave>();
 
     public User getUser() {
         return user;
@@ -41,11 +53,11 @@ public class AttackForce  extends OtdEntity {
         this.attackForcePatternId = attackForcePatternId;
     }
 
-    public List<Wave> getWaves() {
+    public Set<Wave> getWaves() {
         return waves;
     }
 
-    public void setWaves(List<Wave> waves) {
+    public void setWaves(Set<Wave> waves) {
         this.waves = waves;
     }
 
@@ -56,9 +68,9 @@ public class AttackForce  extends OtdEntity {
 
         AttackForce that = (AttackForce) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (attackForcePatternId != null ? !attackForcePatternId.equals(that.attackForcePatternId) : that.attackForcePatternId != null)
             return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (user != null ? !user.equals(that.user) : that.user != null) return false;
         if (waves != null ? !waves.equals(that.waves) : that.waves != null) return false;
 
