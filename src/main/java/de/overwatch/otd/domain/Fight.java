@@ -71,6 +71,7 @@ public class Fight extends OtdEntity{
 
         Fight fight = (Fight) o;
 
+        if (id != null ? !id.equals(fight.id) : fight.id != null) return false;
         if (attackForce != null ? !attackForce.equals(fight.attackForce) : fight.attackForce != null) return false;
         if (dungeon != null ? !dungeon.equals(fight.dungeon) : fight.dungeon != null) return false;
         if (fightState != fight.fightState) return false;
@@ -89,7 +90,7 @@ public class Fight extends OtdEntity{
     @Override
     public String toString() {
         return "Fight{" +
-                "fightState=" + fightState +
+                "id=" + id +
                 '}';
     }
 }

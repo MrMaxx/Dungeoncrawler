@@ -1,6 +1,7 @@
 package de.overwatch.otd.domain.defend;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.overwatch.otd.domain.OtdEntity;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Entity
 public class ConstructionSite extends OtdEntity{
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dungeon_blueprint_id", nullable = false)
     private DungeonBlueprint dungeonBlueprint;
@@ -50,11 +51,9 @@ public class ConstructionSite extends OtdEntity{
 
         ConstructionSite that = (ConstructionSite) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (x != that.x) return false;
         if (y != that.y) return false;
-        if (dungeonBlueprint != null ? !dungeonBlueprint.equals(that.dungeonBlueprint) : that.dungeonBlueprint != null)
-            return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
 
         return true;
     }
@@ -62,7 +61,6 @@ public class ConstructionSite extends OtdEntity{
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (dungeonBlueprint != null ? dungeonBlueprint.hashCode() : 0);
         result = 31 * result + x;
         result = 31 * result + y;
         return result;

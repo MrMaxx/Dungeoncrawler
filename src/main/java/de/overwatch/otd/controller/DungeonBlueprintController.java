@@ -2,9 +2,9 @@ package de.overwatch.otd.controller;
 
 
 import de.overwatch.otd.domain.attack.AttackForcePattern;
-import de.overwatch.otd.domain.attack.AttackerBlueprint;
+import de.overwatch.otd.domain.defend.DungeonBlueprint;
 import de.overwatch.otd.repository.AttackForcePatternRepository;
-import de.overwatch.otd.repository.AttackerBlueprintRepository;
+import de.overwatch.otd.repository.DungeonBlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(ApiConstants.API_PATH_PREFIX+"/attackForcePattern")
-public class AttackForcePatternController {
+@RequestMapping(ApiConstants.API_PATH_PREFIX+"/dungeonBlueprint")
+public class DungeonBlueprintController {
 
     @Autowired
-    private AttackForcePatternRepository attackForcePatternRepository;
+    private DungeonBlueprintRepository dungeonBlueprintRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<AttackForcePattern> index() {
-        return attackForcePatternRepository.findAllByOrderByIdAsc();
+    public @ResponseBody List<DungeonBlueprint> index() {
+        return dungeonBlueprintRepository.findAllByOrderByIdAsc();
     }
 
     @RequestMapping(value="{id}", method = RequestMethod.GET)
-    public @ResponseBody AttackForcePattern show(@PathVariable("id") Integer id) {
-        return attackForcePatternRepository.findById(id);
+    public @ResponseBody DungeonBlueprint show(@PathVariable("id") Integer id) {
+        return dungeonBlueprintRepository.findById(id);
     }
 
 }

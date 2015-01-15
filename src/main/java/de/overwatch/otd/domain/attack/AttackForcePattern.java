@@ -10,6 +10,14 @@ import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "graph.attackForcePattern.complete",
+                attributeNodes = {
+                        @NamedAttributeNode("waveBlueprints")
+                }
+        )
+})
 @Entity
 public class AttackForcePattern  extends OtdEntity {
 
@@ -39,7 +47,8 @@ public class AttackForcePattern  extends OtdEntity {
     @Override
     public String toString() {
         return "AttackForcePattern{" +
-                "patternName='" + patternName + '\'' +
+                "id='" + id + '\'' +
+                ", patternName='" + patternName + '\'' +
                 '}';
     }
 
@@ -50,9 +59,8 @@ public class AttackForcePattern  extends OtdEntity {
 
         AttackForcePattern that = (AttackForcePattern) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (patternName != null ? !patternName.equals(that.patternName) : that.patternName != null) return false;
-        if (waveBlueprints != null ? !waveBlueprints.equals(that.waveBlueprints) : that.waveBlueprints != null)
-            return false;
 
         return true;
     }
@@ -60,7 +68,7 @@ public class AttackForcePattern  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = patternName != null ? patternName.hashCode() : 0;
-        result = 31 * result + (waveBlueprints != null ? waveBlueprints.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }

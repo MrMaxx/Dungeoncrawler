@@ -5,12 +5,23 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "graph.dungeon.complete",
+                attributeNodes = {
+                        @NamedAttributeNode("dungeonNodes"),
+                        @NamedAttributeNode("constructionSites")
+                }
+        )
+})
 public class DungeonBlueprint  extends OtdEntity {
+
+    @Column
+    private String name;
 
     @OneToMany(mappedBy = "dungeonBlueprint")
     @Fetch(FetchMode.SUBSELECT)
@@ -19,6 +30,14 @@ public class DungeonBlueprint  extends OtdEntity {
     @OneToMany(mappedBy = "dungeonBlueprint")
     @Fetch(FetchMode.SUBSELECT)
     private Set<ConstructionSite> constructionSites = new HashSet<ConstructionSite>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Set<DungeonNode> getDungeonNodes() {
         return dungeonNodes;
@@ -39,14 +58,12 @@ public class DungeonBlueprint  extends OtdEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof DungeonBlueprint)) return false;
 
         DungeonBlueprint that = (DungeonBlueprint) o;
 
-        if (constructionSites != null ? !constructionSites.equals(that.constructionSites) : that.constructionSites != null)
-            return false;
-        if (dungeonNodes != null ? !dungeonNodes.equals(that.dungeonNodes) : that.dungeonNodes != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
@@ -54,15 +71,16 @@ public class DungeonBlueprint  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (dungeonNodes != null ? dungeonNodes.hashCode() : 0);
-        result = 31 * result + (constructionSites != null ? constructionSites.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+
         return result;
     }
 
     @Override
     public String toString() {
         return "DungeonBlueprint{" +
-                "id=" + id +
+                "name='" + name + '\'' +
+                "id='" + id + '\'' +
                 '}';
     }
 }

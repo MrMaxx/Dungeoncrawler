@@ -57,9 +57,8 @@ public class Dungeon  extends OtdEntity {
 
         Dungeon dungeon = (Dungeon) o;
 
-        if (dungeonBlueprintId != null ? !dungeonBlueprintId.equals(dungeon.dungeonBlueprintId) : dungeon.dungeonBlueprintId != null)
+        if (id != null ? !id.equals(dungeon.id) : dungeon.id != null)
             return false;
-        if (towers != null ? !towers.equals(dungeon.towers) : dungeon.towers != null) return false;
         if (user != null ? !user.equals(dungeon.user) : dungeon.user != null) return false;
 
         return true;
@@ -67,8 +66,8 @@ public class Dungeon  extends OtdEntity {
 
     @Override
     public int hashCode() {
-        int result = user != null ? user.hashCode() : 0;
-        result = 31 * result + (dungeonBlueprintId != null ? dungeonBlueprintId.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (towers != null ? towers.hashCode() : 0);
         return result;
     }

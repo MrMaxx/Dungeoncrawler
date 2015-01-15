@@ -74,12 +74,11 @@ public class Wave  extends OtdEntity {
 
         Wave wave = (Wave) o;
 
+        if (id != null ? !id.equals(wave.id) : wave.id != null) return false;
         if (dispatchesAfter != wave.dispatchesAfter) return false;
         if (slots != wave.slots) return false;
-        if (attackForce != null ? !attackForce.equals(wave.attackForce) : wave.attackForce != null) return false;
         if (attackerBlueprintId != null ? !attackerBlueprintId.equals(wave.attackerBlueprintId) : wave.attackerBlueprintId != null)
             return false;
-        if (id != null ? !id.equals(wave.id) : wave.id != null) return false;
         if (waveBlueprintId != null ? !waveBlueprintId.equals(wave.waveBlueprintId) : wave.waveBlueprintId != null)
             return false;
 
@@ -89,7 +88,6 @@ public class Wave  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (attackForce != null ? attackForce.hashCode() : 0);
         result = 31 * result + dispatchesAfter;
         result = 31 * result + slots;
         result = 31 * result + (attackerBlueprintId != null ? attackerBlueprintId.hashCode() : 0);

@@ -62,19 +62,18 @@ public class WaveBlueprint  extends OtdEntity {
 
         WaveBlueprint that = (WaveBlueprint) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (delayBetweenSpawns != that.delayBetweenSpawns) return false;
         if (dispatchesAfter != that.dispatchesAfter) return false;
         if (slots != that.slots) return false;
-        if (attackForcePattern != null ? !attackForcePattern.equals(that.attackForcePattern) : that.attackForcePattern != null)
-            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = dispatchesAfter;
-        result = 31 * result + (attackForcePattern != null ? attackForcePattern.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + dispatchesAfter;
         result = 31 * result + slots;
         result = 31 * result + delayBetweenSpawns;
         return result;
@@ -83,7 +82,8 @@ public class WaveBlueprint  extends OtdEntity {
     @Override
     public String toString() {
         return "WaveBlueprint{" +
-                "dispatchesAfter=" + dispatchesAfter +
+                "id=" + id +
+                ", dispatchesAfter=" + dispatchesAfter +
                 ", slots=" + slots +
                 ", delayBetweenSpawns=" + delayBetweenSpawns +
                 '}';

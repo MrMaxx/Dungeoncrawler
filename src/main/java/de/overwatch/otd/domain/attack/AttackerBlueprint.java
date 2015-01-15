@@ -66,7 +66,8 @@ public class AttackerBlueprint  extends OtdEntity {
 
     @Override
     public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + price;
         result = 31 * result + speed;
         result = 31 * result + maxHealth;
@@ -76,6 +77,7 @@ public class AttackerBlueprint  extends OtdEntity {
     @Override
     public String toString() {
         return "AttackerBlueprint{" +
+                "id='" + id + '\'' +
                 "type='" + type + '\'' +
                 ", price=" + price +
                 ", speed=" + speed +
