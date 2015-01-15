@@ -39,3 +39,12 @@ insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id)
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (2, 1, 2, 2);
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (3, 2, 2, 1);
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (4, 2, 2, 2);
+
+insert into dungeon (id, user_id, dungeon_blueprint_id) values (1, 1, 1);
+insert into dungeon (id, user_id, dungeon_blueprint_id) values (2, 2, 1);
+
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (1, 1, 1, 1);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (2, 1, 2, 2);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 2, 1, 2);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 2, 2, 2);
+

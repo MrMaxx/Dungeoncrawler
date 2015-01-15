@@ -1,5 +1,6 @@
 package de.overwatch.otd.domain.defend;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.overwatch.otd.domain.OtdEntity;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 public class Tower extends OtdEntity {
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dungeon_id", nullable = false)
     private Dungeon dungeon;
@@ -51,7 +53,6 @@ public class Tower extends OtdEntity {
 
         if (constructionSiteId != null ? !constructionSiteId.equals(tower.constructionSiteId) : tower.constructionSiteId != null)
             return false;
-        if (dungeon != null ? !dungeon.equals(tower.dungeon) : tower.dungeon != null) return false;
         if (id != null ? !id.equals(tower.id) : tower.id != null) return false;
         if (towerBlueprintId != null ? !towerBlueprintId.equals(tower.towerBlueprintId) : tower.towerBlueprintId != null)
             return false;
@@ -62,7 +63,6 @@ public class Tower extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (dungeon != null ? dungeon.hashCode() : 0);
         result = 31 * result + (constructionSiteId != null ? constructionSiteId.hashCode() : 0);
         result = 31 * result + (towerBlueprintId != null ? towerBlueprintId.hashCode() : 0);
         return result;

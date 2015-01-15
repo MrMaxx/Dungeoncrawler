@@ -1,7 +1,9 @@
 package de.overwatch.otd.domain.defend;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.overwatch.otd.domain.OtdEntity;
 import de.overwatch.otd.domain.User;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,6 +17,7 @@ import java.util.Set;
 public class Dungeon  extends OtdEntity {
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -24,6 +27,7 @@ public class Dungeon  extends OtdEntity {
 
     @OneToMany(mappedBy = "dungeon")
     @Fetch(FetchMode.SUBSELECT)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Tower> towers = new HashSet<Tower>();
 
     public User getUser() {
@@ -68,7 +72,6 @@ public class Dungeon  extends OtdEntity {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (towers != null ? towers.hashCode() : 0);
         return result;
     }
 
