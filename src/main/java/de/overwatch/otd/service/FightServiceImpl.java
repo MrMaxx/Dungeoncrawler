@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -39,7 +40,7 @@ public class FightServiceImpl implements FightService{
 
                 String eventStream = gson.toJson(outstandingFights);
 
-                fight.setEventStream(eventStream);
+                fight.setEvents(eventStream);
                 fight.setFightState(Fight.FightState.COMPLETED);
             }catch(Exception e){
                 fight.setFightState(Fight.FightState.ERROR);
@@ -47,5 +48,24 @@ public class FightServiceImpl implements FightService{
 
         }
 
+    }
+
+    @Override
+    public PublicFight getPublicFight(Integer id, Integer userId) {
+        Fight fight = fightRepository.findByIdAndUserId(id, userId);
+        if(fight==null){return null;}
+        return new PublicFight(fight);
+    }
+
+    @Override
+    public List<PublicFight> getPublicFights(Integer userId) {
+
+        List<PublicFight> result = new LinkedList<PublicFight>();
+        List<Fight> fights = fightRepository.findByUserId(userId);
+        for(Fight fight : fights){
+            result.add(new PublicFight(fight));
+        }
+
+        return result;
     }
 }

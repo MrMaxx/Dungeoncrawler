@@ -1,7 +1,7 @@
 package de.overwatch.otd.game.events;
 
 
-public class AttackerSpawned extends GameEvent{
+public class TowerSpawned extends GameEvent{
 
     private int time;
     private String type;
@@ -9,13 +9,8 @@ public class AttackerSpawned extends GameEvent{
     private int x,y;
 
     @Override
-    public String getType() {
-        return EVENT_TYPE_SPAWN;
-    }
-
-    @Override
     public String toString() {
-        return "AttackerSpawned{" +
+        return "TowerSpawned{" +
                 "time=" + time +
                 ", type='" + type + '\'' +
                 ", id=" + id +
@@ -27,9 +22,9 @@ public class AttackerSpawned extends GameEvent{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AttackerSpawned)) return false;
+        if (!(o instanceof TowerSpawned)) return false;
 
-        AttackerSpawned that = (AttackerSpawned) o;
+        TowerSpawned that = (TowerSpawned) o;
 
         if (time != that.time) return false;
         if (x != that.x) return false;
@@ -56,6 +51,10 @@ public class AttackerSpawned extends GameEvent{
 
     public void setTime(int time) {
         this.time = time;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {

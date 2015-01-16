@@ -2,7 +2,6 @@ package de.overwatch.otd.controller.user;
 
 
 import de.overwatch.otd.controller.ApiConstants;
-import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
 import de.overwatch.otd.domain.attack.AttackForce;
 import de.overwatch.otd.repository.AttackForceRepository;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 /**

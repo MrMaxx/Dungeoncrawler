@@ -1,9 +1,7 @@
 package de.overwatch.otd.controller;
 
 
-import de.overwatch.otd.domain.attack.AttackForcePattern;
 import de.overwatch.otd.domain.defend.DungeonBlueprint;
-import de.overwatch.otd.repository.AttackForcePatternRepository;
 import de.overwatch.otd.repository.DungeonBlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

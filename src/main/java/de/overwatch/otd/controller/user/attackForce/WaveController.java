@@ -2,11 +2,9 @@ package de.overwatch.otd.controller.user.attackForce;
 
 
 import de.overwatch.otd.controller.ApiConstants;
-import de.overwatch.otd.domain.User;
 import de.overwatch.otd.domain.attack.AttackForce;
 import de.overwatch.otd.domain.attack.Wave;
 import de.overwatch.otd.repository.AttackForceRepository;
-import de.overwatch.otd.repository.UserRepository;
 import de.overwatch.otd.repository.WaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

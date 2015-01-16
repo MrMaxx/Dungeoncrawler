@@ -1,9 +1,7 @@
 package de.overwatch.otd.controller;
 
 
-import de.overwatch.otd.domain.attack.AttackerBlueprint;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
-import de.overwatch.otd.repository.AttackerBlueprintRepository;
 import de.overwatch.otd.repository.TowerBlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

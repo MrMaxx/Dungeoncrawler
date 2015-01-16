@@ -3,7 +3,8 @@ package de.overwatch.otd.domain.attack;
 
 import de.overwatch.otd.domain.OtdEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
 public class AttackerBlueprint  extends OtdEntity {

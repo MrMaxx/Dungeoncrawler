@@ -1,10 +1,7 @@
 package de.overwatch.otd.domain.attack;
 
 
-
 import de.overwatch.otd.domain.OtdEntity;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.LinkedList;

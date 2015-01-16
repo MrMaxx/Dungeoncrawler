@@ -48,3 +48,6 @@ insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) val
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 2, 1, 2);
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 2, 2, 2);
 
+insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (1,1,1,'2015-01-16 09:42:01','ISSUED',null, null);
+
+

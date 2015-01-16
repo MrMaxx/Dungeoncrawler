@@ -2,8 +2,6 @@ package de.overwatch.otd.game.model;
 
 import de.overwatch.otd.domain.attack.AttackerBlueprint;
 
-import javax.persistence.Column;
-
 
 public class Attacker {
 

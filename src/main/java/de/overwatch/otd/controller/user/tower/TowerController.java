@@ -2,14 +2,10 @@ package de.overwatch.otd.controller.user.tower;
 
 
 import de.overwatch.otd.controller.ApiConstants;
-import de.overwatch.otd.domain.attack.AttackForce;
-import de.overwatch.otd.domain.attack.Wave;
 import de.overwatch.otd.domain.defend.Dungeon;
 import de.overwatch.otd.domain.defend.Tower;
-import de.overwatch.otd.repository.AttackForceRepository;
 import de.overwatch.otd.repository.DungeonRepository;
 import de.overwatch.otd.repository.TowerRepository;
-import de.overwatch.otd.repository.WaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +40,9 @@ public class TowerController {
     }
 
     /**
-     * Todo: Validation if AttackForce exists and proper errorcodes on failure
-     * Todo: Validate if AttackerBlueprint exists and proper errorcodes on failure
+     * Todo: Validation if Dungeon exists and proper errorcodes on failure
+     * Todo: Validate if towerBlueprint exists and proper errorcodes on failure
+     * Todo: Validate if constructionSite exists and proper errorcodes on failure
      */
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody Tower create(
@@ -68,7 +65,7 @@ public class TowerController {
 
     /**
      * Todo: authorization and return http status code 204
-     * Todo: Validation if AttackForce exists + belongs to user and proper errorcodes on failure
+     * Todo: Validation if Dungeon exists + belongs to user and proper errorcodes on failure
      *
      */
     @RequestMapping( method = RequestMethod.DELETE)

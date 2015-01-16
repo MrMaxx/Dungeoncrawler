@@ -3,9 +3,9 @@ package de.overwatch.otd.controller.user;
 
 import de.overwatch.otd.controller.ApiConstants;
 import de.overwatch.otd.domain.User;
-import de.overwatch.otd.domain.attack.AttackForce;
 import de.overwatch.otd.domain.defend.Dungeon;
-import de.overwatch.otd.repository.*;
+import de.overwatch.otd.repository.DungeonRepository;
+import de.overwatch.otd.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
