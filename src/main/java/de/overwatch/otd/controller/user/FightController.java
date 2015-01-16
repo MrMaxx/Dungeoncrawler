@@ -11,6 +11,7 @@ import de.overwatch.otd.repository.FightRepository;
 import de.overwatch.otd.service.FightService;
 import de.overwatch.otd.service.PublicFight;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,10 +47,12 @@ public class FightController {
         return fightService.getPublicFight(id, userId);
     }
 
-    @RequestMapping(value="{id}/yevents", method = RequestMethod.GET)
+    @RequestMapping(value="{id}/events", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String events(@PathVariable("id") Integer id,
                                           @PathVariable("userId") Integer userId) {
         Fight fight = fightRepository.findByIdAndUserId(id, userId);
+
+        if(fight==null){ return null; }
 
         if(fight.getFightState() != Fight.FightState.COMPLETED){
             return null;

@@ -4,7 +4,7 @@ package de.overwatch.otd.game.events;
 public class AttackerSpawned extends GameEvent{
 
     private int time;
-    private String type;
+    private String attackerType;
     private Integer id;
     private int x,y;
 
@@ -17,7 +17,7 @@ public class AttackerSpawned extends GameEvent{
     public String toString() {
         return "AttackerSpawned{" +
                 "time=" + time +
-                ", type='" + type + '\'' +
+                ", attackerType='" + attackerType + '\'' +
                 ", id=" + id +
                 ", x=" + x +
                 ", y=" + y +
@@ -35,7 +35,7 @@ public class AttackerSpawned extends GameEvent{
         if (x != that.x) return false;
         if (y != that.y) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (attackerType != null ? !attackerType.equals(that.attackerType) : that.attackerType != null) return false;
 
         return true;
     }
@@ -43,7 +43,7 @@ public class AttackerSpawned extends GameEvent{
     @Override
     public int hashCode() {
         int result = time;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (attackerType != null ? attackerType.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + x;
         result = 31 * result + y;
@@ -58,8 +58,12 @@ public class AttackerSpawned extends GameEvent{
         this.time = time;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAttackerType(String attackerType) {
+        this.attackerType = attackerType;
+    }
+
+    public String getAttackerType() {
+        return attackerType;
     }
 
     public Integer getId() {

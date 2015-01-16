@@ -48,6 +48,7 @@ insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) val
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 2, 1, 2);
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 2, 2, 2);
 
-insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (1,1,1,'2015-01-16 09:42:01','ISSUED',null, null);
+insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (1,2,1,'2015-01-16 09:42:01','ISSUED',null, null);
+insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (2,1,2,'2015-01-16 14:11:42','COMPLETED','ATTACKER_WON', '{"type": "SPAWN","time":100,"attackerTqype":"GRUNT","id":1,"x":2,"y":2}');
 
 

@@ -23,7 +23,7 @@ public class SpawnProcessor {
             if( spawn.getExecuteAfterMillis() == tickInMilliseconds ){
                 AttackerSpawned event = new AttackerSpawned();
                 event.setId(spawn.getAttacker().getId());
-                event.setType(spawn.getAttacker().getType());
+                event.setAttackerType(spawn.getAttacker().getType());
                 event.setTime(tickInMilliseconds);
 
                 events.add(event);
