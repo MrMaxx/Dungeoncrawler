@@ -3,12 +3,11 @@ package de.overwatch.otd.game;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
-import de.overwatch.otd.domain.Fight;
 import de.overwatch.otd.domain.attack.*;
 import de.overwatch.otd.domain.defend.DungeonNode;
-import de.overwatch.otd.domain.defend.TowerBlueprint;
 import de.overwatch.otd.game.model.*;
 import de.overwatch.otd.game.util.IdGenerator;
+import de.overwatch.otd.game.model.NodeVisit;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,17 +43,6 @@ public class AttackerSpawnBuilder {
 
         List<AttackerSpawn> result = new LinkedList<AttackerSpawn>();
 
-        int currentCheckPoint = 0;
-        DungeonNode startNode = null;
-
-        while( startNode == null && currentCheckPoint < 20 ){
-            startNode = checkPointToDungeonNodeMap.get(Integer.valueOf(currentCheckPoint));
-            currentCheckPoint++;
-        }
-        if(startNode == null){
-            throw new IllegalStateException("There is no DungeonNode with a checkPoint < 20 for this Dungeon.");
-        }
-
         for(Wave wave : attackForce.getWaves()){
 
             WaveBlueprint waveBlueprint = idToWaveBlueprintMap.get(wave.getWaveBlueprintId());
@@ -63,13 +51,18 @@ public class AttackerSpawnBuilder {
 
                 Attacker attacker = new Attacker(
                         idGenerator.getNextId(),
-                        idToAttackerBlueprintMap.get(wave.getAttackerBlueprintId()),
-                        new Coordinate(startNode.getX(), startNode.getY()));
+                        idToAttackerBlueprintMap.get(wave.getAttackerBlueprintId()));
 
+                DungeonNode start = checkPointToDungeonNodeMap.get(Integer.valueOf(0));
+
+                int spawnsAt = waveBlueprint.getDispatchesAfter()+(waveBlueprint.getDelayBetweenSpawns()*i);
+
+                attacker.moveTo(new Coordinate(start.getX(), start.getY()));
+                attacker.setLastDungeonNodeVisit(
+                        new NodeVisit(new Coordinate(start.getX(), start.getY()), spawnsAt), 0);
                 result.add(
                         new AttackerSpawn(
-                                waveBlueprint.getDispatchesAfter()+(waveBlueprint.getDelayBetweenSpawns()*i),
-                                attacker));
+                                spawnsAt, attacker));
             }
         }
 

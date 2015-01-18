@@ -20,6 +20,7 @@ import de.overwatch.otd.repository.TowerBlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
                 return Integer.valueOf(from.getCheckPoint());
             }
         });
+        checkPointToDungeonNodeMap = normalizeDungeonNodes(checkPointToDungeonNodeMap);
 
         AttackForcePattern attackForcePattern = attackForcePatternRepository.findById(fight.getAttackForce().getAttackForcePatternId());
         IdGenerator idGenerator = new IdGenerator();
@@ -82,9 +84,32 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
                 fight.getDungeon(), idToDefenderBlueprintMap, idToConstructionSiteMap, idGenerator).build();
 
 
-        GameEngine gameEngine = new GameEngine(attackerSpawns, defenderSpawns);
+        GameState gameState = new GameState(attackerSpawns, defenderSpawns, checkPointToDungeonNodeMap);
+
+        GameEngine gameEngine = new GameEngine(gameState);
 
         return gameEngine;
     }
 
+    /**
+     * If the DungeonBlueprint is missing a checkPoint we need to normalize this
+     */
+    private Map<Integer, DungeonNode> normalizeDungeonNodes(Map<Integer, DungeonNode> map){
+
+        Map<Integer,DungeonNode> normalizedMap = new HashMap<Integer, DungeonNode>();
+
+        int loopIndex = 0;
+        int normalizedIndex = 0;
+        while(map.size() > normalizedIndex){
+            Integer currentKey = Integer.valueOf(loopIndex);
+            DungeonNode node = map.get(currentKey);
+            if(node != null){
+                normalizedMap.put(normalizedIndex, node);
+                normalizedIndex ++;
+            }
+            loopIndex++;
+        }
+
+        return normalizedMap;
+    }
 }

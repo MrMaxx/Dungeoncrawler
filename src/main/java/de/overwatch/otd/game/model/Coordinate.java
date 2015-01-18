@@ -14,11 +14,24 @@ public class Coordinate {
         this.y = y;
     }
 
+    public Coordinate(Coordinate coordinate) {
+        this.x = coordinate.getX();
+        this.y = coordinate.getY();
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

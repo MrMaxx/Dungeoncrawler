@@ -16,10 +16,13 @@ public class Attacker {
     private int health;
 
     private Coordinate coordinate;
+    private NodeVisit lastNodeVisit;
+    private int lastDungeonNodeIndex;
+    private NodeVisit nextNodeVisit;
 
-    public Attacker(Integer id, AttackerBlueprint attackerBlueprint, Coordinate coordinate) {
+
+    public Attacker(Integer id, AttackerBlueprint attackerBlueprint) {
         this.id = id;
-        this.coordinate = coordinate;
         type = attackerBlueprint.getType();
         speed = attackerBlueprint.getSpeed();
         health = attackerBlueprint.getMaxHealth();
@@ -37,8 +40,14 @@ public class Attacker {
         return health > 0;
     }
 
+    public void setLastDungeonNodeVisit(NodeVisit lastDungeonNodeVisit, int dungeonNodeIndex ) {
+        this.lastNodeVisit = lastDungeonNodeVisit;
+        this.lastDungeonNodeIndex = dungeonNodeIndex;
+    }
 
-
+    public void setNextNodeVisit(NodeVisit nextNodeVisit) {
+        this.nextNodeVisit = nextNodeVisit;
+    }
 
     public Integer getId() {
         return id;
@@ -58,5 +67,31 @@ public class Attacker {
 
     public Coordinate getCoordinate() {
         return coordinate;
+    }
+
+    public NodeVisit getLastNodeVisit() {
+        return lastNodeVisit;
+    }
+
+    public int getLastDungeonNodeIndex() {
+        return lastDungeonNodeIndex;
+    }
+
+    public NodeVisit getNextNodeVisit() {
+        return nextNodeVisit;
+    }
+
+    @Override
+    public String toString() {
+        return "Attacker{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", speed=" + speed +
+                ", health=" + health +
+                ", coordinate=" + coordinate +
+                ", lastNodeVisit=" + lastNodeVisit +
+                ", lastDungeonNodeIndex=" + lastDungeonNodeIndex +
+                ", nextNodeVisit=" + nextNodeVisit +
+                '}';
     }
 }
