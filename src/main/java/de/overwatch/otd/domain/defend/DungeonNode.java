@@ -14,6 +14,9 @@ public class DungeonNode  extends OtdEntity {
     @Column
     private int y;
 
+    @Column
+    private int checkPoint;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dungeon_blueprint_id", nullable = false)
@@ -43,6 +46,14 @@ public class DungeonNode  extends OtdEntity {
         this.y = y;
     }
 
+    public int getCheckPoint() {
+        return checkPoint;
+    }
+
+    public void setCheckPoint(int checkPoint) {
+        this.checkPoint = checkPoint;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +64,7 @@ public class DungeonNode  extends OtdEntity {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (x != that.x) return false;
         if (y != that.y) return false;
+        if (checkPoint != that.checkPoint) return false;
 
         return true;
     }
@@ -62,6 +74,7 @@ public class DungeonNode  extends OtdEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + x;
         result = 31 * result + y;
+        result = 31 * result + checkPoint;
         return result;
     }
 
@@ -71,6 +84,7 @@ public class DungeonNode  extends OtdEntity {
                 "id=" + id +
                 ", x=" + x +
                 ", y=" + y +
+                ", checkPoint=" + checkPoint +
                 '}';
     }
 }

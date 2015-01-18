@@ -3,22 +3,19 @@ package de.overwatch.otd.game.processor;
 
 import de.overwatch.otd.game.events.AttackerSpawned;
 import de.overwatch.otd.game.events.GameEvent;
-import de.overwatch.otd.game.model.Spawn;
+import de.overwatch.otd.game.model.AttackerSpawn;
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Processes if there are any SpawnEvents are taking place in this round/millisecond of the game
- */
-public class SpawnProcessor {
+public class AttackerSpawnProcessor {
 
 
-    public static List<GameEvent> process(List<Spawn> spawnes, int tickInMilliseconds){
+    public static List<GameEvent> process(List<AttackerSpawn> spawnes, int tickInMilliseconds){
 
         List<GameEvent> events = new LinkedList<GameEvent>();
 
-        for(Spawn spawn : spawnes){
+        for(AttackerSpawn spawn : spawnes){
 
             if( spawn.getExecuteAfterMillis() == tickInMilliseconds ){
                 AttackerSpawned event = new AttackerSpawned();

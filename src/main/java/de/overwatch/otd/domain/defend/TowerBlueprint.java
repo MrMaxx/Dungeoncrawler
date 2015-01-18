@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class TowerBlueprint  extends OtdEntity {
 
     @Column(nullable = false)
-    private String name;
+    private String type;
     @Column(nullable = false)
     private int damage;
     @Column(nullable = false)
@@ -19,12 +19,12 @@ public class TowerBlueprint  extends OtdEntity {
     @Column(nullable = false)
     private int price;
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getDamage() {
@@ -71,7 +71,7 @@ public class TowerBlueprint  extends OtdEntity {
         if (range != that.range) return false;
         if (timeToReload != that.timeToReload) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
     }
@@ -79,7 +79,7 @@ public class TowerBlueprint  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + damage;
         result = 31 * result + timeToReload;
         result = 31 * result + range;
@@ -91,7 +91,7 @@ public class TowerBlueprint  extends OtdEntity {
     public String toString() {
         return "TowerBlueprint{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
                 ", damage=" + damage +
                 ", timeToReload=" + timeToReload +
                 ", range=" + range +

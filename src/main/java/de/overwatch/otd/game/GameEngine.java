@@ -3,8 +3,10 @@ package de.overwatch.otd.game;
 import de.overwatch.otd.domain.defend.Tower;
 import de.overwatch.otd.game.events.GameEvent;
 import de.overwatch.otd.game.model.Attacker;
-import de.overwatch.otd.game.model.Spawn;
-import de.overwatch.otd.game.processor.SpawnProcessor;
+import de.overwatch.otd.game.model.AttackerSpawn;
+import de.overwatch.otd.game.model.DefenderSpawn;
+import de.overwatch.otd.game.processor.AttackerSpawnProcessor;
+import de.overwatch.otd.game.processor.DefenderSpawnProcessor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,26 +19,32 @@ public class GameEngine {
 
     private int milliSeconds;
 
-    private List<Spawn> spawnes;
+    private List<AttackerSpawn> attackerSpawnes;
+    private List<DefenderSpawn> defenderSpawnes;
     private List<Attacker> attackers;
     private List<Tower> towers;
 
     private List<GameEvent> gameEvents = new LinkedList<GameEvent>();
 
-    public GameEngine(List<Spawn> spawnes, List<Tower> towers) {
-        this.spawnes = spawnes;
-        this.towers = towers;
+    public GameEngine(List<AttackerSpawn> spawnes, List<DefenderSpawn> defenderSpawnes) {
+        this.attackerSpawnes = spawnes;
+        this.defenderSpawnes = defenderSpawnes;
     }
 
+
+
+
     public List<GameEvent> processGame(){
+        milliSeconds = 0;
+        /* a Fight has to be finished in 10 Minutes */
+        while( milliSeconds < 600000 ){
 
-        /* As long as there are Attackers on the Board, and we do not exceed 10 Minutes we continue */
-        while( ! attackers.isEmpty() && milliSeconds < 600000 ){
-
-            gameEvents.addAll(SpawnProcessor.process(spawnes, milliSeconds));
+            gameEvents.addAll(DefenderSpawnProcessor.process(defenderSpawnes, milliSeconds));
+            gameEvents.addAll(AttackerSpawnProcessor.process(attackerSpawnes, milliSeconds));
 
 
 
+            milliSeconds++;
         }
 
 

@@ -34,6 +34,7 @@ public class Fight extends OtdEntity{
 
     @JsonIgnore
     @Column
+    @Lob
     private String events;
 
     public static enum FightState{

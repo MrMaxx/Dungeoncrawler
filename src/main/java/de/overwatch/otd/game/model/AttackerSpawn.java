@@ -1,12 +1,12 @@
 package de.overwatch.otd.game.model;
 
 
-public class Spawn {
+public class AttackerSpawn {
 
     private int executeAfterMillis;
     private Attacker attacker;
 
-    public Spawn(int executeAfterMillis, Attacker attacker) {
+    public AttackerSpawn(int executeAfterMillis, Attacker attacker) {
         this.executeAfterMillis = executeAfterMillis;
         this.attacker = attacker;
     }
