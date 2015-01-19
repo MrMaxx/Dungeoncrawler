@@ -6,6 +6,7 @@ import de.overwatch.otd.game.model.Attacker;
 import de.overwatch.otd.game.model.AttackerSpawn;
 import de.overwatch.otd.game.model.DefenderSpawn;
 import de.overwatch.otd.game.processor.AttackerSpawnProcessor;
+import de.overwatch.otd.game.processor.AttackerSucceededProcessor;
 import de.overwatch.otd.game.processor.DefenderSpawnProcessor;
 import de.overwatch.otd.game.processor.MoveToProcessor;
 
@@ -38,6 +39,8 @@ public class GameEngine {
             gameEvents.addAll(MoveToProcessor.process(gameState, milliSeconds));
 
 
+
+            gameEvents.addAll(AttackerSucceededProcessor.process(gameState, milliSeconds));
             milliSeconds++;
         }
 

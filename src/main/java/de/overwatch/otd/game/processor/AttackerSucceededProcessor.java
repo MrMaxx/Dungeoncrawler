@@ -3,6 +3,7 @@ package de.overwatch.otd.game.processor;
 
 import de.overwatch.otd.domain.defend.DungeonNode;
 import de.overwatch.otd.game.GameState;
+import de.overwatch.otd.game.events.AttackerSucceeded;
 import de.overwatch.otd.game.events.GameEvent;
 import de.overwatch.otd.game.events.MoveFromTo;
 import de.overwatch.otd.game.model.Attacker;
@@ -13,28 +14,51 @@ import org.apache.log4j.Logger;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MoveToProcessor {
+public class AttackerSucceededProcessor {
 
-    private static final Logger LOGGER = Logger.getLogger(MoveToProcessor.class);
+    private static final Logger LOGGER = Logger.getLogger(AttackerSucceededProcessor.class);
 
     public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
 
         List<GameEvent> events = new LinkedList<GameEvent>();
 
-        LOGGER.debug("START MoveToProcessor => tickInMilliseconds = "+tickInMilliseconds);
+        LOGGER.debug("START AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
         try {
+            List<Attacker> succeededAttackers = new LinkedList<Attacker>();
             for (Attacker attacker : gameState.getAttackers()) {
-                LOGGER.debug("Processing Attacker => " + attacker);
-                // 1: MOVE FORWARD
-                moveAttacker(attacker, tickInMilliseconds);
-                // 2: CHECK IF NEW MoveFromTo-Event NEEDS TO BE GENERATED
-                events.addAll(checkForMoveFromToEvents(attacker, gameState, tickInMilliseconds));
+
+                /*
+                        the MoveToProcessor leaves Attackers with a blank NextNodeVisit if they have reached the
+                        end of the Dungeon.
+                 */
+                if(attacker.getNextNodeVisit() == null && attacker.getLastDungeonNodeIndex() > 0 ) {
+
+                    int nextNodeIndex = Integer.valueOf(attacker.getLastDungeonNodeIndex() + 1);
+                    DungeonNode nextNode = gameState.getCheckPointToDungeonNodeMap().get(nextNodeIndex);
+
+                    if(nextNode==null){
+                        succeededAttackers.add(attacker);
+
+                        AttackerSucceeded event = new AttackerSucceeded();
+                        event.setTime(tickInMilliseconds);
+                        event.setId(attacker.getId());
+                        event.setX(attacker.getCoordinate().getX());
+                        event.setY(attacker.getCoordinate().getY());
+
+                        events.add(event);
+                    }
+
+                }
+
             }
+
+            gameState.getAttackers().removeAll(succeededAttackers);
+
         }catch(IllegalArgumentException iae){
             LOGGER.error(gameState.getCheckPointToDungeonNodeMap());
             throw new RuntimeException(iae);
         }
-        LOGGER.debug("END MoveToProcessor => tickInMilliseconds = "+tickInMilliseconds);
+        LOGGER.debug("END AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
 
         return events;
     }

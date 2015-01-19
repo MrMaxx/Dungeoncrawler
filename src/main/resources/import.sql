@@ -7,8 +7,8 @@ insert into authorities (user_id, authority) values (1, 'ADMIN');
 insert into authorities (user_id, authority) values (2, 'ADMIN');
 
 
-insert into attacker_blueprint (id, type, price, speed, max_health) values (1,'GRUNT', 200, 10, 100);
-insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'RUNNER', 200, 15, 100);
+insert into attacker_blueprint (id, type, price, speed, max_health) values (1,'GRUNT', 200, 30, 100);
+insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'RUNNER', 200, 50, 100);
 
 insert into attack_force_pattern (id, pattern_name) values (1, 'EARLY_SURPRISE');
 
