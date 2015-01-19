@@ -9,6 +9,7 @@ import de.overwatch.otd.game.events.MoveFromTo;
 import de.overwatch.otd.game.model.Attacker;
 import de.overwatch.otd.game.model.Coordinate;
 import de.overwatch.otd.game.model.NodeVisit;
+import de.overwatch.otd.game.model.Turret;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
@@ -46,6 +47,14 @@ public class AttackerSucceededProcessor {
                         event.setY(attacker.getCoordinate().getY());
 
                         events.add(event);
+
+                        for(Turret turret : attacker.getBeingTargetedBy()){
+                            if( turret.getCurrentTarget().equals(attacker) ){
+                                turret.setCurrentTarget(null);
+                            }
+
+                        }
+                        attacker.getBeingTargetedBy().clear();
                     }
 
                 }

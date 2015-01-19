@@ -6,8 +6,8 @@ import de.overwatch.otd.domain.defend.Tower;
 import de.overwatch.otd.game.model.Attacker;
 import de.overwatch.otd.game.model.AttackerSpawn;
 import de.overwatch.otd.game.model.DefenderSpawn;
+import de.overwatch.otd.game.model.Turret;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class GameState {
     private List<AttackerSpawn> attackerSpawnes;
     private List<DefenderSpawn> defenderSpawnes;
     private List<Attacker> attackers = new LinkedList<Attacker>();
-    private List<Tower> towers = new LinkedList<Tower>();
+    private List<Turret> turrets = new LinkedList<Turret>();
 
     private Map<Integer, DungeonNode> checkPointToDungeonNodeMap;
 
@@ -39,8 +39,8 @@ public class GameState {
         return attackers;
     }
 
-    public List<Tower> getTowers() {
-        return towers;
+    public List<Turret> getTurrets() {
+        return turrets;
     }
 
     public Map<Integer, DungeonNode> getCheckPointToDungeonNodeMap() {

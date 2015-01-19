@@ -29,12 +29,11 @@ insert into dungeon_node (id, dungeon_blueprint_id, x, y, check_point) values (7
 insert into dungeon_node (id, dungeon_blueprint_id, x, y, check_point) values (8, 1, 600, 360, 8);
 
 
+insert into construction_site (id, dungeon_blueprint_id, x, y) values (1, 1, 80, 360);
+insert into construction_site (id, dungeon_blueprint_id, x, y) values (2, 1, 560, 160);
 
-insert into construction_site (id, dungeon_blueprint_id, x, y) values (1, 1, 1, 4);
-insert into construction_site (id, dungeon_blueprint_id, x, y) values (2, 1, 3, 5);
-
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (1, 'GATTLING', 100, 100, 100, 100);
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (2, 'FLAMER', 800, 1500, 50, 200);
+insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (1, 'GATTLING', 10000, 100, 4000, 100);
+insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (2, 'FLAMER', 80000, 1500, 2000, 200);
 
 insert into attack_force (id, user_id, attack_force_pattern_id) values (1, 1, 1);
 insert into attack_force (id, user_id, attack_force_pattern_id) values (2, 2, 1);

@@ -2,6 +2,9 @@ package de.overwatch.otd.game.model;
 
 import de.overwatch.otd.domain.attack.AttackerBlueprint;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Attacker {
 
@@ -20,12 +23,13 @@ public class Attacker {
     private int lastDungeonNodeIndex;
     private NodeVisit nextNodeVisit;
 
+    private List<Turret> beingTargetedBy = new LinkedList<Turret>();
 
     public Attacker(Integer id, AttackerBlueprint attackerBlueprint) {
         this.id = id;
-        type = attackerBlueprint.getType();
-        speed = attackerBlueprint.getSpeed();
-        health = attackerBlueprint.getMaxHealth();
+        this.type = attackerBlueprint.getType();
+        this.speed = attackerBlueprint.getSpeed();
+        this.health = attackerBlueprint.getMaxHealth();
     }
 
     public void moveTo(Coordinate coordinate){
@@ -33,11 +37,11 @@ public class Attacker {
     }
 
     public void inflictDamage (int damage){
-        health -= damage;
+        this.health = health - damage;
     }
 
     public boolean isDead(){
-        return health > 0;
+        return health <= 0;
     }
 
     public void setLastDungeonNodeVisit(NodeVisit lastDungeonNodeVisit, int dungeonNodeIndex ) {
@@ -47,6 +51,10 @@ public class Attacker {
 
     public void setNextNodeVisit(NodeVisit nextNodeVisit) {
         this.nextNodeVisit = nextNodeVisit;
+    }
+
+    public List<Turret> getBeingTargetedBy() {
+        return beingTargetedBy;
     }
 
     public Integer getId() {
@@ -93,5 +101,24 @@ public class Attacker {
                 ", lastDungeonNodeIndex=" + lastDungeonNodeIndex +
                 ", nextNodeVisit=" + nextNodeVisit +
                 '}';
+    }
+
+    /** The id of an Attacker can never be null...plus its unique for one Fight. */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Attacker)) return false;
+
+        Attacker attacker = (Attacker) o;
+
+        if (!id.equals(attacker.id)) return false;
+
+        return true;
+    }
+
+    /** The id of an Attacker can never be null...plus its unique for one Fight. */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

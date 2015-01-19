@@ -27,6 +27,13 @@ public class Coordinate {
         return y;
     }
 
+    public double getDistanceTo(Coordinate target){
+
+        double x1 = (this.getX()-target.getX())*(this.getX()-target.getX());
+        double y1 = (this.getY()-target.getY())*(this.getY()-target.getY());
+        return Math.sqrt(x1 + y1);
+    }
+
     @Override
     public String toString() {
         return "Coordinate{" +

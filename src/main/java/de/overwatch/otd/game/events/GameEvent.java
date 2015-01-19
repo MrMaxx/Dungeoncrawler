@@ -2,10 +2,13 @@ package de.overwatch.otd.game.events;
 
 public abstract class GameEvent {
 
-    protected static final String EVENT_TYPE_ATTACKERSPAWN = "ATTACKER_SPAWN";
-    protected static final String EVENT_TYPE_DEFENDERSPAWN = "DEFENDER_SPAWN";
-    protected static final String EVENT_TYPE_ATTACKERSUCCEEDED = "ATTACKER_SUCCEEDED";
-    protected static final String EVENT_TYPE_MOVETO = "MOVETO";
+    public static final String EVENT_TYPE_ATTACKERSPAWN = "ATTACKER_SPAWN";
+    public static final String EVENT_TYPE_DEFENDERSPAWN = "DEFENDER_SPAWN";
+    public static final String EVENT_TYPE_ATTACKERSUCCEEDED = "ATTACKER_SUCCEEDED";
+    public static final String EVENT_TYPE_ATTACKERDIED = "ATTACKER_DIED";
+    public static final String EVENT_TYPE_TOWERTARGETSATTACKER = "TOWER_NEW_TARGET";
+    public static final String EVENT_TYPE_TOWERLOSTTARGET = "TOWER_LOST_TARGET";
+    public static final String EVENT_TYPE_MOVETO = "MOVETO";
 
 
 

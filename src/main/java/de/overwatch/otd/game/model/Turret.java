@@ -18,12 +18,24 @@ public class Turret {
     private int timeToReload;
     private int range;
 
+    private Attacker currentTarget;
+    private int lastShot = 0;
+
     public Turret(Integer id, TowerBlueprint towerBlueprint, ConstructionSite constructionSite) {
+        this.id = id;
         this.type = towerBlueprint.getType();
         this.coordinate = new Coordinate(constructionSite.getX(), constructionSite.getY());
         this.damage = towerBlueprint.getDamage();
         this.timeToReload = towerBlueprint.getTimeToReload();
         this.range = towerBlueprint.getRange();
+    }
+
+    public int getLastShot() {
+        return lastShot;
+    }
+
+    public void setLastShot(int lastShot) {
+        this.lastShot = lastShot;
     }
 
     public Integer getId() {
@@ -48,5 +60,30 @@ public class Turret {
 
     public int getRange() {
         return range;
+    }
+
+    public Attacker getCurrentTarget() {
+        return currentTarget;
+    }
+
+    public void setCurrentTarget(Attacker currentTarget) {
+        this.currentTarget = currentTarget;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Turret)) return false;
+
+        Turret turret = (Turret) o;
+
+        if (id != null ? !id.equals(turret.id) : turret.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
