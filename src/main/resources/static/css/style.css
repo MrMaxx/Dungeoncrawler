@@ -1,0 +1,272 @@
+@charset "utf-8";
+/* V 0.3b */
+
+/* ######################## */
+/* ######## RESET ######### */
+/* ######################## */
+
+html, body { width:100%; height:100%; }
+html, body, p, form, table, input, img, a { margin:0px; padding:0px; text-align:left; line-height:normal; }
+tr, td { margin:0px; padding:0px; text-align:left; line-height:normal; }
+p, form, span, div, a, font { width:auto; height:auto; }
+div, form { display:block; }
+span, a, font, input { display:inline; }
+ol, ul { list-style: none; margin:0px; padding:0px; }
+table td { vertical-align:top; }
+a { text-decoration:none; color:#6AA772; }
+a.image-link { line-height:0; }
+a img { border:none; vertical-align:top; }
+:focus { outline: 0; }
+h1, h2, h3, h4 { margin:0px; padding:0px; font:inherit; }
+
+/* ######################## */
+/* ###### STRUCTURE ####### */
+/* ######################## */
+
+body { 	font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:normal;
+    background-color:#000000; color:#ffffff; cursor:default; }
+.pagewrap { width:996px; margin:0px auto; }
+
+/* ######################### */
+/* ######## HEADER ######### */
+/* ######################### */
+
+#logo { display:block; background-position:center bottom; background-repeat:no-repeat; height:163px; }
+
+/* ######################### */
+/* ###### NAVIGATION ####### */
+/* ######################### */
+
+#navigation { position:relative; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/navigation_sprite.png) left -48px repeat-x; height:48px; margin-bottom:-4px; z-index:1;  }
+#navigation #deco1 { display:block; position:absolute; left:-10px; top:-5px; width:75px; height:12px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/navigation_decoration_sprite.png) left top no-repeat; z-index:2; }
+#navigation #deco2 { display:block; position:absolute; right:-8px; top:7px; width:90px; height:30px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/navigation_decoration_sprite.png) right -27px no-repeat; z-index:2; }
+
+#countryswitch_box{ position: absolute; right:85px; top:20px; z-index: 5; }
+#countryswitch_box a.countryswitch{ position:absolute; top:0px; width:27px; height:21px; line-height:0px; background-repeat: repeat; display:block; }
+#countryswitch_box a#countryswitch_de_DE{ left:0px; background-image:  url( http://overwatch.de/overwatchgraphics/live/portal/icons/country/country_de_DE.jpg ); }
+#countryswitch_box a#countryswitch_en_GB{ left:31px; background-image:  url( http://overwatch.de/overwatchgraphics/live/portal/icons/country/country_en_GB.jpg ); }
+
+#navigation .menu { float:left; border-left:1px solid #434141; margin-left:-1px; padding-right:13px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/menu_finish.png) right top no-repeat; }
+#navigation .menu a, #navigation .menu a span  { display:block; float:left; height:40px; font-size:0px; cursor:pointer; }
+#navigation .menu a span { background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/menu_sprite.png) repeat-x; }
+#navigation .menu a .edge-left { width:8px; background-position:left -120px; }
+#navigation .menu a .edge-middle { background-position:left -160px; padding-left:25px; padding-right:26px; font-size:16px; font-weight:bold; color:#6f6f6f; padding-top:11px; height:29px; text-shadow:1px 1px 1px #1d160d; }
+#navigation .menu a .edge-right { width:8px; background-position:left -200px; }
+#navigation .menu a:hover .edge-left { background-position:left top; }
+#navigation .menu a:hover .edge-middle { background-position:left -40px; color:#d2d2d2; }
+#navigation .menu a:hover .edge-right { background-position:left -80px; }
+#navigation .menu a.active .edge-left { background-position:left -240px; }
+#navigation .menu a.active .edge-middle { background-position:left -280px; color:#ffffff; }
+#navigation .menu a.active .edge-right { background-position:left -320px; }
+
+#navigation .deco-bg { float:left; width:239px; height:40px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/navigation_sprite.png) left top repeat-x; }
+
+/* ###################### */
+/* ###### CONTENT ####### */
+/* ###################### */
+
+#content { display:block; width:988px; margin:0px auto; }
+#content .content-body { display:block; overflow:visible; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/content_bg_sprite.png) left top repeat-y; padding:20px; padding-top:15px; padding-bottom:11px; }
+#content .content-footer { display:block; height:9px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/content_bg_sprite.png) -988px top no-repeat; }
+
+/* ##################### */
+/* ###### FOOTER ####### */
+/* ##################### */
+
+#footer { display:block; padding-top:20px; padding-bottom:20px; text-align:right; color:#73b67c; font-size:12px; font-weight:normal; cursor:default; }
+#footer a { font-weight:bold; color:#73b67c; text-decoration:none; cursor:pointer; }
+#footer a:hover { text-decoration:underline; }
+
+
+/* ////////// MODULES /////////// */
+
+/* TEASER IMAGE AREA */
+
+#teaser-image-area .teaser-image { position:relative; float:left; position:relative; border:1px solid #676768; background-color:#070707; width:auto; height:auto; }
+#teaser-image-area .teaser-image .image { display:block; position:relative; background-repeat:no-repeat; background-position:left top; border:2px solid #000000; }
+
+#teaser-image-area .teaser-image .image .hover-arrow { display:none; position:absolute; left:-3px; top:-3px; width:27px; height:28px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/navigation_sprite.png) left -109px no-repeat; z-index:4; }
+#teaser-image-area .teaser-image .image:hover .hover-arrow { display:block; }
+
+#teaser-image-area .teaser-image .image .panel { display:block; position:absolute; left:0px; bottom:0px; right:0px; height:54px; z-index:3; }
+* html #teaser-image-area .teaser-image .image .panel { left:0px; width:100%; }
+#teaser-image-area .teaser-image .image .darkened { background-color:#000000; opacity:0.62; filter:alpha(opacity=62); z-index:2; }
+#teaser-image-area .teaser-image .image .panel .green-button { display:block; cursor:pointer; padding-right:10px; margin-top:10px; }
+
+#teaser-image-area .teaser-image .image .interlace { position:absolute; display:block; left:0px; right:0px; top:0px; bottom:0px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/module_teaser_interlace.png) left top repeat; z-index:1; }
+* html #teaser-image-area .teaser-image .image .interlace { width:100%; height:100%; }
+#teaser-image-area .teaser-image .image:hover .interlace { display:none; }
+
+#teaser-image-area .teaser-image .image .description { display:block; padding:22px 28px; font-size:26px; font-weight:normal; font-family:Impact, Arial, sans-serif; color:#ffffff; text-shadow:0px 0px 4px #000000; letter-spacing:0.04em; }
+#teaser-image-area .teaser-image .image .description h1 { color:#fbcb8c; font-size:44px; line-height:38px; padding-bottom:10px; }
+
+#teaser-image-area .teaser-image .image .small-description { display:block; padding:10px 22px; font-size:16px; font-weight:normal; font-family:Impact, Arial, sans-serif; color:#ffffff; text-shadow:0px 0px 4px #000000; letter-spacing:0.13em; }
+#teaser-image-area .teaser-image .image .small-description h1 { color:#fbcb8c; font-size:22px; line-height:22px; padding-bottom:5px; }
+
+#teaser-image-area .teaser-image .nav-area { display:block; padding-left:10px; width:693px; overflow:hidden; }
+#teaser-image-area .teaser-image .nav-area .img-link { display:block; position:relative; float:left; width:161px; padding:18px 1px 15px 1px; margin-right:10px; text-align:center; font-size:12px; color:#a0a0a0; font-weight:normal; cursor:pointer; }
+#teaser-image-area .teaser-image .nav-area .img-link .small-image { display:block; width:161px; height:62px; background-position:center top; padding-bottom:6px; background-repeat:no-repeat; }
+#teaser-image-area .teaser-image .nav-area .img-link .overlay{ display:block; position:absolute; left:0px; top:8px; width:163px; height:73px; z-index:1; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/teaser_smallimg.png) left top no-repeat; }
+#teaser-image-area .teaser-image .nav-area .img-link:hover .overlay { display:none; }
+#teaser-image-area .teaser-image .nav-area .active { color:#73b67c; }
+#teaser-image-area .teaser-image .nav-area .active .overlay { display:block !important; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/teaser_smallimg_active.png) left top no-repeat; cursor:default; }
+
+
+#teaser-image-area .teaser-image .register-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/register_box.jpg); width:379px; height:186px; }
+#teaser-image-area .teaser-image .create-game-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/create_game_box.jpg); width:379px; height:186px; }
+#teaser-image-area .teaser-image .tutorial-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/tutorial_box.jpg); width:299px; height:186px; }
+#teaser-image-area .teaser-image .story-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/story_box2.jpg); width:299px; height:186px; }
+
+#teaser-image-area .teaser-image .asteroid-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/asteroid.jpg); width:699px; height:266px; }
+#teaser-image-area .teaser-image .campaigns-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/campaigns.jpg); width:699px; height:266px; }
+#teaser-image-area .teaser-image .game-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/game.jpg); width:699px; height:266px; }
+#teaser-image-area .teaser-image .fractions-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/fractions.jpg); width:699px; height:266px; }
+
+#teaser-image-area .teaser-image .tutorials-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/campaigns/tutorials.jpg); width:699px; height:384px; }
+#teaser-image-area .teaser-image .galaxy-image{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/campaigns/galaxy.jpg); width:699px; height:385px; }
+
+#teaser-image-area .teaser-image .nav-area .img-link .teaser-asteroid{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/asteroid_small.jpg) }
+#teaser-image-area .teaser-image .nav-area .img-link .teaser-campaigns{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/campaigns_small.jpg) }
+#teaser-image-area .teaser-image .nav-area .img-link .teaser-game{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/game_small.jpg) }
+#teaser-image-area .teaser-image .nav-area .img-link .teaser-fractions{ background-image:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/fractions_small.jpg) }
+
+.help-box{ position:absolute;top:0px;right:0px;z-index:10;background-image:url(http://overwatch.de/overwatchgraphics/live/portal/icons/help_box.jpg); width:18px; height:19px; }
+
+#teaser-image-area .teaser-image .inline-button { cursor:pointer; position:absolute; left:-2px; top:-2px; display:block; line-height:28px; padding: 3px 10px 3px 10px; height:30px; border-right:1px solid #676767; background-image: url( http://overwatch.de/overwatchgraphics/live/portal/layout/prolog_button_bg.jpg ); font-family: Impact,Arial,sans-serif; font-size: 24px; font-weight: normal; color: #ffffff; letter-spacing: 0.03em; text-shadow: 1px 1px 1px #000000; text-transform: uppercase; }
+
+/* LOGIN BOX */
+
+#login-box { display:block; width:207px; height:167px; padding-top:30px; padding-left:19px; margin-top:-5px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/module_login_box.jpg) left top no-repeat; -webkit-box-shadow: 3px 4px 3px #202020; -moz-box-shadow: 3px 4px 3px #202020; box-shadow: 3px 4px 3px #202020; }
+#login-box .textfield { display:block; margin-left:30px; margin-bottom:14px; width:150px; font-size:12px; background-color:transparent; border:0px solid transparent; color:#a0a0a0; }
+* html #login-box .textfield { margin-bottom:12px; }
+*+html #login-box .textfield { margin-bottom:12px; }
+#login-box .text-btn, #info-box .text-btn { display:block; padding:0px; margin:0px; height:21px; border:0px solid transparent; margin-bottom:1px; cursor:pointer; }
+#login-box label.left { position:relative; margin-right:8px; margin-top:2px; padding-left:3px; text-transform:uppercase; font-size:12px; color:#a0a0a0; }
+#login-box label.left input { position:relative; }
+* html #login-box label.left { padding-left:0px; margin-top:0px; }
+*+html #login-box label.left { padding-left:0px; margin-top:0px; }
+
+#login-box .divider { display:block; height:0px; overflow:hidden; border-top:1px solid #222222; margin:3px; margin-right:22px; }
+#login-box #login-section{ position:relative; }
+#login-box #login-section .lcheck{width:16px;float:left;}
+#login-box #login-section .llayout{width:104px;float:left;text-align:right;}
+#login-box #login-section .lbutton{position:absolute;bottom:0px;right:0px;width:85px;float:left;}
+/* INFO BOX */
+
+#info-box { position:relative; display:block; width:200px; height:auto; padding-top:25px; padding-left:13px; padding-right:13px; padding-bottom:10px; margin-top:-5px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/module_info_box.jpg) left top no-repeat #040404; -webkit-box-shadow: 3px 4px 3px #202020; -moz-box-shadow: 3px 4px 3px #202020; box-shadow: 3px 4px 3px #202020; }
+#info-box #player-avatar { position:absolute; right:10px; top:20px; -webkit-box-shadow: 0px 0px 4px #7dbe87; -moz-box-shadow: 0px 0px 4px #7dbe87; box-shadow: 0px 0px 4px #7dbe87; z-index:1; }
+#info-box #player-avatar .deco { height:9px;width:9px;position:absolute; z-index:2; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/deco_point_glow.png) left top no-repeat; }
+#info-box #player-avatar #NW {  right:0px; top:0px;  }
+#info-box #player-avatar #NE {  left:0px; top: 0px;  }
+#info-box #player-avatar #SE {  left:0px; bottom:0px;  }
+#info-box #player-avatar #SW {  right:0px; bottom:0px;  }
+
+#info-box .text-btn { display:block; padding:0px; margin:0px; height:21px; border:0px solid transparent; margin-bottom:1px; cursor:pointer; }
+#info-box .line { float:left; line-height:14px; font-size:10px; }
+#info-box .line .left-line{ float:left; width:36px; overflow: hidden; }
+#info-box .line .right-line { float:right; width:80px;overflow: hidden; }
+#info-box .menu { padding-top:10px; }
+#info-box .divider { display:block; height:0px; overflow:hidden; border-top:1px solid #333333; margin:7px; }
+
+/* HALL OF FAME */
+
+#halloffame { display:block; position:relative; width:223px; padding-top:51px; }
+#halloffame .caption { position:absolute; display:block; left:-6px; top:0px; width:255px; height:46px; background-position:left top; background-repeat:no-repeat; z-index:2; }
+#halloffame .player-slot { display:block; height:18px; padding-top:3px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/module_halloffame_player_slot.jpg) left top no-repeat; font-size:12px; }
+#halloffame .player-slot .rank { display:block; float:left; padding-left:10px; width:33px; color:#ffffff; font-weight:normal; }
+#halloffame .player-slot .name { display:block; float:left; width:122px; color:#6aa772; font-weight:bold; overflow:hidden; }
+#halloffame .player-slot .name a { color:#6aa772; font-weight:bold; }
+#halloffame .player-slot .name a:hover { color:#85CF90; text-decoration: underline; }
+#halloffame .player-slot .active { color:#902020; }
+#halloffame .player-slot .points { display:block; float:left; width:auto; white-space:nowrap; color:#ffffff; font-weight:normal; }
+#halloffame .divider { display:block; height:1px; background-color:#040403; border-top:1px solid #161616; border-bottom:1px solid #2d2d2d; }
+
+/* ################################### */
+/* ###### STANDARD DEFINITIONS ####### */
+/* ################################### */
+
+.left { float:left !important; }
+.right { float:right !important; }
+.clear { clear:both !important; height:0px; }
+
+.text-right { text-align:right; }
+
+.uppercase { text-transform:uppercase; }
+
+.wrapper { display:block; font-size:0px; line-height:0px; padding:0px; margin:0px; clear:both; height:0px; overflow:hidden; }
+
+.green-button, .red-button { display:block; cursor:pointer; }
+.green-button .edge-left { display:block; float:left; width:5px; height:35px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/content_gradient_sprite.png) left top no-repeat; }
+.green-button .edge-middle { float:left;background-color:#6aa772; }
+.green-button a { border:0px; height:31px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#6aa772; font-size:24px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000; }
+.green-button input { border:0px; height:35px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#6aa772; font-size:24px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000;cursor:pointer; }
+.red-button .edge-left { display:block; float:left; width:5px; height:35px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/content_gradient_sprite_red.png) left top no-repeat; }
+.red-button .edge-middle { float:left;background-color:#502323; }
+.red-button a { border:0px; height:31px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#502323; font-size:24px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000; }
+.red-button input { border:0px; height:35px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#502323; font-size:24px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000;cursor:pointer; }
+
+div.form-green-button { display:block; cursor:pointer; }
+.form-green-button div.edge-left { float:left; width:5px; height:27px; background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/content_gradient_sprite.png) left top no-repeat; }
+.form-green-button div.edge-middle { float:left;background-color:#6aa772; }
+.form-green-button a { border:0px; height:25px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#6aa772; font-size:18px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000; }
+.form-green-button input { border:0px; height:27px; padding-bottom:2px; padding-top:2px; padding-left:3px; padding-right:9px; background-color:#6aa772; font-size:18px; font-weight:normal; letter-spacing:0.03em; color:#ffffff; text-transform:uppercase; font-family:Impact, Arial, sans-serif; text-shadow:1px 1px 1px #000000; }
+
+/* default IMAGES */
+.userImage_full, .defaultImage_full{ background-repeat: no-repeat; width: 150px; height:150px; }
+.userImage_medium, .defaultImage_medium{ background-repeat: no-repeat; width: 80px; height:80px; }
+.userImage_small, .defaultImage_small{ background-repeat: no-repeat; width: 30px; height:30px; }
+.defaultImage_full{ background-image: url(http://overwatch.de/overwatchgraphics/live/page/icons/avatar_default_full.jpg); }
+.defaultImage_medium{ background-image: url(http://overwatch.de/overwatchgraphics/live/page/icons/avatar_default_mid.jpg); }
+.defaultImage_small{ background-image: url(http://overwatch.de/overwatchgraphics/live/page/icons/avatar_default_small.jpg); }
+
+
+#dashboard_links { padding:10px;width:279px; height:166px; background-color:#303030; background:url(http://overwatch.de/overwatchgraphics/live/portal/boxes/dashboard_links_box.jpg) center center no-repeat; }
+#dashboard_links div{ height:35px; text-align:right;padding-right:10px; }
+#dashboard_links div a{ letter-spacing:0.04em; color:#FBCB8C; font-size:25px; line-height:25px; text-shadow:0 0 15px #000000; font-family: Impact,Arial,sans-serif; }
+#dashboard_links div a:hover{ text-shadow:0 0 15px #ffe2ba; color:#ffe2ba; }
+
+#contact-email { width:342px;height:24px;background-image: url(http://overwatch.de/overwatchgraphics/live/portal/layout/contact.jpg);background-repeat: no-repeat;}
+
+#logo { background-image:url(http://overwatch.de/overwatchgraphics/live/portal/de_DE/logo.png); }
+
+#halloffame .caption-top { background-image:url(http://overwatch.de/overwatchgraphics/live/portal/de_DE/module_halloffame_caption.png); }
+#halloffame .caption-range { background-image:url(http://overwatch.de/overwatchgraphics/live/portal/de_DE/module_range_caption.png); }
+
+#login-box .text-btn { background:url(http://overwatch.de/overwatchgraphics/live/portal/de_DE/modules_login_box.png) left top no-repeat transparent; }
+
+#info-box .text-btn { background:url(http://overwatch.de/overwatchgraphics/live/portal/de_DE/modules_info_box_game.png) left top no-repeat transparent; }
+
+div#text-page {
+    padding:10px;
+    width:683px;
+}
+div#text-page h1{
+    color:#fbcb8c;
+    font-size:44px;
+    line-height:32px;
+    padding-bottom:10px;
+}
+ul.listing{ }
+ul.listing li.head{
+    font-weight:bold;
+    padding-top:10px;
+}
+ul.listing li.text{
+    font-weight:normal;
+    padding-left:20px;
+}
+.ovw-form{ }
+.ovw-form input{ width:150px;height:20px; }
+.ovw-form .input-left{ padding-top:10px;padding-left:20px;float:left; width:160px;line-height:20px;}
+.ovw-form .input-right{ padding-top:10px;float:left;width:160px; }
+.ovw-form .input-error{ padding-top:10px;float:left;width:300px;color:#bb6060;line-height:20px; }
+
+.timeline-range{ width:85px; float:left;}
+.timeline-range a{ color:#6AA772; font-weight:bold; }
+.timeline-date{ width:57px; padding-left:20px; color:#FBCB8C; float:left; padding-top:10px; }
+.timeline-text{ width:600px; float:left; padding-top:10px; }
+.timeline-date a{ color:#FBCB8C; }
+
+#deleteUser{ width:20px;height:26px;background-repeat:no-repeat;background-position:3px 3px; }
+.navbutton_active #deleteUser{ background-image: url(http://overwatch.de/overwatchgraphics/live/portal/icons/totenkopf_active.png); }
+.navbutton #deleteUser{ background-image: url(http://overwatch.de/overwatchgraphics/live/portal/icons/totenkopf.png); }
