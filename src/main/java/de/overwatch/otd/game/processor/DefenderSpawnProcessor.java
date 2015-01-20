@@ -13,9 +13,7 @@ import java.util.List;
 public class DefenderSpawnProcessor {
 
 
-    public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> events = new LinkedList<GameEvent>();
+    public static void process(GameState gameState, int tickInMilliseconds){
 
         for(DefenderSpawn spawn : gameState.getDefenderSpawnes()){
 
@@ -29,14 +27,13 @@ public class DefenderSpawnProcessor {
                 event.setX(turret.getCoordinate().getX());
                 event.setY(turret.getCoordinate().getY());
 
-                events.add(event);
+                gameState.getEvents().add(event);
 
                 gameState.getTurrets().add(turret);
             }
 
         }
 
-        return events;
     }
 
 

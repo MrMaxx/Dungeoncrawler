@@ -22,9 +22,7 @@ public class DefenderTargetingProcessor {
 
     private static final Logger LOGGER = Logger.getLogger(DefenderTargetingProcessor.class);
 
-    public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> events = new LinkedList<GameEvent>();
+    public static void process(GameState gameState, int tickInMilliseconds){
 
         for(Turret turret : gameState.getTurrets()){
             // is target out of range? then clear target of turret
@@ -40,7 +38,7 @@ public class DefenderTargetingProcessor {
                     event.setAttackerId(target.getId());
                     event.setTowerId(turret.getId());
                     event.setTime(tickInMilliseconds);
-                    events.add(event);
+                    gameState.getEvents().add(event);
 
                     LOGGER.debug("OUT_OF_RANGE => Turret with id="+turret.getId()+" got out of range for attacker with id="+target.getId());
                 }
@@ -64,7 +62,7 @@ public class DefenderTargetingProcessor {
                         event.setAttackerId(attacker.getId());
                         event.setTowerId(turret.getId());
                         event.setTime(tickInMilliseconds);
-                        events.add(event);
+                        gameState.getEvents().add(event);
 
                         LOGGER.debug("NEW_TARGET => Turret with id="+turret.getId()+" now targets attacker with id="+attacker.getId());
                     }
@@ -91,7 +89,7 @@ public class DefenderTargetingProcessor {
                         AttackerDied attackerDiesEvent = new AttackerDied();
                         attackerDiesEvent.setAttackerId(target.getId());;
                         attackerDiesEvent.setTime(tickInMilliseconds);
-                        events.add(attackerDiesEvent);
+                        gameState.getEvents().add(attackerDiesEvent);
 
                         // if an attacker dies all the turrets targeting it will loose their target
                         for(Turret turretTargeting : target.getBeingTargetedBy()){
@@ -100,7 +98,7 @@ public class DefenderTargetingProcessor {
                             lostTargetEvent.setAttackerId(target.getId());
                             lostTargetEvent.setTowerId(turretTargeting.getId());
                             lostTargetEvent.setTime(tickInMilliseconds);
-                            events.add(lostTargetEvent);
+                            gameState.getEvents().add(lostTargetEvent);
                         }
                         target.getBeingTargetedBy().clear();
                         gameState.getAttackers().remove(target);
@@ -112,7 +110,6 @@ public class DefenderTargetingProcessor {
 
         }
 
-        return events;
     }
 
 

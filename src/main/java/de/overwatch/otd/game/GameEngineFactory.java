@@ -5,6 +5,6 @@ import de.overwatch.otd.domain.Fight;
 
 public interface GameEngineFactory {
 
-    GameEngine createGameEngine(Fight fight);
+    GameState createGameEngine(Fight fight);
 
 }

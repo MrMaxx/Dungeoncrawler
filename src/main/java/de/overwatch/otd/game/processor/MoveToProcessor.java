@@ -17,9 +17,7 @@ public class MoveToProcessor {
 
     private static final Logger LOGGER = Logger.getLogger(MoveToProcessor.class);
 
-    public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> events = new LinkedList<GameEvent>();
+    public static void process(GameState gameState, int tickInMilliseconds){
 
         LOGGER.debug("START MoveToProcessor => tickInMilliseconds = "+tickInMilliseconds);
         try {
@@ -28,7 +26,7 @@ public class MoveToProcessor {
                 // 1: MOVE FORWARD
                 moveAttacker(attacker, tickInMilliseconds);
                 // 2: CHECK IF NEW MoveFromTo-Event NEEDS TO BE GENERATED
-                events.addAll(checkForMoveFromToEvents(attacker, gameState, tickInMilliseconds));
+                gameState.getEvents().addAll(checkForMoveFromToEvents(attacker, gameState, tickInMilliseconds));
             }
         }catch(IllegalArgumentException iae){
             LOGGER.error(gameState.getCheckPointToDungeonNodeMap());
@@ -36,7 +34,6 @@ public class MoveToProcessor {
         }
         LOGGER.debug("END MoveToProcessor => tickInMilliseconds = "+tickInMilliseconds);
 
-        return events;
     }
 
 

@@ -12,8 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public class DefenderTargetingProcessorTest extends GameTest{
 
@@ -35,27 +33,25 @@ public class DefenderTargetingProcessorTest extends GameTest{
     @Test
     public void testFirstHit() throws Exception{
         int oldHealth = attacker.getHealth();
-        List<GameEvent> events = DefenderTargetingProcessor.process(gameState, 100);
+        DefenderTargetingProcessor.process(gameState, 100);
 
         Assert.assertEquals(oldHealth - turret.getDamage(), attacker.getHealth());
-        Assert.assertEquals(1, events.size());
-        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERTARGETSATTACKER, events.get(0).getType());
+        Assert.assertEquals(1, gameState.getEvents().size());
+        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERTARGETSATTACKER, gameState.getEvents().get(0).getType());
     }
 
     @Test
     public void testKilling() throws Exception{
-        List<GameEvent> events = new LinkedList<GameEvent>();
-
         int count = (int)Math.ceil(attacker.getHealth() / turret.getDamage());
         for(int i = 0; i<count; i++){
-            events.addAll(DefenderTargetingProcessor.process(gameState, 100+(i*turret.getTimeToReload())));
+            DefenderTargetingProcessor.process(gameState, 100+(i*turret.getTimeToReload()));
         }
 
         Assert.assertTrue(attacker.isDead());
-        Assert.assertEquals(3, events.size());
-        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERTARGETSATTACKER, events.get(0).getType());
-        Assert.assertEquals(GameEvent.EVENT_TYPE_ATTACKERDIED, events.get(1).getType());
-        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERLOSTTARGET, events.get(2).getType());
+        Assert.assertEquals(3, gameState.getEvents().size());
+        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERTARGETSATTACKER, gameState.getEvents().get(0).getType());
+        Assert.assertEquals(GameEvent.EVENT_TYPE_ATTACKERDIED, gameState.getEvents().get(1).getType());
+        Assert.assertEquals(GameEvent.EVENT_TYPE_TOWERLOSTTARGET, gameState.getEvents().get(2).getType());
 
         Assert.assertEquals(0, gameState.getAttackers().size());
     }

@@ -13,6 +13,9 @@ public class Attacker {
     /** type from AttackerBlueprint */
     private String type;
 
+    /** type from AttackerBlueprint */
+    private int price;
+
     /** in pixel per second */
     private int speed;
 
@@ -30,6 +33,7 @@ public class Attacker {
         this.type = attackerBlueprint.getType();
         this.speed = attackerBlueprint.getSpeed();
         this.health = attackerBlueprint.getMaxHealth();
+        this.price = attackerBlueprint.getPrice();
     }
 
     public void moveTo(Coordinate coordinate){
@@ -51,6 +55,11 @@ public class Attacker {
 
     public void setNextNodeVisit(NodeVisit nextNodeVisit) {
         this.nextNodeVisit = nextNodeVisit;
+    }
+
+
+    public int getPrice() {
+        return price;
     }
 
     public List<Turret> getBeingTargetedBy() {

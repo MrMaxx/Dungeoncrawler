@@ -13,9 +13,7 @@ import java.util.List;
 public class AttackerSpawnProcessor {
 
 
-    public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> events = new LinkedList<GameEvent>();
+    public static void process(GameState gameState, int tickInMilliseconds){
 
         for(AttackerSpawn spawn : gameState.getAttackerSpawnes()){
 
@@ -26,13 +24,12 @@ public class AttackerSpawnProcessor {
                 event.setAttackerType(attacker.getType());
                 event.setTime(tickInMilliseconds);
 
-                events.add(event);
+                gameState.getEvents().add(event);
 
                 gameState.getAttackers().add(spawn.getAttacker());
             }
         }
 
-        return events;
     }
 
 

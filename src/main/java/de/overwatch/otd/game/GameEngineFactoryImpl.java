@@ -43,7 +43,7 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
     private AttackForcePatternRepository attackForcePatternRepository;
 
     @Override
-    public GameEngine createGameEngine(Fight fight) {
+    public GameState createGameEngine(Fight fight) {
 
         List<AttackerBlueprint> attackerBlueprints = attackerBlueprintRepository.findAll();
         List<TowerBlueprint> defenderBlueprints = towerBlueprintRepository.findAll();
@@ -84,11 +84,8 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
                 fight.getDungeon(), idToDefenderBlueprintMap, idToConstructionSiteMap, idGenerator).build();
 
 
-        GameState gameState = new GameState(attackerSpawns, defenderSpawns, checkPointToDungeonNodeMap);
+        return new GameState(attackerSpawns, defenderSpawns, checkPointToDungeonNodeMap);
 
-        GameEngine gameEngine = new GameEngine(gameState);
-
-        return gameEngine;
     }
 
     /**

@@ -19,9 +19,7 @@ public class AttackerSucceededProcessor {
 
     private static final Logger LOGGER = Logger.getLogger(AttackerSucceededProcessor.class);
 
-    public static List<GameEvent> process(GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> events = new LinkedList<GameEvent>();
+    public static void process(GameState gameState, int tickInMilliseconds){
 
         LOGGER.debug("START AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
         try {
@@ -46,7 +44,9 @@ public class AttackerSucceededProcessor {
                         event.setX(attacker.getCoordinate().getX());
                         event.setY(attacker.getCoordinate().getY());
 
-                        events.add(event);
+                        gameState.getEvents().add(event);
+
+                        gameState.increaseAttackerScore(attacker.getPrice());
 
                         for(Turret turret : attacker.getBeingTargetedBy()){
                             if( turret.getCurrentTarget().equals(attacker) ){
@@ -69,7 +69,6 @@ public class AttackerSucceededProcessor {
         }
         LOGGER.debug("END AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
 
-        return events;
     }
 
 

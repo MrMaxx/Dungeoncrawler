@@ -9,7 +9,9 @@ import de.overwatch.otd.domain.attack.AttackerBlueprint;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
 import de.overwatch.otd.game.GameEngine;
 import de.overwatch.otd.game.GameEngineFactory;
+import de.overwatch.otd.game.GameState;
 import de.overwatch.otd.game.events.GameEvent;
+import de.overwatch.otd.game.processor.*;
 import de.overwatch.otd.repository.AttackerBlueprintRepository;
 import de.overwatch.otd.repository.FightRepository;
 import de.overwatch.otd.repository.TowerBlueprintRepository;
@@ -54,10 +56,32 @@ public class FightServiceImpl implements FightService{
         for(Fight fight : outstandingFights){
 
             try {
-                GameEngine engine = gameEngineFactory.createGameEngine(fight);
-                List<GameEvent> events = engine.processGame();
+                GameState gameState = gameEngineFactory.createGameEngine(fight);
 
-                String eventStream = gson.toJson(events);
+                int milliSeconds = 0;
+                /* a Fight has to be finished in 10 Minutes */
+                while( milliSeconds < 600000 ){
+
+                    // 1. lets see if some Turrets are spawning
+                    DefenderSpawnProcessor.process(gameState, milliSeconds);
+                    // 2. lets see if some Attackers are spawning
+                    AttackerSpawnProcessor.process(gameState, milliSeconds);
+                    // 3. calculate the movements of the Attackers
+                    MoveToProcessor.process(gameState, milliSeconds);
+                    // 4. Turrets need to inflict damage...that is what they were build for
+                    DefenderTargetingProcessor.process(gameState, milliSeconds);
+                    // 5. Sometimes Attackers run through the whole Dungeon ands succeed
+                    AttackerSucceededProcessor.process(gameState, milliSeconds);
+
+                    milliSeconds++;
+                }
+
+                String eventStream = gson.toJson(gameState.getEvents());
+
+                fight.setOutcome(
+                        gameState.getAttackerScore() > 0?
+                                Fight.Outcome.ATTACKER_WON: Fight.Outcome.DEFENDER_WON
+                );
 
                 fight.setEvents(eventStream);
                 fight.setFightState(Fight.FightState.COMPLETED);

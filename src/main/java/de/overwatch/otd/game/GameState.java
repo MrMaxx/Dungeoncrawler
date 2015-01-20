@@ -3,6 +3,7 @@ package de.overwatch.otd.game;
 
 import de.overwatch.otd.domain.defend.DungeonNode;
 import de.overwatch.otd.domain.defend.Tower;
+import de.overwatch.otd.game.events.GameEvent;
 import de.overwatch.otd.game.model.Attacker;
 import de.overwatch.otd.game.model.AttackerSpawn;
 import de.overwatch.otd.game.model.DefenderSpawn;
@@ -14,6 +15,8 @@ import java.util.Map;
 
 public class GameState {
 
+    private int attackerScore;
+
     private List<AttackerSpawn> attackerSpawnes;
     private List<DefenderSpawn> defenderSpawnes;
     private List<Attacker> attackers = new LinkedList<Attacker>();
@@ -21,10 +24,16 @@ public class GameState {
 
     private Map<Integer, DungeonNode> checkPointToDungeonNodeMap;
 
+    List<GameEvent> events = new LinkedList<GameEvent>();
+
     public GameState(List<AttackerSpawn> attackerSpawnes, List<DefenderSpawn> defenderSpawnes, Map<Integer, DungeonNode> checkPointToDungeonNodeMap) {
         this.attackerSpawnes = attackerSpawnes;
         this.defenderSpawnes = defenderSpawnes;
         this.checkPointToDungeonNodeMap = checkPointToDungeonNodeMap;
+    }
+
+    public List<GameEvent> getEvents() {
+        return events;
     }
 
     public List<AttackerSpawn> getAttackerSpawnes() {
@@ -46,4 +55,13 @@ public class GameState {
     public Map<Integer, DungeonNode> getCheckPointToDungeonNodeMap() {
         return checkPointToDungeonNodeMap;
     }
+
+    public int getAttackerScore() {
+        return attackerScore;
+    }
+
+    public void increaseAttackerScore(int delta) {
+        this.attackerScore = attackerScore + delta;
+    }
+
 }

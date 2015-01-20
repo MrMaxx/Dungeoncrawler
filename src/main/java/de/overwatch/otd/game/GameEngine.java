@@ -20,33 +20,31 @@ public class GameEngine {
 
     private GameState gameState;
 
-    private List<GameEvent> gameEvents = new LinkedList<GameEvent>();
-
     public GameEngine(GameState gameState) {
         this.gameState = gameState;
     }
 
-    public List<GameEvent> processGame(){
+    public GameState processGame(){
         milliSeconds = 0;
         /* a Fight has to be finished in 10 Minutes */
         while( milliSeconds < 600000 ){
 
             // 1. lets see if some Turrets are spawning
-            gameEvents.addAll(DefenderSpawnProcessor.process(gameState, milliSeconds));
+            DefenderSpawnProcessor.process(gameState, milliSeconds);
             // 2. lets see if some Attackers are spawning
-            gameEvents.addAll(AttackerSpawnProcessor.process(gameState, milliSeconds));
+            AttackerSpawnProcessor.process(gameState, milliSeconds);
             // 3. calculate the movements of the Attackers
-            gameEvents.addAll(MoveToProcessor.process(gameState, milliSeconds));
+            MoveToProcessor.process(gameState, milliSeconds);
             // 4. Turrets need to inflict damage...that is what they were build for
-            gameEvents.addAll(DefenderTargetingProcessor.process(gameState,milliSeconds));
-            // 5. Sometimes Attackers run through the whole Dungeon and succeed
-            gameEvents.addAll(AttackerSucceededProcessor.process(gameState, milliSeconds));
+            DefenderTargetingProcessor.process(gameState,milliSeconds);
+            // 5. Sometimes Attackers run through the whole Dungeon ands succeed
+            AttackerSucceededProcessor.process(gameState, milliSeconds);
 
             milliSeconds++;
         }
 
 
-        return gameEvents;
+        return gameState;
     }
 
 }
