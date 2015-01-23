@@ -50,7 +50,7 @@ body { 	font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:no
 #navigation .menu a, #navigation .menu a span  { display:block; float:left; height:40px; font-size:0px; cursor:pointer; }
 #navigation .menu a span { background:url(http://overwatch.de/overwatchgraphics/live/portal/layout/menu_sprite.png) repeat-x; }
 #navigation .menu a .edge-left { width:8px; background-position:left -120px; }
-#navigation .menu a .edge-middle { background-position:left -160px; padding-left:25px; padding-right:26px; font-size:16px; font-weight:bold; color:#6f6f6f; padding-top:11px; height:29px; text-shadow:1px 1px 1px #1d160d; }
+#navigation .menu a .edge-middle { background-position:left -160px; padding-left:25px; padding-right:26px; font-size:16px; font-weight:bold; color:#6f6f6f; padding-top:11px; height:40px; text-shadow:1px 1px 1px #1d160d; }
 #navigation .menu a .edge-right { width:8px; background-position:left -200px; }
 #navigation .menu a:hover .edge-left { background-position:left top; }
 #navigation .menu a:hover .edge-middle { background-position:left -40px; color:#d2d2d2; }

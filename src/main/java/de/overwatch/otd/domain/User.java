@@ -12,6 +12,7 @@ public class User extends OtdEntity{
     @Column(nullable = false, unique = true)
     private String username;
 
+    @JsonIgnore
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -19,11 +20,13 @@ public class User extends OtdEntity{
     @Column(nullable = false)
     private String password;
 
+    @JsonIgnore
     @Column(nullable = false)
     private Boolean enabled;
 
+    @JsonIgnore
     // following http://stackoverflow.com/questions/416208/jpa-map-collection-of-enums
-    @ElementCollection(targetClass=Role.class)
+    @ElementCollection(targetClass=Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(
             name="authorities",

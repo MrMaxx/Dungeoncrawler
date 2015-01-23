@@ -93,10 +93,8 @@ public class NodeVisitTest {
         NodeVisit lastVisit = new NodeVisit(new Coordinate(880,640),50000);
 
         int transitTime = lastVisit.getTransitTimeInMillis(new Coordinate(880,120), 15);
-        NodeVisit nextNodeVisit = new NodeVisit(
-                new Coordinate(880,120),transitTime);
 
-        Assert.assertEquals(34000, nextNodeVisit.getVisitTime());
+        Assert.assertEquals(34666, transitTime);
     }
 
 }

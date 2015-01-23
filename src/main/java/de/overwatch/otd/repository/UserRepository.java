@@ -9,4 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation= Propagation.REQUIRED)
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    User findByUsername(String username);
+
 }

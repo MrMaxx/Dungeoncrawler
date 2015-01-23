@@ -7,13 +7,13 @@ insert into authorities (user_id, authority) values (1, 'ADMIN');
 insert into authorities (user_id, authority) values (2, 'ADMIN');
 
 
-insert into attacker_blueprint (id, type, price, speed, max_health) values (1,'GRUNT', 200, 30, 100);
-insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'RUNNER', 200, 50, 100);
+insert into attacker_blueprint (id, type, price, speed, max_health) values (1,'GRUNT', 200, 30, 100000);
+insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'RUNNER', 200, 50, 100000);
 
 insert into attack_force_pattern (id, pattern_name) values (1, 'EARLY_SURPRISE');
 
 
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (1, 1000, 1, 2, 1400);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (1, 1000, 1, 1, 1400);
 insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (2, 5000, 1, 10, 500);
 
 
@@ -32,14 +32,14 @@ insert into dungeon_node (id, dungeon_blueprint_id, x, y, check_point) values (8
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (1, 1, 80, 360);
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (2, 1, 560, 160);
 
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (1, 'GATTLING', 10000, 100, 4000, 100);
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (2, 'FLAMER', 80000, 1500, 2000, 200);
+insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (1, 'GATTLING', 20, 100, 4000, 100);
+insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (2, 'FLAMER', 30, 1500, 2000, 200);
 
 insert into attack_force (id, user_id, attack_force_pattern_id) values (1, 1, 1);
 insert into attack_force (id, user_id, attack_force_pattern_id) values (2, 2, 1);
 
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (1, 1, 1, 1);
-insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (2, 1, 2, 2);
+--insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (2, 1, 2, 2);
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (3, 2, 2, 1);
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (4, 2, 2, 2);
 

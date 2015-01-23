@@ -21,7 +21,7 @@ public class SwaggerConfiguration {
         public SwaggerSpringMvcPlugin customImplementation(){
             return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
                     .apiInfo(apiInfo())
-                    .includePatterns(".*api/v1.*");
+                    .includePatterns(".*api/v1.*", ".*oauth/*");
         }
 
         // Todo: later

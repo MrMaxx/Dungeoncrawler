@@ -1,9 +1,7 @@
 package de.overwatch.otd;
 
 
-import de.overwatch.otd.configuration.SchedulingConfiguration;
-import de.overwatch.otd.configuration.SpringMvcConfiguration;
-import de.overwatch.otd.configuration.SwaggerConfiguration;
+import de.overwatch.otd.configuration.*;
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,9 +22,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         "de.overwatch.otd.game"
 })
 @Import({
-        SpringMvcConfiguration.class,
         SchedulingConfiguration.class,
-        SwaggerConfiguration.class
+        SwaggerConfiguration.class,
+        WebSecurityConfiguration.class,
+        OAuth2ServerConfiguration.class
 })
 public class Application {
 
