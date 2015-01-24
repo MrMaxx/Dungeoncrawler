@@ -4,15 +4,11 @@ package de.overwatch.otd.controller;
 import de.overwatch.otd.domain.defend.DungeonBlueprint;
 import de.overwatch.otd.repository.DungeonBlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(ApiConstants.API_PATH_PREFIX+"/dungeonBlueprint")
 public class DungeonBlueprintController {
 
@@ -21,7 +17,7 @@ public class DungeonBlueprintController {
 
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody List<DungeonBlueprint> index() {
-        return dungeonBlueprintRepository.findAllByOrderByIdAsc();
+        return dungeonBlueprintRepository.findAllDistinctByOrderByIdAsc();
     }
 
     @RequestMapping(value="{id}", method = RequestMethod.GET)

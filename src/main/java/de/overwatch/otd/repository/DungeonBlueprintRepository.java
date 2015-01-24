@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Transactional(propagation= Propagation.REQUIRED)
 public interface DungeonBlueprintRepository extends JpaRepository<DungeonBlueprint, Integer> {
@@ -16,7 +17,7 @@ public interface DungeonBlueprintRepository extends JpaRepository<DungeonBluepri
 
     @EntityGraph(value = "graph.dungeon.complete", type = EntityGraph.EntityGraphType.LOAD)
     @Query
-    List<DungeonBlueprint> findAllByOrderByIdAsc();
+    List<DungeonBlueprint> findAllDistinctByOrderByIdAsc();
 
     @EntityGraph(value = "graph.dungeon.complete", type = EntityGraph.EntityGraphType.LOAD)
     @Query

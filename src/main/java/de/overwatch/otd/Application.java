@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 })
 @Import({
         SchedulingConfiguration.class,
+        SpringMvcConfiguration.class,
         SwaggerConfiguration.class,
         WebSecurityConfiguration.class,
         OAuth2ServerConfiguration.class

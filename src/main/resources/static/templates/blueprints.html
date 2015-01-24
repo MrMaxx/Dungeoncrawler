@@ -1,0 +1,33 @@
+<h1>Angreifer</h1>
+<table class="table" ng-controller="AttackerBlueprintsCtrl">
+    <tr>
+        <td>Typ</td>
+        <td>Preis</td>
+        <td>Speed</td>
+        <td>Leben</td>
+    </tr>
+    <tr ng-repeat="blueprint in blueprints">
+        <td>{{blueprint.type}}</td>
+        <td>{{blueprint.price}}</td>
+        <td>{{blueprint.speed}}</td>
+        <td>{{blueprint.maxHealth}}</td>
+    </tr>
+</table>
+
+<h1>Verteidiger</h1>
+<table class="table" ng-controller="TowerBlueprintsCtrl">
+    <tr>
+        <td>Typ</td>
+        <td>Preis</td>
+        <td>Schaden</td>
+        <td>Nachladen</td>
+        <td>Reichweite</td>
+    </tr>
+    <tr ng-repeat="blueprint in blueprints">
+        <td>{{blueprint.type}}</td>
+        <td>{{blueprint.price}}</td>
+        <td>{{blueprint.damage}}</td>
+        <td>{{blueprint.timeToReload}}</td>
+        <td>{{blueprint.range}}</td>
+    </tr>
+</table>

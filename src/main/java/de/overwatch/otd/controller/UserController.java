@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(ApiConstants.API_PATH_PREFIX+"/user")
 public class UserController {
 

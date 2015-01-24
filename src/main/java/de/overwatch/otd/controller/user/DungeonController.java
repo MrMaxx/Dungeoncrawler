@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Todo: Authorization is really required here :)
  */
-@Controller
+@RestController
 @RequestMapping(ApiConstants.API_PATH_PREFIX+"/user/{userId}/dungeon")
 public class DungeonController {
 

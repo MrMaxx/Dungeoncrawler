@@ -23,6 +23,12 @@ public class DungeonBlueprint  extends OtdEntity {
     @Column
     private String name;
 
+    @Column
+    private int width;
+
+    @Column
+    private int height;
+
     @OneToMany(mappedBy = "dungeonBlueprint")
     @Fetch(FetchMode.SUBSELECT)
     private Set<DungeonNode> dungeonNodes = new HashSet<DungeonNode>();
@@ -47,6 +53,22 @@ public class DungeonBlueprint  extends OtdEntity {
         this.dungeonNodes = dungeonNodes;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public Set<ConstructionSite> getConstructionSites() {
         return constructionSites;
     }
@@ -64,7 +86,8 @@ public class DungeonBlueprint  extends OtdEntity {
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
+        if (height != that.height) return false;
+        if (width != that.width) return false;
         return true;
     }
 
@@ -72,7 +95,8 @@ public class DungeonBlueprint  extends OtdEntity {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-
+        result = 31 * result + height;
+        result = 31 * result + width;
         return result;
     }
 
@@ -81,6 +105,8 @@ public class DungeonBlueprint  extends OtdEntity {
         return "DungeonBlueprint{" +
                 "name='" + name + '\'' +
                 "id='" + id + '\'' +
+                ", height=" + height +
+                ", width=" + width +
                 '}';
     }
 }
