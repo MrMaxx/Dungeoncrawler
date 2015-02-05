@@ -1,120 +1,170 @@
 <!DOCTYPE html>
-<html ng-app="otdApp">
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <title>Forza</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online Tower Defense">
+    <meta name="author" content="overwatch.de">
 
-    <title>Online Tower Defense</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta charset="utf8" />
-    <meta name="author" content="overwatch.de" />
-    <meta name="robots" content="all" />
+    <link rel="icon" type="image/png" href="favicon.png">
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='assets/demo/variations/default.css' rel='stylesheet' type='text/css' media='all' id='styleswitcher'>
 
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="assets/css/668b0601.ie8.css">
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <script type='text/javascript' src='assets/plugins/misc/placeholdr.js'></script>
+    <![endif]-->
+
+    <!--[if IE 9]>
+    <script type="text/javascript" src="assets/plugins/misc/media.match.min.js"></script>
+    <![endif]-->
+
+    <!-- The following CSS are included as plugins and can be removed if unused-->
+
+    <link rel="stylesheet" href="assets/css/7c9d6bc2.vendor.css"/>
+
+    <link rel="stylesheet" href="assets/css/c8472f88.main.css"/>
+
+    <style type="text/css">
+        [ng-cloak] {
+            display: none;
+        }
+        .topNegative1000 {
+            top: -1000px !important;
+        }
+        .topZero {
+            top: 0 !important;
+        }
+
+        .mainview-animation {
+            position: relative;
+        }
+        .mainview-animation.ng-enter {
+            -webkit-transition: .3s linear all; /* Safari/Chrome */
+            -moz-transition: .3s linear all; /* Firefox */
+            -o-transition: .3s linear all; /* Opera */
+            transition: .3s linear all; /* IE10+ and Future Browsers */
+        }
+
+        .mainview-animation.ng-enter{
+            opacity: 0;
+        }
+
+        .mainview-animation.ng-enter.ng-enter-active {
+            opacity: 1;
+        }
+
+        .navbar.navbar-default.ng-hide {
+            display: none;
+        }
+        .fc-grid .fc-day-number {
+            padding: 5px 6px;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="assets/demo/variations/header-midnightblue.css">
+    <link rel="stylesheet" type="text/css" href="assets/demo/variations/sidebar-gray.css">
 </head>
-<body style="background-color:#000000;">
 
-<div class="pagewrap" style="padding-top:36px;">
+<body class=""
+      ng-app="themesApp"
+      ng-controller="MainController"
+      ng-class="{
+              'static-header': !style_fixedHeader,
+              'focusedform': style_fullscreen,
+              'layout-horizontal': style_layoutHorizontal,
+              'fixed-layout': style_layoutBoxed,
+              'collapse-leftbar': style_leftbarCollapsed && !style_leftbarShown,
+              'show-rightbar': style_rightbarCollapsed,
+              'show-leftbar': style_leftbarShown
+            }"
+      ng-cloak
+        >
 
-    <div id="navigation">
-        <span id="deco1"><!-- &nbsp; --></span>
-        <span id="deco2"><!-- &nbsp; --></span>
 
-        <div class="menu">
 
-            <a href="#/" class="active">
-                <span class="edge-left"><!-- &nbsp; --></span>
-                <span class="edge-middle">Home</span>
-                <span class="edge-right"><!-- &nbsp; --></span>
-            </a>
+<header class="navbar navbar-inverse" ng-class="{'navbar-fixed-top': style_fixedHeader, 'navbar-static-top': !style_fixedHeader}" role="banner">
+    <ul class="nav navbar-nav pull-right toolbar">
+        <li class="dropdown" ng-show="!isLoggedIn" style="margin-right:40px;">
+            <a href="#/login" style="font-size: 14px"><i class="fa fa-sign-in"></i> Log in</a>
+        </li>
+        <li class="dropdown" ng-show="isLoggedIn" style="margin-right:40px;" ng-controller="HeaderUserBarController">
+            <a href="#/user/edit" class="dropdown-toggle username"><span class="hidden-xs">User: {{$parent.activeUser.username}}</span></a>
+            <ul class="dropdown-menu userinfo arrow">
+                <li class="userlinks">
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Edit Profile <i class="pull-right fa fa-fw fa-pencil"></i></a></li>
+                        <li class="divider"></li>
+                        <li><a class="text-right" ng-click="logOut()">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
 
-            <a href="#/dungeon">
-                <span class="edge-left"><!-- &nbsp; --></span>
-                <span class="edge-middle">Dungeon</span>
-                <span class="edge-right"><!-- &nbsp; --></span>
-            </a>
+<div id="page-container" class="clearfix">
 
-            <a href="#/blueprints">
-                <span class="edge-left"><!-- &nbsp; --></span>
-                <span class="edge-middle">Blueprints</span>
-                <span class="edge-right"><!-- &nbsp; --></span>
-            </a>
+    <!-- BEGIN SIDEBAR -->
+    <nav id="page-leftbar" role="navigation">
 
+        <div style="height: 120px;background-image: url(http://overwatch.de/level/live/portal/campaigns/tutorials.jpg);background-size: 100% 100%"></div>
+
+        <div>
+            <ul ng-controller="NavigationController" id="sidebar" sticky-scroll="40">
+                <li ng-repeat="item in menu"
+                    ng-class="{ hasChild: (item.children!==undefined),
+                                    active: item.selected,
+                                      open: (item.children!==undefined) && item.open }"
+                    ng-include="'templates/nav_renderer.html'"
+                        ></li>
+            </ul>
         </div>
-        <div class="deco-bg"><!-- &nbsp; --></div>
+        <!-- END SIDEBAR MENU -->
+    </nav>
 
-    </div>
+    <div id="page-content" class="clearfix" fit-height>
+        <div id="wrap" ng-view="" class="mainview-animation">
+        </div> <!--wrap -->
+    </div> <!-- page-content -->
 
-    <!-- CONTENT -->
-
-    <div id="content">
-        <div class="content-body">
-            <!-- LEFT -->
-
-            <div id="teaser-image-area" class="left" style="width:705px;">
-                <div class="teaser-image clear" style="margin-top:16px;">
-                    <div id="text-page">
-                        <div ng-view style="padding-top:20px;padding-bottom:10px;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RIGHT -->
-            <div class="right">
-                <div id="login-box">
-
-                </div>
-                <div id="halloffame" style="margin-top:16px;">
-                    <span class="caption caption-top"><!-- &nbsp; --></span>
-
-                    <div class="player-slot">
-                        <span class="rank">1</span>
-                        <span class="name">Peter</span>
-                        <span class="points">1501</span>
-                    </div>
-                    <div class="player-slot">
-                        <span class="rank">2</span>
-                        <span class="name">Paul</span>
-                        <span class="points">1021</span>
-                    </div>
-                    <div class="player-slot">
-                        <span class="rank">3</span>
-                        <span class="name">Moritz</span>
-                        <span class="points">939</span>
-                    </div>
-                    <div class="player-slot">
-                        <span class="rank">4</span>
-                        <span class="name">Megaslayer</span>
-                        <span class="points">804</span>
-                    </div>
-                    <div class="player-slot">
-                        <span class="rank">5</span>
-                        <span class="name">n00bzor</span>
-                        <span class="points">302</span>
-                    </div>
-
-
-                </div>
-            </div>
-
-
-            <span class="wrapper"><!-- &nbsp; --></span>
+    <footer role="contentinfo">
+        <div class="clearfix">
+            <button class="pull-right btn btn-default btn-xs hidden-print" back-to-top style="padding: 1px 10px;"><i class="fa fa-angle-up"></i></button>
         </div>
+    </footer>
 
-        <div class="content-footer"><!-- &nbsp; --></div>
+</div> <!-- page-container -->
 
-        <div id="footer">
-            <a href="/dataPrivacy">Datenschutz</a> |
-            <a href="/imprint">Impressum</a>
-        </div>
-
-    </div>
-</div>
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
 
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.js"></script>
-<script src="js/app.js"></script>
+<script src="scripts/c94b923a.vendor.js"></script>
+
+
+<script src="scripts/controllers/UsersInRangeController.js"></script>
+<script src="scripts/controllers/NavigationController.js"></script>
+<script src="scripts/controllers/LoginController.js"></script>
+<script src="scripts/controllers/HeaderUserBarController.js"></script>
+
+<script src="scripts/services/Base64Service.js"></script>
+<script src="scripts/services/AuthenticationService.js"></script>
+<script src="scripts/services/UserService.js"></script>
+
+<script src="scripts/0f7c48f3.scripts.js"></script>
+
+<script src="scripts/app.js"></script>
+
 </body>
 </html>

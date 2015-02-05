@@ -4,7 +4,9 @@ package de.overwatch.otd.controller;
 import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
 import de.overwatch.otd.repository.UserRepository;
+import de.overwatch.otd.service.ActiveUserAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ActiveUserAccessor activeUserAccessor;
+
+
+
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody List<User> index() {
         return userRepository.findAll();
@@ -26,6 +33,12 @@ public class UserController {
     @RequestMapping(value="{id}", method = RequestMethod.GET)
     public @ResponseBody User show(@PathVariable("id") Integer id) {
         return userRepository.findOne(id);
+    }
+
+    @RequestMapping(value="me", method = RequestMethod.GET)
+    public @ResponseBody User me() {
+        UserDetails userDetails = activeUserAccessor.getActiveUser();
+        return userRepository.findByUsername(userDetails.getUsername());
     }
 
     /**
