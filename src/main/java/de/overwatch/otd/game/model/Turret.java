@@ -1,7 +1,6 @@
 package de.overwatch.otd.game.model;
 
 
-import de.overwatch.otd.domain.attack.AttackerBlueprint;
 import de.overwatch.otd.domain.defend.ConstructionSite;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
 
@@ -27,7 +26,7 @@ public class Turret {
         this.coordinate = new Coordinate(constructionSite.getX(), constructionSite.getY());
         this.damage = towerBlueprint.getDamage();
         this.timeToReload = towerBlueprint.getTimeToReload();
-        this.range = towerBlueprint.getRange();
+        this.range = towerBlueprint.getAttackRange();
     }
 
     public int getLastShot() {

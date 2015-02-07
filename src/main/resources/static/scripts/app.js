@@ -16,10 +16,12 @@ angular
         'otd.controller.userstable',
         'otd.controller.login',
         'otd.controller.headerUserBar',
+        'otd.controller.userstatistics',
 
         'otd.services.auth',
         'otd.services.base64',
         'otd.services.user',
+        'otd.services.activeUser',
 
         'otd.templates.TemplatesCache',
         'otd.templates.TemplatesCacheOverride',
@@ -32,7 +34,7 @@ angular
         'ngRoute',
         'ngAnimate'
     ])
-    .controller('MainController', ['$scope', '$log', 'AuthenticationService', 'authService', 'UserService', function ($scope, $log, AuthenticationService, authService, UserService) {
+    .controller('MainController', ['$scope', '$log', 'AuthenticationService', 'authService', 'ActiveUserService', function ($scope, $log, AuthenticationService, authService, ActiveUserService) {
         $scope.style_fixedHeader = true;
         $scope.style_headerBarHidden = false;
         $scope.style_layoutBoxed = false;
@@ -77,10 +79,9 @@ angular
         $scope.$on('Auth:loggedIn', function (event, newVal) {
             $scope.isLoggedIn = AuthenticationService.isLoggedIn();
 
-            UserService.activeUser().then(
-                function (response) {
-                    $scope.activeUser = response.data;
-                    $scope.activeUserName = response.data.username;
+            ActiveUserService.getActiveUser().then(
+                function (activeUser) {
+                    $scope.activeUser = activeUser;
                 },
                 function (errorPayload) {
                     $log.info("Could not get the active User. Responsecode=" + status);

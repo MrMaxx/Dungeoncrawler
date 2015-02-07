@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
+            <div class="row" ng-controller="UserStatisticsController">
                 <div class="col-md-3 col-sm-6">
                             <span class="info-tiles tiles-midnightblue" href="#">
                                 <div class="tiles-heading">
@@ -40,11 +40,11 @@
                             <span class="info-tiles tiles-midnightblue" href="#">
                                 <div class="tiles-heading">
                                     <div class="pull-left">Attack</div>
-                                    <div class="pull-right">success: 74.8%</div>
+                                    <div class="pull-right">success: {{(100*userStatistics.attacksWon/userStatistics.attacksTotal)| number:1}}%</div>
                                 </div>
                                 <div class="tiles-body">
                                     <div class="pull-left"><i class="fa fa-bolt"></i></div>
-                                    <div class="pull-right">17</div>
+                                    <div class="pull-right">{{userStatistics.attacksTotal}}</div>
                                 </div>
                             </span>
                 </div>
@@ -52,11 +52,11 @@
                             <span class="info-tiles tiles-midnightblue" href="#">
                                 <div class="tiles-heading">
                                     <div class="pull-left">Defense</div>
-                                    <div class="pull-right">success: +43%</div>
+                                    <div class="pull-right">success: {{(100*userStatistics.defendsWon/userStatistics.defendsTotal)| number:1}}%</div>
                                 </div>
                                 <div class="tiles-body">
                                     <div class="pull-left"><i class="fa fa-shield"></i></div>
-                                    <div class="pull-right">26</div>
+                                    <div class="pull-right">{{userStatistics.defendsTotal}}</div>
                                 </div>
                             </span>
                 </div>

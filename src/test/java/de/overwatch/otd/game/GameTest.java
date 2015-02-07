@@ -65,7 +65,7 @@ public class GameTest {
         blueprint.setType("DEFAULT_TOWER");
         blueprint.setPrice(100);
         blueprint.setDamage(100);
-        blueprint.setRange(100);
+        blueprint.setAttackRange(100);
         blueprint.setTimeToReload(10);
         return blueprint;
     }

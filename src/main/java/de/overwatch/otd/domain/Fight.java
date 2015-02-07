@@ -24,6 +24,12 @@ public class Fight extends OtdEntity{
     @JoinColumn(name = "attack_force_id", nullable = false)
     private AttackForce attackForce;
 
+    /* redundant...fight is used too often as to have so much joins */
+    @Column(nullable = false)
+    private Integer attackerId;
+    @Column(nullable = false)
+    private Integer defenderId;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FightState fightState;
@@ -47,6 +53,22 @@ public class Fight extends OtdEntity{
         ATTACKER_WON,
         DEFENDER_WON,
         DRAW
+    }
+
+    public Integer getAttackerId() {
+        return attackerId;
+    }
+
+    public void setAttackerId(Integer attackerId) {
+        this.attackerId = attackerId;
+    }
+
+    public Integer getDefenderId() {
+        return defenderId;
+    }
+
+    public void setDefenderId(Integer defenderId) {
+        this.defenderId = defenderId;
     }
 
     public Date getCreated() {
@@ -109,6 +131,8 @@ public class Fight extends OtdEntity{
         if (dungeon != null ? !dungeon.equals(fight.dungeon) : fight.dungeon != null) return false;
         if (fightState != fight.fightState) return false;
         if (outcome != fight.outcome) return false;
+        if (attackerId != fight.attackerId) return false;
+        if (defenderId != fight.defenderId) return false;
 
         return true;
     }
@@ -119,6 +143,8 @@ public class Fight extends OtdEntity{
         result = 31 * result + (attackForce != null ? attackForce.hashCode() : 0);
         result = 31 * result + (fightState != null ? fightState.hashCode() : 0);
         result = 31 * result + (outcome != null ? outcome.hashCode() : 0);
+        result = 31 * result + (attackerId != null ? attackerId.hashCode() : 0);
+        result = 31 * result + (defenderId != null ? defenderId.hashCode() : 0);
         return result;
     }
 
@@ -129,6 +155,8 @@ public class Fight extends OtdEntity{
                 ", fightState='" + fightState + '\'' +
                 ", outcome='" + outcome + '\'' +
                 ", created='" + created + '\'' +
+                ", attackerId='" + attackerId + '\'' +
+                ", defenderId='" + defenderId + '\'' +
                 '}';
     }
 }

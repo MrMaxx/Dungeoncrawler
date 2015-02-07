@@ -32,8 +32,8 @@ insert into dungeon_node (id, dungeon_blueprint_id, x, y, check_point) values (8
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (1, 1, 200, 440);
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (2, 1, 440, 280);
 
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (1, 'GATTLING', 20, 100, 4000, 100);
-insert into tower_blueprint (id, type, damage, time_to_reload, range, price) values (2, 'FLAMER', 30, 1500, 2000, 200);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price) values (1, 'GATTLING', 20, 100, 4000, 100);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price) values (2, 'FLAMER', 30, 1500, 2000, 200);
 
 insert into attack_force (id, user_id, attack_force_pattern_id) values (1, 1, 1);
 insert into attack_force (id, user_id, attack_force_pattern_id) values (2, 2, 1);
@@ -51,7 +51,7 @@ insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) val
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 2, 1, 2);
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 2, 2, 2);
 
-insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (1,2,1,'2015-01-16 09:42:01','ISSUED',null, null);
-insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, events) values (2,1,2,'2015-01-16 14:11:42','COMPLETED','ATTACKER_WON', '[{"type": "SPAWN","time":100,"attackerTqype":"GRUNT","id":1,"x":2,"y":2}');
+insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, attacker_id, defender_id, events) values (1,2,1,'2015-01-16 09:42:01','ISSUED',null, 1, 2, null);
+insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, attacker_id, defender_id, events) values (2,1,2,'2015-01-16 14:11:42','COMPLETED','ATTACKER_WON', 2, 1, '[{"type": "SPAWN","time":100,"attackerTqype":"GRUNT","id":1,"x":2,"y":2}');
 
 

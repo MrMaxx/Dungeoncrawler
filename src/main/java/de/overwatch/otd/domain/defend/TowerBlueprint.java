@@ -9,22 +9,22 @@ import javax.persistence.Entity;
 public class TowerBlueprint  extends OtdEntity {
 
     @Column(nullable = false)
-    private String type;
+    private String towerType;
     @Column(nullable = false)
     private int damage;
     @Column(nullable = false)
     private int timeToReload;
     @Column(nullable = false)
-    private int range;
+    private int attackRange;
     @Column(nullable = false)
     private int price;
 
     public String getType() {
-        return type;
+        return towerType;
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.towerType = type;
     }
 
     public int getDamage() {
@@ -43,12 +43,12 @@ public class TowerBlueprint  extends OtdEntity {
         this.timeToReload = timeToReload;
     }
 
-    public int getRange() {
-        return range;
+    public int getAttackRange() {
+        return attackRange;
     }
 
-    public void setRange(int range) {
-        this.range = range;
+    public void setAttackRange(int range) {
+        this.attackRange = range;
     }
 
     public int getPrice() {
@@ -68,10 +68,10 @@ public class TowerBlueprint  extends OtdEntity {
 
         if (damage != that.damage) return false;
         if (price != that.price) return false;
-        if (range != that.range) return false;
+        if (attackRange != that.attackRange) return false;
         if (timeToReload != that.timeToReload) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (towerType != null ? !towerType.equals(that.towerType) : that.towerType != null) return false;
 
         return true;
     }
@@ -79,10 +79,10 @@ public class TowerBlueprint  extends OtdEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (towerType != null ? towerType.hashCode() : 0);
         result = 31 * result + damage;
         result = 31 * result + timeToReload;
-        result = 31 * result + range;
+        result = 31 * result + attackRange;
         result = 31 * result + price;
         return result;
     }
@@ -91,10 +91,10 @@ public class TowerBlueprint  extends OtdEntity {
     public String toString() {
         return "TowerBlueprint{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", towerType='" + towerType + '\'' +
                 ", damage=" + damage +
                 ", timeToReload=" + timeToReload +
-                ", range=" + range +
+                ", attackRange=" + attackRange +
                 ", price=" + price +
                 '}';
     }
