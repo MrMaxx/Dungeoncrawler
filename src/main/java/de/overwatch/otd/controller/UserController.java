@@ -5,11 +5,15 @@ import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
 import de.overwatch.otd.repository.UserRepository;
 import de.overwatch.otd.service.ActiveUserAccessor;
+import de.overwatch.otd.service.ranking.PagedUserList;
+import de.overwatch.otd.service.ranking.UserRankingService;
+import de.overwatch.otd.service.ranking.UserWithRank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,11 +27,24 @@ public class UserController {
     @Autowired
     private ActiveUserAccessor activeUserAccessor;
 
-
+    @Autowired
+    private UserRankingService userRankingService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<User> index() {
-        return userRepository.findAll();
+    public @ResponseBody PagedUserList index(
+            @RequestParam Integer pagesize,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer userId) {
+
+        if(page == null){ page = 1; }
+        if(pagesize == null){ pagesize = 30; }
+
+
+        if(userId != null){
+            return userRankingService.getUserRanking(userId, pagesize);
+        }
+
+        return userRankingService.getUserPage(page, pagesize);
     }
 
     @RequestMapping(value="{id}", method = RequestMethod.GET)
@@ -36,9 +53,10 @@ public class UserController {
     }
 
     @RequestMapping(value="me", method = RequestMethod.GET)
-    public @ResponseBody User me() {
+    public @ResponseBody UserWithRank me() {
         UserDetails userDetails = activeUserAccessor.getActiveUser();
-        return userRepository.findByUsername(userDetails.getUsername());
+        User user = userRepository.findByUsername(userDetails.getUsername());
+        return userRankingService.getUserWithRank(user.getId());
     }
 
     /**
@@ -61,7 +79,8 @@ public class UserController {
 
         user.setAuthorities(roles);
 
-        userRepository.save(user);
+        User persistedUser = userRepository.save(user);
+        userRankingService.addUser(persistedUser);
 
         return user;
     }

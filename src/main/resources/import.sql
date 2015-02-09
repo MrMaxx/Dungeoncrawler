@@ -1,6 +1,6 @@
 
-insert into users (id, username, email, password, enabled) values (1, 'maxx', 'maximilian.hoeflich@googlemail.com', 'maxxer', true);
-insert into users (id, username, email, password, enabled) values (2, 'blackscorp', 'cccpmik@gmail.com', 'backscorper', true);
+insert into users (id, username, email, password, score, enabled) values (1, 'maxx', 'maximilian.hoeflich@googlemail.com', 'maxxer', 1000, true);
+insert into users (id, username, email, password, score, enabled) values (2, 'blackscorp', 'cccpmik@gmail.com', 'backscorper', 2000, true);
 
 
 insert into authorities (user_id, authority) values (1, 'ADMIN');
@@ -55,3 +55,29 @@ insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcom
 insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, attacker_id, defender_id, events) values (2,1,2,'2015-01-16 14:11:42','COMPLETED','ATTACKER_WON', 2, 1, '[{"type": "SPAWN","time":100,"attackerTqype":"GRUNT","id":1,"x":2,"y":2}');
 
 
+-- MORE USERS FOR THE LIST :)
+insert into users (id, username, email, password, score, enabled) values (3, 'DummyUser1', 'dummy1@gmail.com', '123password', 1200, true);
+insert into users (id, username, email, password, score, enabled) values (4, 'DummyUser2', 'dummy2@gmail.com', '123password', 1100, true);
+insert into users (id, username, email, password, score, enabled) values (5, 'DummyUser3', 'dummy3@gmail.com', '123password', 900, true);
+insert into users (id, username, email, password, score, enabled) values (6, 'DummyUser4', 'dummy4@gmail.com', '123password', 800, true);
+insert into users (id, username, email, password, score, enabled) values (7, 'DummyUser5', 'dummy5@gmail.com', '123password', 700, true);
+insert into users (id, username, email, password, score, enabled) values (8, 'DummyUser6', 'dummy6@gmail.com', '123password', 600, true);
+insert into users (id, username, email, password, score, enabled) values (9, 'DummyUser7', 'dummy7@gmail.com', '123password', 500, true);
+insert into users (id, username, email, password, score, enabled) values (10, 'DummyUser8', 'dummy8@gmail.com', '123password', 400, true);
+insert into users (id, username, email, password, score, enabled) values (11, 'DummyUser9', 'dummy9@gmail.com', '123password', 300, true);
+insert into users (id, username, email, password, score, enabled) values (12, 'DummyUser10', 'dummy10@gmail.com', '123password', 200, true);
+insert into users (id, username, email, password, score, enabled) values (13, 'DummyUser11', 'dummy11@gmail.com', '123password', 100, true);
+insert into users (id, username, email, password, score, enabled) values (14, 'DummyUser12', 'dummy12@gmail.com', '123password', 1300, true);
+insert into users (id, username, email, password, score, enabled) values (15, 'DummyUser13', 'dummy13@gmail.com', '123password', 1400, true);
+insert into users (id, username, email, password, score, enabled) values (16, 'DummyUser14', 'dummy14@gmail.com', '123password', 1500, true);
+insert into users (id, username, email, password, score, enabled) values (17, 'DummyUser15', 'dummy15@gmail.com', '123password', 1600, true);
+insert into users (id, username, email, password, score, enabled) values (18, 'DummyUser16', 'dummy16@gmail.com', '123password', 1700, true);
+insert into users (id, username, email, password, score, enabled) values (19, 'DummyUser17', 'dummy17@gmail.com', '123password', 1800, true);
+insert into users (id, username, email, password, score, enabled) values (20, 'DummyUser18', 'dummy18@gmail.com', '123password', 1900, true);
+insert into users (id, username, email, password, score, enabled) values (21, 'DummyUser19', 'dummy19@gmail.com', '123password', 2000, true);
+insert into users (id, username, email, password, score, enabled) values (22, 'DummyUser20', 'dummy20@gmail.com', '123password', 2100, true);
+insert into users (id, username, email, password, score, enabled) values (23, 'DummyUser21', 'dummy21@gmail.com', '123password', 2200, true);
+insert into users (id, username, email, password, score, enabled) values (24, 'DummyUser22', 'dummy22@gmail.com', '123password', 2300, true);
+insert into users (id, username, email, password, score, enabled) values (25, 'DummyUser23', 'dummy23@gmail.com', '123password', 2400, true);
+insert into users (id, username, email, password, score, enabled) values (26, 'DummyUser24', 'dummy24@gmail.com', '123password', 2500, true);
+insert into users (id, username, email, password, score, enabled) values (27, 'DummyUser25', 'dummy25@gmail.com', '123password', 2600, true);

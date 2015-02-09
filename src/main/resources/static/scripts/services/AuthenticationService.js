@@ -3,7 +3,8 @@
 angular
     .module('otd.services.auth', [])
 
-    .factory('AuthenticationService',[ '$http', '$rootScope', 'Base64', function($http, $rootScope, Base64) {
+    .factory('AuthenticationService',[ '$http', '$rootScope', '$log', 'Base64', 'Constants',
+        function($http, $rootScope, $log, Base64, Constants) {
         // We first define a private API for our service.
 
         var loggedIn = false;
@@ -14,11 +15,11 @@ angular
             return loggedIn;
         }
 
-        function logIn(username, password, successCallBack, errorCallBack) {
+        function logIn(username, password) {
 
-            $http({
+            return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/oauth/token',
+                url: Constants.API_BASEURL+'/oauth/token',
                 headers: {
                     'Authorization': 'Basic '+Base64.encode('webapp:password'),
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -28,9 +29,9 @@ angular
                     username:username,
                     grant_type:'password',
                     scope:'read'
-                })
-            }).
-                success(function(data, status, headers, config) {
+                })}
+            ).success(
+                function(data, status, headers, config) {
                     accessToken = data.access_token;
                     refreshToken = data.refresh_token;
                     loggedIn = true;
@@ -38,10 +39,12 @@ angular
                     $http.defaults.headers.common.Authorization = 'Bearer '+accessToken;
 
                     $rootScope.$broadcast('Auth:loggedIn');
-
-                    successCallBack(data, status);
-                }).
-                error(errorCallBack);
+                }
+            ).error(
+                function(data, status, headers, config) {
+                    $log.error("AuthError: "+status);
+                }
+            );
 
         }
 
@@ -59,7 +62,7 @@ angular
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/oauth/token',
+                url: Constants.API_BASEURL+'/oauth/token',
                 headers: {
                     'Authorization': 'Basic '+Base64.encode('webapp:password'),
                     'Content-Type': 'application/x-www-form-urlencoded'

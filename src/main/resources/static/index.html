@@ -28,7 +28,7 @@
 
     <!-- The following CSS are included as plugins and can be removed if unused-->
 
-    <link rel="stylesheet" href="assets/css/7c9d6bc2.vendor.css"/>
+    <link rel="stylesheet" href="assets/css/1b859e5a.vendor.css"/>
 
     <link rel="stylesheet" href="assets/css/c8472f88.main.css"/>
 
@@ -93,7 +93,10 @@
 <header class="navbar navbar-inverse" ng-class="{'navbar-fixed-top': style_fixedHeader, 'navbar-static-top': !style_fixedHeader}" role="banner">
     <ul class="nav navbar-nav pull-right toolbar">
         <li class="dropdown" ng-show="!isLoggedIn" style="margin-right:40px;">
-            <a href="#/login" style="font-size: 14px"><i class="fa fa-sign-in"></i> Log in</a>
+            <a href="#/user/login" style="font-size: 14px"><i class="fa fa-sign-in"></i> Log in</a>
+        </li>
+        <li class="dropdown" ng-show="!isLoggedIn">
+            <a href="#/user/register" style="font-size: 14px"><i class="fa fa-user"></i><i class="fa fa-plus" style="font-size: 8px;vertical-align: top;"></i> Register</a>
         </li>
         <li class="dropdown" ng-show="isLoggedIn" style="margin-right:40px;" ng-controller="HeaderUserBarController">
             <a href="#/user/edit" class="dropdown-toggle username"><span class="hidden-xs">User: {{$parent.activeUser.username}}</span></a>
@@ -120,6 +123,7 @@
         <div>
             <ul ng-controller="NavigationController" id="sidebar" sticky-scroll="40">
                 <li ng-repeat="item in menu"
+                    ng-show="isLoggedIn || !item.authorized"
                     ng-class="{ hasChild: (item.children!==undefined),
                                     active: item.selected,
                                       open: (item.children!==undefined) && item.open }"
@@ -150,7 +154,7 @@
 
 
 
-<script src="scripts/c94b923a.vendor.js"></script>
+<script src="scripts/3687e45f.vendor.js"></script>
 
 
 <script src="scripts/controllers/UsersInRangeController.js"></script>
@@ -158,11 +162,16 @@
 <script src="scripts/controllers/LoginController.js"></script>
 <script src="scripts/controllers/HeaderUserBarController.js"></script>
 <script src="scripts/controllers/UserStatisticsController.js"></script>
+<script src="scripts/controllers/RegisterController.js"></script>
 
 <script src="scripts/services/Base64Service.js"></script>
 <script src="scripts/services/AuthenticationService.js"></script>
 <script src="scripts/services/UserService.js"></script>
 <script src="scripts/services/ActiveUserService.js"></script>
+<script src="scripts/services/PinesNotification.js"></script>
+
+#<script src="scripts/util/HttpInterceptors.js"></script>
+<script src="scripts/util/Constants.js"></script>
 
 <script src="scripts/0f7c48f3.scripts.js"></script>
 

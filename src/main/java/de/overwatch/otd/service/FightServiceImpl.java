@@ -1,16 +1,12 @@
 package de.overwatch.otd.service;
 
 
-import com.google.common.collect.Collections2;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.overwatch.otd.domain.Fight;
-import de.overwatch.otd.domain.attack.AttackerBlueprint;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
-import de.overwatch.otd.game.GameEngine;
 import de.overwatch.otd.game.GameEngineFactory;
 import de.overwatch.otd.game.GameState;
-import de.overwatch.otd.game.events.GameEvent;
 import de.overwatch.otd.game.processor.*;
 import de.overwatch.otd.repository.AttackerBlueprintRepository;
 import de.overwatch.otd.repository.FightRepository;
@@ -29,6 +25,8 @@ import java.util.Map;
 public class FightServiceImpl implements FightService{
 
     private static final Logger LOGGER = Logger.getLogger(FightServiceImpl.class);
+
+    private final static int WINNING_SCORE = 100;
 
     @Autowired
     private FightRepository fightRepository;
@@ -78,10 +76,13 @@ public class FightServiceImpl implements FightService{
 
                 String eventStream = gson.toJson(gameState.getEvents());
 
-                fight.setOutcome(
-                        gameState.getAttackerScore() > 0?
-                                Fight.Outcome.ATTACKER_WON: Fight.Outcome.DEFENDER_WON
-                );
+                if(gameState.getAttackerScore() > 0){
+                    fight.setOutcome(Fight.Outcome.ATTACKER_WON);
+                    fight.getAttackForce().getUser().setScore(fight.getAttackForce().getUser().getScore()+WINNING_SCORE);
+                }else{
+                    fight.setOutcome(Fight.Outcome.DEFENDER_WON);
+                    fight.getDungeon().getUser().setScore(fight.getDungeon().getUser().getScore()+WINNING_SCORE);
+                }
 
                 fight.setEvents(eventStream);
                 fight.setFightState(Fight.FightState.COMPLETED);

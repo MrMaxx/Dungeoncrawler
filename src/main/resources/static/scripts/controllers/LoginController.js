@@ -12,13 +12,12 @@ angular
 
             AuthenticationService.logIn(
                 $scope.loginForm.username,
-                $scope.loginForm.password,
-                function(data, status){
+                $scope.loginForm.password)
+            .then(
+                function(successResponse){
                     $location.path("/dashboard");
-                },
-                function(data, status){
-                    $location.path("/home");
-                });
+                }
+            );
 
 
 

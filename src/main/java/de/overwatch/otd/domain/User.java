@@ -24,6 +24,9 @@ public class User extends OtdEntity{
     @Column(nullable = false)
     private Boolean enabled;
 
+    @Column
+    private int score = 0;
+
     @JsonIgnore
     // following http://stackoverflow.com/questions/416208/jpa-map-collection-of-enums
     @ElementCollection(targetClass=Role.class, fetch = FetchType.EAGER)
@@ -33,6 +36,14 @@ public class User extends OtdEntity{
             joinColumns=@JoinColumn(name="user_id"))
     @Column(name="authority")
     private Set<Role> authorities;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public String getUsername() {
         return username;
@@ -87,6 +98,7 @@ public class User extends OtdEntity{
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (!username.equals(user.username)) return false;
+        if (score != user.score) return false;
 
         return true;
     }
@@ -99,6 +111,7 @@ public class User extends OtdEntity{
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (enabled != null ? enabled.hashCode() : 0);
         result = 31 * result + (authorities != null ? authorities.hashCode() : 0);
+        result = 31 * result + score;
         return result;
     }
 
@@ -110,6 +123,7 @@ public class User extends OtdEntity{
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
+                ", score=" + score +
                 '}';
     }
 }

@@ -1,0 +1,73 @@
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <panel panel-class="panel-primary" data-heading="Register new User">
+
+                <form ng-submit="processForm()" class="form-horizontal" ng-controller="RegisterController">
+                    <div class="form-group">
+                        <label for="loginForm_username" class="control-label col-sm-3" style="text-align: left;">Username</label>
+                        <div class="col-sm-8">
+                            <input name="username"
+                                   id="loginForm_username"
+                                   type="text"
+                                   placeholder="Username"
+                                   required
+                                   ng-model="registerForm.username"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginForm_email" class="control-label col-sm-3" style="text-align: left;">Email</label>
+                        <div class="col-sm-8">
+                            <input name="email"
+                                   id="loginForm_email"
+                                   type="email"
+                                   data-type="email"
+                                   placeholder="Email"
+                                   required
+                                   ng-model="registerForm.email"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginForm.password" class="control-label col-sm-3" style="text-align: left;">Password</label>
+                        <div class="col-sm-8">
+                            <input name="password"
+                                   id="loginForm.password"
+                                   type="password"
+                                   placeholder="Password"
+                                   required
+                                   ng-model="registerForm.password"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginForm.repeat_password" class="control-label col-sm-3" style="text-align: left;">Repeat Password</label>
+                        <div class="col-sm-8">
+                            <input name="password_repeat"
+                                   id="loginForm.repeat_password"
+                                   type="password"
+                                   placeholder="Password"
+                                   required
+                                   ng-model="registerForm.password_repeat"
+                                   password-verify="registerForm.password"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <button class="btn-primary btn btn-block">Register</button>
+                </form>
+
+            </panel>
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+
+

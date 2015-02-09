@@ -2,13 +2,14 @@
 
 angular
     .module('otd.services.activeUser', [])
-    .factory('ActiveUserService', ['$http', '$q', '$log',
-        function ($http, $q, $log) {
+    .factory('ActiveUserService', ['$http', '$q', '$log', 'Constants',
+        function ($http, $q, $log, Constants) {
 
             var activeUser = null;
             var promises = [];
 
             return {
+                clear: function(){ activeUser = null;},
                 getActiveUser: function () {
 
                     var deferred = $q.defer();
@@ -20,7 +21,7 @@ angular
                         $log.debug('ActiveUserService: Fetching ActiveUser from Server.');
                         $http({
                             method: 'GET',
-                            url: 'http://localhost:8080/api/v1/user/me'
+                            url: Constants.API_BASEURL+'/api/v1/user/me'
                         }).then(function(response){
                             activeUser = response.data;
                             var i;

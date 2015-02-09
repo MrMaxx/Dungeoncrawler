@@ -6,12 +6,13 @@ public class UserWithRank {
     private Integer id;
     private String username;
     private int score;
-    private int rank;
+    private Integer rank;
 
-    public UserWithRank(Integer id, String username, int score) {
+    public UserWithRank(Integer id, String username, int score, int rank) {
         this.id = id;
         this.username = username;
         this.score = score;
+        this.rank = rank;
     }
 
     public Integer getId() {
@@ -38,11 +39,11 @@ public class UserWithRank {
         this.score = score;
     }
 
-    public int getRank() {
+    public Integer getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Integer rank) {
         this.rank = rank;
     }
 }

@@ -17,14 +17,19 @@ angular
         'otd.controller.login',
         'otd.controller.headerUserBar',
         'otd.controller.userstatistics',
+        'otd.controller.register',
 
         'otd.services.auth',
         'otd.services.base64',
         'otd.services.user',
         'otd.services.activeUser',
+        'otd.services.pinesNotifications',
 
         'otd.templates.TemplatesCache',
         'otd.templates.TemplatesCacheOverride',
+
+        'otd.util.httpErrorInterceptor',
+        'otd.util.constants',
 
         'otd.shared.Directives',
 
@@ -75,6 +80,7 @@ angular
         $scope.$on('Auth:loggedOut', function (event, newVal) {
             $scope.isLoggedIn = AuthenticationService.isLoggedIn();
             $scope.activeUser = {};
+            ActiveUserService.clear();
         });
         $scope.$on('Auth:loggedIn', function (event, newVal) {
             $scope.isLoggedIn = AuthenticationService.isLoggedIn();
@@ -95,8 +101,9 @@ angular
         $routeProvider
             .when('/', { templateUrl: 'views/home.html' })
             .when('/dashboard', { templateUrl: 'views/dashboard.html' })
-            .when('/login', { templateUrl: 'views/login.html' })
+            .when('/user/login', { templateUrl: 'views/user/login.html' })
             .when('/user/edit', { templateUrl: 'views/user/edit.html' })
+            .when('/user/register', { templateUrl: 'views/user/register.html' })
 
             .otherwise({
                 redirectTo: '/'

@@ -20,10 +20,10 @@ public class CustomFightRepositoryImpl implements CustomFightRepository{
 
         String sql = "" +
                 "SELECT " +
-                "       SUM(CASE WHEN attacker_id = :userId THEN 1 ELSE 0 END) as attacksTotal," +
-                "       SUM(CASE WHEN attacker_id = :userId && outcome = 'ATTACKER_WON' THEN 1 ELSE 0 END) as attacksWon," +
-                "       SUM(CASE WHEN defender_id = :userId THEN 1 ELSE 0 END) as defendsTotal," +
-                "       SUM(CASE WHEN defender_id = :userId && outcome = 'DEFENDER_WON' THEN 1 ELSE 0 END) as defendsWon" +
+                "       SUM(CASE WHEN attacker_id = CAST(:userId AS INTEGER) THEN 1 ELSE 0 END) as attacksTotal," +
+                "       SUM(CASE WHEN attacker_id = CAST(:userId AS INTEGER) && outcome = 'ATTACKER_WON' THEN 1 ELSE 0 END) as attacksWon," +
+                "       SUM(CASE WHEN defender_id = CAST(:userId AS INTEGER) THEN 1 ELSE 0 END) as defendsTotal," +
+                "       SUM(CASE WHEN defender_id = CAST(:userId AS INTEGER) && outcome = 'DEFENDER_WON' THEN 1 ELSE 0 END) as defendsWon" +
                 "   FROM fight" +
                 "   WHERE attacker_id = :userId OR defender_id = :userId" +
                 "   ORDER BY attacker_id, defender_id";

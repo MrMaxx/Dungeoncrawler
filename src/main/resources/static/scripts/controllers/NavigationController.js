@@ -6,17 +6,20 @@ angular
     $scope.menu = [
         {
             label: 'Dashboard',
+            authorized: true,
             iconClasses: 'fa fa-home',
             url: '#/dashboard'
         },
         {
             label: 'Home',
+            authorized: false,
             iconClasses: 'fa fa-home',
             url: '#/'
         },
         {
             label: 'Job Market',
             iconClasses: 'fa fa-tasks',
+            authorized: true,
             children: [
                 {
                     label:"Jobs for Defenders",
@@ -33,6 +36,7 @@ angular
         {
             label:"Knowledge Base",
             iconClasses:"fa fa-book",
+            authorized: false,
             children: [
                 {
                     label:"Offense",

@@ -3,14 +3,16 @@ package de.overwatch.otd.service.ranking;
 
 import de.overwatch.otd.domain.User;
 
-import java.util.List;
-
 public interface UserRankingService {
 
     void addUser(User user);
 
+    UserWithRank getUserWithRank(Integer userId);
+
     void changeScore(Integer userId, int newScore);
 
-    List<UserWithRank> getUserRanking();
+    PagedUserList getUserRanking(Integer userId, int pagesize);
+
+    PagedUserList getUserPage(int page, int pagesize);
 
 }
