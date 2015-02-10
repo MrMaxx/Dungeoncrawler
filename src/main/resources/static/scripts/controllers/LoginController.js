@@ -14,7 +14,7 @@ angular
                 $scope.loginForm.username,
                 $scope.loginForm.password)
             .then(
-                function(successResponse){
+                function(success){
                     $location.path("/dashboard");
                 }
             );

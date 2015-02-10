@@ -5,16 +5,22 @@ angular
   .controller('NavigationController', ['$scope', '$location', '$timeout', function ($scope, $location, $timeout) {
     $scope.menu = [
         {
+            label: 'Home',
+            authorized: false,
+            iconClasses: 'fa fa-home',
+            url: '#/'
+        },
+        {
             label: 'Dashboard',
             authorized: true,
             iconClasses: 'fa fa-home',
             url: '#/dashboard'
         },
         {
-            label: 'Home',
+            label: 'Dungeon Editor',
             authorized: false,
             iconClasses: 'fa fa-home',
-            url: '#/'
+            url: '#/dungeon'
         },
         {
             label: 'Job Market',

@@ -18,12 +18,14 @@ angular
         'otd.controller.headerUserBar',
         'otd.controller.userstatistics',
         'otd.controller.register',
+        'otd.controller.dungeon',
 
         'otd.services.auth',
         'otd.services.base64',
         'otd.services.user',
         'otd.services.activeUser',
         'otd.services.pinesNotifications',
+        'otd.services.blueprints',
 
         'otd.templates.TemplatesCache',
         'otd.templates.TemplatesCacheOverride',
@@ -33,6 +35,7 @@ angular
 
         'otd.shared.Directives',
 
+        'ngDragDrop',
         'ngCookies',
         'ngResource',
         'ngSanitize',
@@ -104,6 +107,7 @@ angular
             .when('/user/login', { templateUrl: 'views/user/login.html' })
             .when('/user/edit', { templateUrl: 'views/user/edit.html' })
             .when('/user/register', { templateUrl: 'views/user/register.html' })
+            .when('/dungeon', { templateUrl: 'views/dungeonEditor.html' })
 
             .otherwise({
                 redirectTo: '/'
