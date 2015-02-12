@@ -3,84 +3,126 @@
 angular
     .module('otd.controller.dungeon', [])
     .controller('DungeonController',
-        ['$scope', '$log',
-        function ($scope, $log) {
+        ['$scope', '$log', 'TowerBlueprintService', 'DungeonBlueprintService', 'DungeonService','$injector',
+        function ($scope, $log, TowerBlueprintService, DungeonBlueprintService, DungeonService, $injector) {
 
-            $scope.dungeon = {
-                "dungeonBlueprintId": 1,
-                "id": 0,
-                "towers": [
-                    {
-                        "constructionSiteId": 1,
-                        "towerBlueprintId": 1,
-                        "id": 1,
-                        // x,y NEED TO BE ADDED ON LOAD !!!
-                        "x": 200,
-                        "y": 440,
-                        // TowerName NEEDS TO BE ADDED ON LOAD !!!
-                        "type":"GATTLING",
-                        // needs to be added and initialized with false
-                        "highlight":false
-                    }
-                ]
+            $scope.dungeonBlueprint = {};
+            $scope.constructionSites = {};
+            $scope.towerBlueprints = {};
+            $scope.dungeon = {};
+            $scope.towers = {};
+
+            $scope.showTowerDetails = false;
+
+            $scope.constructionSiteIdSelected = null;
+            $scope.towerIdSelected = null;
+
+            $scope.inititlizeController = function(dungeonBlueprintId){
+                $scope.dungeonBlueprint = {};
+                $scope.constructionSites = {};
+                $scope.towerBlueprints = {};
+                $scope.dungeon = {};
+                $scope.towers = {};
+                DungeonBlueprintService.getDungeonBlueprint(dungeonBlueprintId).then(function(dungeonBlueprint){
+                    angular.forEach(dungeonBlueprint.constructionSites, function(site, index){
+                        site['highlight'] = false;
+                        $scope.constructionSites[site.id] = site;
+                    });
+                    $scope.dungeonBlueprint = dungeonBlueprint;
+                    return DungeonService.getDungeonByDungeonBlueprintId(dungeonBlueprintId);
+                }).then(function(dungeon){
+                    angular.forEach(dungeon.towers, function(tower, index){
+                        $scope.prepareTower(tower);
+                    });
+                    $scope.dungeon = dungeon;
+                });
+
+                TowerBlueprintService.getTowerBlueprints().then(function(towerBlueprints){
+                    angular.forEach(towerBlueprints, function(towerBlueprint, index){
+                        $scope.towerBlueprints[towerBlueprint.id] = towerBlueprint;
+                    });
+                });
             };
+            $scope.inititlizeController(1);
 
-            $scope.dungeonBlueprint = {
-                "id": 1,
-                "name": "SNAIL",
-                "width": 1080,
-                "height": 840,
-                "constructionSites": [
-                    {
-                        "id": 1,
-                        "x": 200,
-                        "y": 440
-                    },
-                    {
-                        "id": 2,
-                        "x": 440,
-                        "y": 280
-                    }
-                ]
-            };
-
-            $scope.towerBlueprints = [
-                {
-                    "id": 1,
-                    "damage": 20,
-                    "timeToReload": 100,
-                    "attackRange": 4000,
-                    "price": 100,
-                    "type": "GATTLING",
-                    // NEEDS TO BE ADDED ON STARTUP
-                    "selected": true
-                },
-                {
-                    "id": 2,
-                    "damage": 30,
-                    "timeToReload": 1500,
-                    "attackRange": 2000,
-                    "price": 200,
-                    "type": "FLAMER",
-                    // NEEDS TO BE ADDED ON STARTUP
-                    "selected": false
+            $scope.prepareTower = function(tower){
+                var towerBlueprint = $scope.towerBlueprints[tower.towerBlueprintId];
+                var site = $scope.constructionSites[tower.constructionSiteId];
+                if(site){
+                    tower['x'] = site.x;
+                    tower['y'] = site.y;
                 }
-            ];
+                if(towerBlueprint){
+                    tower['type'] = towerBlueprint.type;
+                }
+                $scope.towers[tower.id] = tower;
+            }
 
+            $scope.highlightConstructionSite = function(siteId){
+                angular.forEach($scope.constructionSites, function(site, index){
+                    site['highlight'] = false;
+                });
+                $scope.constructionSites[siteId].highlight = true;
 
-            $scope.constructionSiteClicked = function(siteId){
+                $scope.highlightTowerBlueprint();
 
+                $scope.showTowerDetails = true;
                 $log.info("clicked Site "+siteId);
+            }
+            $scope.constructionSiteClicked = function(siteId){
+                $scope.constructionSiteIdSelected = siteId;
+                $scope.towerIdSelected = null;
+                $scope.highlightConstructionSite(siteId);
+
             };
-            $scope.towerClicked = function(towerId){
+            $scope.towerClicked = function(towerId, siteId){
+                $scope.constructionSiteIdSelected = siteId;
+                $scope.towerIdSelected = towerId;
+                $scope.highlightConstructionSite(siteId);
+
+                $scope.highlightTowerBlueprint(towerId);
 
                 $log.info("clicked Tower "+towerId);
             };
+            $scope.highlightTowerBlueprint = function(towerId){
+                angular.forEach($scope.towerBlueprints, function(towerBlueprint, index){
+                    towerBlueprint['selected'] = false;
+                });
+                if(towerId){
+                    var tower = $scope.towers[towerId];
+                    $scope.towerBlueprints[tower.towerBlueprintId].selected = true;
+                }
+            }
 
+            // preventing Massive Clicking to break the Editor
+            $scope.operationRunning = false;
 
+            $scope.chooseTower = function(towerBlueprintId){
 
+                if( ! $scope.operationRunning ){
+                    $scope.operationRunning = true;
+                    if($scope.towerIdSelected != null){
+                        DungeonService.deleteTower($scope.dungeon.id, $scope.towerIdSelected).then(function(response){
+                            return DungeonService.addTower($scope.dungeon.id, $scope.constructionSiteIdSelected, towerBlueprintId);
+                        }).then(function(tower){
+                            delete $scope.towers[$scope.towerIdSelected];
+                            $scope.prepareTower(tower);
+                            $scope.towerIdSelected = tower.id;
+                            $scope.highlightTowerBlueprint(tower.id);
+                            $scope.operationRunning = false;
+                        });
+                    }else{
+                        DungeonService.addTower($scope.dungeon.id, $scope.constructionSiteIdSelected, towerBlueprintId)
+                        .then(function(tower){
+                                delete $scope.towers[$scope.towerIdSelected];
+                                $scope.prepareTower(tower);
+                                $scope.towerIdSelected = tower.id;
+                                $scope.highlightTowerBlueprint(tower.id);
+                                $scope.operationRunning = false;
+                            });
+                    }
+                }
 
-
-
+            };
 
         }]);

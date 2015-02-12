@@ -18,7 +18,7 @@ angular
         },
         {
             label: 'Dungeon Editor',
-            authorized: false,
+            authorized: true,
             iconClasses: 'fa fa-home',
             url: '#/dungeon'
         },

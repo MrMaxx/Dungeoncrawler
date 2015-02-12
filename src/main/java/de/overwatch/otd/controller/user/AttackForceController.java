@@ -59,10 +59,10 @@ public class AttackForceController {
     /**
      * Todo: authorization and return http status code 204
      */
-    @RequestMapping( method = RequestMethod.DELETE)
+    @RequestMapping(value="{id}", method = RequestMethod.DELETE)
     public @ResponseBody void delete(
             @PathVariable("userId") Integer userId,
-            @RequestParam(required = true) Integer id) {
+            @PathVariable Integer id) {
 
         //AttackForce attackForce = attackForceRepository.findByIdAndUserId(id, userId);
 

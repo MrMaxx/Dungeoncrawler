@@ -3,6 +3,8 @@ package de.overwatch.otd.controller;
 
 import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
+import de.overwatch.otd.domain.defend.Dungeon;
+import de.overwatch.otd.repository.DungeonRepository;
 import de.overwatch.otd.repository.UserRepository;
 import de.overwatch.otd.service.ActiveUserAccessor;
 import de.overwatch.otd.service.ranking.PagedUserList;
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private ActiveUserAccessor activeUserAccessor;
+
+    @Autowired
+    private DungeonRepository dungeonRepository;
 
     @Autowired
     private UserRankingService userRankingService;
@@ -81,6 +86,14 @@ public class UserController {
 
         User persistedUser = userRepository.save(user);
         userRankingService.addUser(persistedUser);
+
+        // every User gets one Dungeon for now
+        Dungeon dungeon = new Dungeon();
+
+        dungeon.setDungeonBlueprintId(1);
+        dungeon.setUser(persistedUser);
+
+        dungeonRepository.save(dungeon);
 
         return user;
     }

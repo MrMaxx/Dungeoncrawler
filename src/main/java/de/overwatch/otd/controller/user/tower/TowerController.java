@@ -68,11 +68,11 @@ public class TowerController {
      * Todo: Validation if Dungeon exists + belongs to user and proper errorcodes on failure
      *
      */
-    @RequestMapping( method = RequestMethod.DELETE)
+    @RequestMapping(value="{id}", method = RequestMethod.DELETE)
     public @ResponseBody void delete(
             @PathVariable("userId") Integer userId,
             @PathVariable("dungeonId") Integer dungeonId,
-            @RequestParam(required = true) Integer id) {
+            @PathVariable Integer id) {
 
         towerRepository.delete(id);
 

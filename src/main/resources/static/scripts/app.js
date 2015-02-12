@@ -26,6 +26,8 @@ angular
         'otd.services.activeUser',
         'otd.services.pinesNotifications',
         'otd.services.blueprints',
+        'otd.services.dungeon',
+        'otd.services.dungeonblueprints',
 
         'otd.templates.TemplatesCache',
         'otd.templates.TemplatesCacheOverride',
@@ -53,7 +55,6 @@ angular
         $scope.style_isSmallScreen = false;
         $scope.style_showSearchCollapsed = true;
         $scope.style_layoutHorizontal = false;
-
 
         /* http-auth-interceptor Event handling
         *  and modifying Authorization Headers in
@@ -103,11 +104,11 @@ angular
     .config(['$provide', '$routeProvider', function ($provide, $routeProvider) {
         $routeProvider
             .when('/', { templateUrl: 'views/home.html' })
-            .when('/dashboard', { templateUrl: 'views/dashboard.html' })
-            .when('/user/login', { templateUrl: 'views/user/login.html' })
-            .when('/user/edit', { templateUrl: 'views/user/edit.html' })
-            .when('/user/register', { templateUrl: 'views/user/register.html' })
-            .when('/dungeon', { templateUrl: 'views/dungeonEditor.html' })
+            .when('/dashboard/', { templateUrl: 'views/dashboard.html' })
+            .when('/user/login/', { templateUrl: 'views/user/login.html' })
+            .when('/user/edit/', { templateUrl: 'views/user/edit.html' })
+            .when('/user/register/', { templateUrl: 'views/user/register.html' })
+            .when('/dungeon/', { templateUrl: 'views/dungeonEditor.html' })
 
             .otherwise({
                 redirectTo: '/'

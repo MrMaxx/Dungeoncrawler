@@ -2,7 +2,9 @@
 
 angular
     .module('otd.controller.userstable', [])
-    .controller('UserInRangeController', ['$scope', '$log', 'UserService', 'ActiveUserService', function ($scope, $log, UserService, ActiveUserService) {
+    .controller('UserInRangeController', ['$scope', '$log', 'UserService', 'ActiveUserService', 'DungeonBlueprintService',
+        function ($scope, $log, UserService, ActiveUserService, DungeonBlueprintService) {
+
         $scope.filterOptions = {
             filterText: "",
             useExternalFilter: true

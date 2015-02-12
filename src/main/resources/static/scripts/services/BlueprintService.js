@@ -13,18 +13,18 @@ angular
                         this.getAttackerBlueprints().then(function(result){
                             angular.forEach(result, function(data, index){
                                 if(data.id == id){
-                                    return deferred.promise.resolve(data);
+                                    deferred.resolve(data);
                                 }
                             });
-                            return deferred.promise.resolve({});
+                            deferred.resolve({});
                         });
                     }else{
                         angular.forEach(attackerBlueprints, function(data, index){
                             if(data.id == id){
-                                return deferred.promise.resolve(data);
+                                deferred.resolve(data);
                             }
                         });
-                        return deferred.promise.resolve({});
+                        deferred.resolve({});
                     }
 
                     return deferred.promise;
@@ -38,7 +38,7 @@ angular
                             url: Constants.API_BASEURL+'/api/v1/attackerBlueprint'
                         }).then(function(response){
                             attackerBlueprints = response.data;
-                            deferred.promise.resolve(response.data);
+                            deferred.resolve(response.data);
                         });
                     }else {
                         $log.debug('AttackerBlueprintService: Fetching AttackerBlueprints directly from Cache.');
@@ -56,21 +56,21 @@ angular
                 getTowerBlueprint: function (id) {
                     var deferred = $q.defer();
                     if(attackerBlueprints == null){
-                        this.getAttackerBlueprints().then(function(result){
+                        this.getTowerBlueprints().then(function(result){
                             angular.forEach(result, function(data, index){
                                 if(data.id == id){
-                                    return deferred.promise.resolve(data);
+                                    deferred.resolve(data);
                                 }
                             });
-                            return deferred.promise.resolve({});
+                            deferred.resolve({});
                         });
                     }else{
                         angular.forEach(attackerBlueprints, function(data, index){
                             if(data.id == id){
-                                return deferred.promise.resolve(data);
+                                deferred.resolve(data);
                             }
                         });
-                        return deferred.promise.resolve({});
+                        deferred.resolve({});
                     }
 
                     return deferred.promise;
@@ -84,35 +84,11 @@ angular
                             url: Constants.API_BASEURL+'/api/v1/towerBlueprint'
                         }).then(function(response){
                             towerBlueprints = response.data;
-                            deferred.promise.resolve(response.data);
+                            deferred.resolve(response.data);
                         });
                     }else {
                         $log.debug('TowerBlueprintService: Fetching TowerBlueprints directly from Cache.');
                         deferred.resolve(towerBlueprints);
-                    }
-
-                    return deferred.promise;
-                }
-            }
-        }])
-    .factory('DungeonBlueprintService', ['$http', '$q', '$log', 'Constants',
-        function ($http, $q, $log, Constants) {
-            var dungeonBueprints = null;
-            return {
-                getDungeonBlueprints: function () {
-                    var deferred = $q.defer();
-                    if(dungeonBueprints == null){
-                        $log.debug('DungeonBlueprintService: Fetching DungeonBlueprints from Server.');
-                        $http({
-                            method: 'GET',
-                            url: Constants.API_BASEURL+'/api/v1/dungeonBlueprint'
-                        }).then(function(response){
-                            dungeonBueprints = response.data;
-                            deferred.promise.resolve(response.data);
-                        });
-                    }else {
-                        $log.debug('DungeonBlueprintService: Fetching DungeonBlueprints directly from Cache.');
-                        deferred.resolve(dungeonBueprints);
                     }
 
                     return deferred.promise;
