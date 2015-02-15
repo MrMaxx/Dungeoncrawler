@@ -11,6 +11,10 @@ angular
         var refreshToken = null;
         var accessToken = null;
 
+        function getAccessToken(){
+            return accessToken;
+        }
+
         function isLoggedIn(){
             return loggedIn;
         }
@@ -85,6 +89,7 @@ angular
         }
 
         return {
+            getAccessToken: getAccessToken,
             logIn: logIn,
             logOut: logOut,
             isLoggedIn: isLoggedIn,

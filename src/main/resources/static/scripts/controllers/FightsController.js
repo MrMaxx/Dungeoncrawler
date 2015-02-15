@@ -2,11 +2,13 @@
 
 angular
     .module('otd.controller.fights', [])
-    .controller('FightsController', ['$scope', '$log', 'FightService', 'ActiveUserService',
-        function ($scope, $log, FightService, ActiveUserService) {
+    .controller('FightsController', ['$scope', '$log', 'FightService', 'ActiveUserService', 'AuthenticationService',
+        function ($scope, $log, FightService, ActiveUserService, AuthenticationService) {
 
             $scope.activeUserId=0;
             ActiveUserService.getActiveUser().then(function(activeUser){$scope.activeUserId = activeUser.id;});
+            $scope.accessToken = AuthenticationService.getAccessToken();
+
 
             $scope.totalServerItems = 0;
             $scope.fights = [];
@@ -54,7 +56,18 @@ angular
                             '</div>'
                     },
                     {field:'attackingUserName', displayName:'Attacker'},
-                    {field:'defendingUserName', displayName:'Defender'}
+                    {field:'defendingUserName', displayName:'Defender'},
+                    {
+                        displayName:'',
+                        width:50,
+                        cellTemplate:'' +
+                            '<div style="padding-left:15px;padding-top:4px;">' +
+                            '   <a target="_blank" href="gameclient/index.html?userId={{activeUserId}}&fightId={{row.getProperty(\'id\')}}&access_token={{accessToken}}" style="display:{{row.getProperty(\'outcome\')?\'block\':\'none\'}};">' +
+                            '       <i style="font-size:20px;font-weight:bold;" class="fa fa-eye"></i>' +
+                            '   </a>' +
+                            '</div>'
+                    }
+
                 ],
                 enablePaging: false,
                 enableSorting: false,
