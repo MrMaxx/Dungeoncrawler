@@ -1,1 +1,4 @@
 
+[submodule "src/main/resources/static/gameclient"]
+	path = src/main/resources/static/gameclient
+	url = https://github.com/OnlineTowerDefense/Client.git
