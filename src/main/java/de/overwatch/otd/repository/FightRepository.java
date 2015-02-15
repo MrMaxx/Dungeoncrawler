@@ -16,7 +16,7 @@ public interface FightRepository extends JpaRepository<Fight, Integer> {
 
     List<Fight> findByFightState(Fight.FightState fightState);
 
-    @Query("select f from Fight f where f.dungeon.id = :userId OR f.attackForce.user.id = :userId")
+    @Query("select f from Fight f where f.dungeon.id = :userId OR f.attackForce.user.id = :userId ORDER BY f.id DESC")
     List<Fight> findByUserId(@Param("userId") Integer userId);
 
     @Query("select f from Fight f where f.id = :id AND (f.dungeon.id = :userId OR f.attackForce.user.id = :userId)")

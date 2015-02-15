@@ -14,6 +14,7 @@ public class PublicFight {
     private String defendingUserName;
     private Date createdAt;
     private Fight.FightState fightState;
+    private Fight.Outcome outcome;
 
     public PublicFight(Fight fight) {
         this.id = fight.getId();
@@ -27,6 +28,7 @@ public class PublicFight {
             this.defendingUserId = fight.getDungeon().getUser().getId();
             this.defendingUserName = fight.getDungeon().getUser().getUsername();
         }
+        this.outcome = fight.getOutcome();
     }
 
     public Integer getId() {
@@ -55,5 +57,9 @@ public class PublicFight {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public Fight.Outcome getOutcome() {
+        return outcome;
     }
 }

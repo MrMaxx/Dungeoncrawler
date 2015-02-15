@@ -47,13 +47,15 @@ public class WaveController {
     public @ResponseBody Wave create(
             @PathVariable("userId") Integer userId,
             @PathVariable("attackForceId") Integer attackForceId,
-            @RequestParam(required = true) Integer attackerBlueprintId) {
+            @RequestParam(required = true) Integer attackerBlueprintId,
+            @RequestParam(required = true) Integer waveBlueprintId) {
 
         AttackForce attackForce = attackForceRepository.findByIdAndUserId(attackForceId, userId);
 
         Wave wave = new Wave();
         wave.setAttackerBlueprintId(attackerBlueprintId);
         wave.setAttackForce(attackForce);
+        wave.setWaveBlueprintId(waveBlueprintId);
 
         waveRepository.save(wave);
 
@@ -65,15 +67,18 @@ public class WaveController {
      * Todo: Validation if AttackForce exists + belongs to user and proper errorcodes on failure
      *
      */
-    @RequestMapping( method = RequestMethod.DELETE)
+    @RequestMapping(value="{id}", method = RequestMethod.DELETE)
     public @ResponseBody void delete(
             @PathVariable("userId") Integer userId,
             @PathVariable("attackForceId") Integer attackForceId,
-            @RequestParam(required = true) Integer id) {
+            @PathVariable("id") Integer id) {
 
         AttackForce attackForce = attackForceRepository.findByIdAndUserId(attackForceId, userId);
 
-        attackForceRepository.delete(id);
+        if(attackForce != null){
+            waveRepository.delete(id);
+        }
+
 
         return;
     }

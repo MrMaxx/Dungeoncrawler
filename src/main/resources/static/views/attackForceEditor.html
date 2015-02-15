@@ -1,0 +1,145 @@
+<div id="page-heading">
+    <h1>Attack Force Editor</h1>
+</div>
+
+<style type="text/css">
+
+    .waveElement {
+        float:left;
+        height:150px;
+    }
+    .waveStart {
+        margin-top:50px;
+        height:30px;
+        width:30px;
+        border-radius: 50%;
+        background-color: black;
+    }
+    .waveEnd {
+        margin-top:2px;
+        margin-left:2px;
+        height:24px;
+        width:24px;
+        border-radius: 50%;
+        background-color: black;
+    }
+    .waveEndOuter {
+        margin-top:53px;
+        height:30px;
+        width:30px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+    .waveDash {
+        margin-top:64px;
+        height:3px;
+        width:30px;
+        background-color: black;
+    }
+    .waveTime {
+        margin-top:55px;
+    }
+</style>
+
+<div class="container-fluid" ng-controller="AttackForceController">
+
+    <div class="row">
+        <div class="col-md-8" style="height:600px;overflow:hidden;" id="dragContainer">
+
+            <panel style="height:600px;" panel-class="panel-primary" data-heading="Build up your Attack Force for Pattern '{{attackForcePattern.patternName}}'">
+
+
+                <div class="waveElement"><div class="waveStart"></div></div>
+
+
+
+                <div ng-repeat-start="(id, waveBlueprint) in waveBlueprintsByWaveBlueprintId" class="waveElement"><div class="waveDash"></div></div>
+                <div class="waveElement">
+                    <div class="waveTime">
+                        <span class="badge badge-primary">{{waveBlueprint.delayAfterLastWave}}ms</span>
+                    </div>
+                </div>
+                <div class="waveElement"><div class="waveDash"></div></div>
+                <div ng-repeat-end class="waveElement">
+                    <div class="col-md-2" style="margin-top: 20px; width: 125px;padding: 0px">
+                        <a ng-click="chooseWaveBlueprint(waveBlueprint.id)"
+                           class="shortcut-tiles"
+                           ng-class="{'tiles-green': (id == selectedWaveBlueprintId),'tiles-midnightblue': (id != selectedWaveBlueprintId)}">
+                            <div class="tiles-body">
+                                <div class="pull-left"><i class="fa fa-group"></i></div>
+                                <div class="pull-right">
+                                    <span class="badge ng-binding"  tooltip-placement="right" tooltip="count of spawns">+{{waveBlueprint.slots}}</span><br>
+                                    <span class="badge ng-binding" style="margin-top:3px" tooltip-placement="right" tooltip="delay in ms between spawns">{{waveBlueprint.delayBetweenSpawns}}ms</span>
+                                </div>
+                            </div>
+                            <div class="tiles-footer ng-binding">
+                                <img src="assets/gameimages/attacker/{{waveByWaveBlueprintId[waveBlueprint.id]?attackerBlueprintsById[waveByWaveBlueprintId[waveBlueprint.id].attackerBlueprintId].type:'NONE'}}.png">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="waveElement"><div class="waveDash"></div></div>
+                <div class="waveElement"><div class="waveEndOuter"><div class="waveEnd"></div></div></div>
+
+
+            </panel>
+
+        </div>
+
+        <style type="text/css">
+            .attacker_selected {
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                background-color: green;opacity: 0.4;
+                position:absolute;
+            }
+        </style>
+
+
+        <div class="col-md-4">
+            <panel style="height:600px;" panel-class="panel-primary" data-heading="Attacker Details">
+
+                <h4 ng-show="!showAttackerDetails" style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">
+                    <span style="padding-left:60px;">Click on a Wave</span>
+                </h4>
+
+                <div ng-show="showAttackerDetails" style="position:relative;min-height: 100px;" ng-repeat="(id, blueprint) in attackerBlueprintsById">
+                    <h4 style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">{{blueprint.type}}</h4>
+                    <div style="position:absolute;top:55px;left:15px;height:60px;width:60px;">
+
+                        <div ng-class="{attacker_selected: blueprint.id == waveByWaveBlueprintId[selectedWaveBlueprintId].attackerBlueprintId}"></div>
+                        <div ng-click="chooseAttacker(blueprint.id)"
+                             style="cursor: pointer;position:absolute;top:10px;left:10px;background-image:url(assets/gameimages/attacker/{{blueprint.type}}.png);height:40px;width:40px;"></div>
+
+                    </div>
+                    <div style="margin-left:100px;">
+
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <td>Speed</td>
+                                <td>{{blueprint.speed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Health</td>
+                                <td>{{blueprint.maxHealth}}</td>
+                            </tr>
+                            <tr>
+                                <td>price</td>
+                                <td>{{blueprint.price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </panel>
+        </div>
+    </div>
+</div>
+
+

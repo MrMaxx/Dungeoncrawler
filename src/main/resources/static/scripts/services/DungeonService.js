@@ -8,6 +8,7 @@ angular
 
             var dungeonsByDungeonBlueprintId = null;
 
+            function clearCache(){dungeonsByDungeonBlueprintId = null;}
             function deleteTower(dungeonId, towerId) {
                 var deferred = $q.defer();
 
@@ -82,6 +83,7 @@ angular
                 return deferred.promise;
             }
             return {
+                clearCache:clearCache,
                 getDungeonByDungeonBlueprintId: getDungeonByDungeonBlueprintId,
                 getDungeons: getDungeons,
                 deleteTower: deleteTower,

@@ -5,7 +5,7 @@ import de.overwatch.otd.domain.User;
 
 public interface UserRankingService {
 
-    void addUser(User user);
+    void addUser(User user, boolean dungeonExists);
 
     UserWithRank getUserWithRank(Integer userId);
 

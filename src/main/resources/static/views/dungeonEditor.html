@@ -3,7 +3,7 @@
         <li class='active'><a href="index.htm">Dashboard</a></li>
     </ol> -->
 
-    <h1>Home</h1>
+    <h1>Dungeon Editor</h1>
 
 </div>
 
@@ -66,7 +66,11 @@
         <div class="col-md-4">
             <panel style="height:600px;" panel-class="panel-primary" data-heading="Tower Details">
 
-                <h4 ng-show="! showTowerDetails" style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">Click on Tower</h4>
+                <h4 ng-show="! showTowerDetails" style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">
+                    Drag the Map <br><br />
+                    <span style="padding-left:30px;">and</span><br /><br />
+                    <span style="padding-left:60px;">Click on a Tower</span>
+                </h4>
 
                 <div ng-show="showTowerDetails" style="position:relative;min-height: 100px;" ng-repeat="(id, blueprint) in towerBlueprints">
                     <h4 style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">{{blueprint.type}}</h4>

@@ -7,12 +7,22 @@ public class UserWithRank {
     private String username;
     private int score;
     private Integer rank;
+    private boolean dungeonExists;
 
-    public UserWithRank(Integer id, String username, int score, int rank) {
+    public UserWithRank(Integer id, String username, int score, int rank, boolean dungeonExists) {
         this.id = id;
         this.username = username;
         this.score = score;
         this.rank = rank;
+        this.dungeonExists = dungeonExists;
+    }
+
+    public boolean getDungeonExists() {
+        return dungeonExists;
+    }
+
+    public void setDungeonExists(boolean dungeonExists) {
+        this.dungeonExists = dungeonExists;
     }
 
     public Integer getId() {

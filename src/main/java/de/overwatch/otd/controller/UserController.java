@@ -3,7 +3,9 @@ package de.overwatch.otd.controller;
 
 import de.overwatch.otd.domain.Role;
 import de.overwatch.otd.domain.User;
+import de.overwatch.otd.domain.attack.AttackForce;
 import de.overwatch.otd.domain.defend.Dungeon;
+import de.overwatch.otd.repository.AttackForceRepository;
 import de.overwatch.otd.repository.DungeonRepository;
 import de.overwatch.otd.repository.UserRepository;
 import de.overwatch.otd.service.ActiveUserAccessor;
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
     private DungeonRepository dungeonRepository;
+
+    @Autowired
+    private AttackForceRepository attackForceRepository;
 
     @Autowired
     private UserRankingService userRankingService;
@@ -85,15 +90,19 @@ public class UserController {
         user.setAuthorities(roles);
 
         User persistedUser = userRepository.save(user);
-        userRankingService.addUser(persistedUser);
 
         // every User gets one Dungeon for now
         Dungeon dungeon = new Dungeon();
-
         dungeon.setDungeonBlueprintId(1);
         dungeon.setUser(persistedUser);
-
         dungeonRepository.save(dungeon);
+
+        AttackForce attackForce = new AttackForce();
+        attackForce.setUser(user);
+        attackForce.setAttackForcePatternId(1);
+        attackForceRepository.save(attackForce);
+
+        userRankingService.addUser(persistedUser, true);
 
         return user;
     }

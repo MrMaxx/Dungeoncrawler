@@ -64,12 +64,21 @@
         </div>
     </div>
 
-    <div class="row" ng-controller="UserInRangeController">
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6" ng-controller="UserInRangeController">
 
             <panel panel-class="panel-primary" data-heading="Players in your range">
 
-                <div style="height: 540px;" ng-grid="gridOptions"></div>
+                <div style="height: 540px;" ng-grid="userInRangeOptions"></div>
+
+            </panel>
+
+        </div>
+        <div class="col-md-6" ng-controller="FightsController">
+
+            <panel panel-class="panel-primary" data-heading="Your Fights">
+
+                <div style="height: 540px;" ng-grid="fightsOptions"></div>
 
             </panel>
 

@@ -30,10 +30,7 @@ public class FightController {
 
     @Autowired
     private FightRepository fightRepository;
-    @Autowired
-    private DungeonRepository dungeonRepository;
-    @Autowired
-    private AttackForceRepository attackForceRepository;
+
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -62,27 +59,32 @@ public class FightController {
     }
 
     /**
+     * Todo: remove...only temporary for the MVP Prototype
+     *
      * Todo: authorization
      * Todo: validation if the attacker belongs to the given attackForce
      * Todo: validation if the attacker is the same as the defender (you should not attack yourself)
      */
+    /*
     @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody PublicFight create(
             @PathVariable("userId") Integer userId,
             @RequestParam(required = true) Integer dungeonId,
             @RequestParam(required = true) Integer attackForceId) {
 
-        Dungeon dungeon = dungeonRepository.findOne(dungeonId);
-        AttackForce attackForce = attackForceRepository.findOne(attackForceId);
-        Fight fight = new Fight();
-        fight.setDungeon(dungeon);
-        fight.setAttackForce(attackForce);
-        fight.setFightState(Fight.FightState.ISSUED);
-        fight.setCreated(new Date());
+        return fightService.createFight(dungeonId, attackForceId);
+    }
+     */
 
-        fightRepository.save(fight);
+    /**
+     * Todo: remove...only temporary for the MVP Prototype
+     */
+    @RequestMapping( method = RequestMethod.POST)
+    public @ResponseBody PublicFight create(
+            @PathVariable("userId") Integer attackingUserId,
+            @RequestParam(value="defendingUserId", required = true) Integer defendingUserId) {
 
-        return new PublicFight(fight);
+        return fightService.createFightAgainst(attackingUserId, defendingUserId);
     }
 
 }

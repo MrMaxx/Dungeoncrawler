@@ -13,7 +13,7 @@ insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'R
 insert into attack_force_pattern (id, pattern_name) values (1, 'EARLY_SURPRISE');
 
 
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (1, 1000, 1, 1, 1400);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (1, 1000, 1, 3, 1400);
 insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (2, 5000, 1, 10, 500);
 
 

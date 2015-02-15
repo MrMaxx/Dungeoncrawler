@@ -13,15 +13,20 @@ angular
         {
             label: 'Dashboard',
             authorized: true,
-            iconClasses: 'fa fa-home',
+            iconClasses: 'fa fa-th-large',
             url: '#/dashboard'
         },
         {
             label: 'Dungeon Editor',
             authorized: true,
-            iconClasses: 'fa fa-home',
+            iconClasses: 'fa fa-shield',
             url: '#/dungeon'
-        },
+        },{
+            label: 'Attack Force Editor',
+            authorized: true,
+            iconClasses: 'fa fa-bolt',
+            url: '#/attackForce'
+        }/*,
         {
             label: 'Job Market',
             iconClasses: 'fa fa-tasks',
@@ -56,6 +61,7 @@ angular
                 }
             ]
         }
+        */
     ];
     
     var setParent = function (children, parent) {

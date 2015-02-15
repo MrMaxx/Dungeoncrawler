@@ -5,7 +5,6 @@ import de.overwatch.otd.domain.User;
 import de.overwatch.otd.service.ranking.PagedUserList;
 import de.overwatch.otd.service.ranking.UserRankingService;
 import de.overwatch.otd.service.ranking.UserRankingServiceImpl;
-import de.overwatch.otd.service.ranking.UserWithRank;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,19 +46,19 @@ public class UserRankingServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNonExistingChangeScore()throws Exception{
-        userRankingService.addUser(user1);
+        userRankingService.addUser(user1, false);
         userRankingService.changeScore(user2.getId(), Integer.MAX_VALUE);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testNonExistingGetUserPage()throws Exception{
-        userRankingService.addUser(user1);
+        userRankingService.addUser(user1, false);
         userRankingService.getUserRanking(user2.getId(),2);
     }
 
     @Test
     public void testOutOfBoundsPages()throws Exception{
-        userRankingService.addUser(user1);
+        userRankingService.addUser(user1, false);
 
         assertEmptyPagesUserList(-10, 20, userRankingService.getUserPage(-10,20));
         assertEmptyPagesUserList(1, -20, userRankingService.getUserPage(1,-20));
@@ -74,10 +73,10 @@ public class UserRankingServiceTest {
     @Test
     public void testRegularBuildup()throws Exception{
 
-        userRankingService.addUser(user1);
-        userRankingService.addUser(user2);
-        userRankingService.addUser(user3);
-        userRankingService.addUser(user4);
+        userRankingService.addUser(user1, false);
+        userRankingService.addUser(user2, false);
+        userRankingService.addUser(user3, false);
+        userRankingService.addUser(user4, false);
 
 
         PagedUserList page = userRankingService.getUserPage(1,2);
@@ -97,10 +96,10 @@ public class UserRankingServiceTest {
     @Test
     public void testUserPage()throws Exception{
 
-        userRankingService.addUser(user1);
-        userRankingService.addUser(user2);
-        userRankingService.addUser(user3);
-        userRankingService.addUser(user4);
+        userRankingService.addUser(user1, false);
+        userRankingService.addUser(user2, false);
+        userRankingService.addUser(user3, false);
+        userRankingService.addUser(user4, false);
 
 
         PagedUserList page = userRankingService.getUserRanking(user1.getId(),2);

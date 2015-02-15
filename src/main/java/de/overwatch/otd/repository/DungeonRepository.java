@@ -14,6 +14,9 @@ import java.util.List;
 public interface DungeonRepository extends JpaRepository<Dungeon, Integer> {
 
 
+    @Query("select d from Dungeon d left join fetch d.user")
+    List<Dungeon> findAllWithUser();
+
     @Query("select d from Dungeon d where d.user.id = :userId")
     List<Dungeon> findByUserId(@Param("userId") Integer userId);
 

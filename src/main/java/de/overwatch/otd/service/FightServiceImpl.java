@@ -4,18 +4,19 @@ package de.overwatch.otd.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.overwatch.otd.domain.Fight;
+import de.overwatch.otd.domain.attack.AttackForce;
+import de.overwatch.otd.domain.defend.Dungeon;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
 import de.overwatch.otd.game.GameEngineFactory;
 import de.overwatch.otd.game.GameState;
 import de.overwatch.otd.game.processor.*;
-import de.overwatch.otd.repository.AttackerBlueprintRepository;
-import de.overwatch.otd.repository.FightRepository;
-import de.overwatch.otd.repository.TowerBlueprintRepository;
+import de.overwatch.otd.repository.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -37,11 +38,58 @@ public class FightServiceImpl implements FightService{
     private TowerBlueprintRepository towerBlueprintRepository;
 
     @Autowired
+    private DungeonRepository dungeonRepository;
+    @Autowired
+    private AttackForceRepository attackForceRepository;
+
+    @Autowired
     private GameEngineFactory gameEngineFactory;
 
     private Map<Integer, TowerBlueprint> getTowerBlueprintIdToTowerBlueprintMap(){
 
         return null;
+    }
+
+    @Override
+    public PublicFight createFightAgainst(Integer attackingUserId, Integer defendingUserId) {
+        List<Dungeon> dungeons = dungeonRepository.findByUserId(defendingUserId);
+        List<AttackForce> attackForces = attackForceRepository.findByUserId(attackingUserId);
+
+        // users can have only one Dungeon for now
+        Dungeon dungeon = dungeons.get(0);
+        AttackForce attackForce = attackForces.get(0);
+
+        Fight fight = new Fight();
+        fight.setDungeon(dungeon);
+        fight.setAttackForce(attackForce);
+        fight.setFightState(Fight.FightState.ISSUED);
+        fight.setCreated(new Date());
+
+        fight.setAttackerId(attackingUserId);
+        fight.setDefenderId(defendingUserId);
+
+        fightRepository.save(fight);
+
+        return new PublicFight(fight);
+    }
+
+    @Override
+    public PublicFight createFight(Integer dungeonId, Integer attackForceId) {
+        Dungeon dungeon = dungeonRepository.findOne(dungeonId);
+        AttackForce attackForce = attackForceRepository.findOne(attackForceId);
+        Fight fight = new Fight();
+        fight.setDungeon(dungeon);
+        fight.setAttackForce(attackForce);
+        fight.setFightState(Fight.FightState.ISSUED);
+        fight.setCreated(new Date());
+
+        // Todo: uhhhh...lazy loading...prefetch please...later
+        fight.setAttackerId(attackForce.getUser().getId());
+        fight.setDefenderId(dungeon.getUser().getId());
+
+        fightRepository.save(fight);
+
+        return new PublicFight(fight);
     }
 
     @Override

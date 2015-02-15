@@ -16,8 +16,8 @@ public class UserRankingServiceImpl implements UserRankingService{
 
 
     @Override
-    public synchronized void addUser(User user) {
-        UserWithRank userWithRank = new UserWithRank(user.getId(), user.getUsername(), 0, ranking.size()+1);
+    public synchronized void addUser(User user, boolean dungeonExists) {
+        UserWithRank userWithRank = new UserWithRank(user.getId(), user.getUsername(), 0, ranking.size()+1, dungeonExists);
 
         ranking.put(ranking.size()+1, userWithRank);
         userIdToUserWithScoreMap.put(userWithRank.getId(), userWithRank);
