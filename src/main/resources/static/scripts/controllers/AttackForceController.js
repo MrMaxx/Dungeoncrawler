@@ -23,14 +23,14 @@ angular
             $scope.chooseAttacker = function(attackerBlueprintId){
                 var currentWave = $scope.waveByWaveBlueprintId[$scope.selectedWaveBlueprintId];
                 if(currentWave){
-                    AttackForceService.deleteWave($scope.attackForcePatternId, currentWave.id).then(function(nothing){
+                    AttackForceService.deleteWave($scope.attackForce.id, currentWave.id).then(function(nothing){
                         delete $scope.waveByWaveBlueprintId[currentWave.waveBlueprintId];
-                        return AttackForceService.addWave($scope.attackForcePatternId, attackerBlueprintId, $scope.selectedWaveBlueprintId);
+                        return AttackForceService.addWave($scope.attackForce.id, attackerBlueprintId, $scope.selectedWaveBlueprintId);
                     }).then(function(wave){
                         $scope.waveByWaveBlueprintId[wave.waveBlueprintId] = wave;
                     });
                 }else{
-                    AttackForceService.addWave($scope.attackForcePatternId, attackerBlueprintId, $scope.selectedWaveBlueprintId)
+                    AttackForceService.addWave($scope.attackForce.id, attackerBlueprintId, $scope.selectedWaveBlueprintId)
                         .then(function(wave){
                             $scope.waveByWaveBlueprintId[wave.waveBlueprintId] = wave;
                         });
@@ -63,6 +63,7 @@ angular
                         angular.forEach(attackForce.waves, function(wave, index){
                             $scope.waveByWaveBlueprintId[wave.waveBlueprintId] = wave;
                         });
+                        $scope.attackForce = attackForce;
                     });
             };
             $scope.initializeController($scope.attackForcePatternId);
