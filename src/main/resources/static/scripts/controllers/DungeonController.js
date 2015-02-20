@@ -43,7 +43,7 @@ angular
                     });
                 });
             };
-            $scope.inititlizeController(1);
+            $scope.inititlizeController(2);
 
             $scope.prepareTower = function(tower){
                 var towerBlueprint = $scope.towerBlueprints[tower.towerBlueprintId];

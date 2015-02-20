@@ -34,9 +34,8 @@ public class DefenderTargetingProcessor {
                     target.getBeingTargetedBy().remove(turret);
                     turret.setCurrentTarget(null);
 
-                    TowerLostTarget event = new TowerLostTarget();
+                    TowerLostTarget event = new TowerLostTarget(turret.getId());
                     event.setAttackerId(target.getId());
-                    event.setTowerId(turret.getId());
                     event.setTime(tickInMilliseconds);
                     gameState.getEvents().add(event);
 
@@ -58,9 +57,8 @@ public class DefenderTargetingProcessor {
                         turret.setCurrentTarget(attacker);
                         attacker.getBeingTargetedBy().add(turret);
 
-                        TowerTargetedAttacker event = new TowerTargetedAttacker();
+                        TowerTargetedAttacker event = new TowerTargetedAttacker(turret.getId());
                         event.setAttackerId(attacker.getId());
-                        event.setTowerId(turret.getId());
                         event.setTime(tickInMilliseconds);
                         gameState.getEvents().add(event);
 
@@ -86,17 +84,15 @@ public class DefenderTargetingProcessor {
                     // no health...itz dead
                     if(target.isDead()){
                         LOGGER.debug("IS DEAD => attacker with id="+target.getId());
-                        AttackerDied attackerDiesEvent = new AttackerDied();
-                        attackerDiesEvent.setAttackerId(target.getId());;
+                        AttackerDied attackerDiesEvent = new AttackerDied(target.getId());
                         attackerDiesEvent.setTime(tickInMilliseconds);
                         gameState.getEvents().add(attackerDiesEvent);
 
                         // if an attacker dies all the turrets targeting it will loose their target
                         for(Turret turretTargeting : target.getBeingTargetedBy()){
                             turretTargeting.setCurrentTarget(null);
-                            TowerLostTarget lostTargetEvent = new TowerLostTarget();
+                            TowerLostTarget lostTargetEvent = new TowerLostTarget(turretTargeting.getId());
                             lostTargetEvent.setAttackerId(target.getId());
-                            lostTargetEvent.setTowerId(turretTargeting.getId());
                             lostTargetEvent.setTime(tickInMilliseconds);
                             gameState.getEvents().add(lostTargetEvent);
                         }

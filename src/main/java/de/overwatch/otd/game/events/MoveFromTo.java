@@ -5,12 +5,14 @@ import de.overwatch.otd.game.model.Coordinate;
 
 public class MoveFromTo extends GameEvent {
 
-
-    private Integer attackerId;
-    private int startsAt;
+    private int time;
     private int endsAt;
     private Coordinate startingCoordinate;
     private Coordinate endingCoordinate;
+
+    public MoveFromTo(int elementId) {
+        super(elementId);
+    }
 
 
     @Override
@@ -21,28 +23,19 @@ public class MoveFromTo extends GameEvent {
     @Override
     public String toString() {
         return "MoveFromTo{" +
-                "attackerId=" + attackerId +
-                ", startsAt=" + startsAt +
+                ", time=" + time +
                 ", endsAt=" + endsAt +
                 ", startingCoordinate=" + startingCoordinate +
                 ", endingCoordinate=" + endingCoordinate +
                 "} " + super.toString();
     }
 
-    public Integer getAttackerId() {
-        return attackerId;
+    public int getTime() {
+        return time;
     }
 
-    public void setAttackerId(Integer attackerId) {
-        this.attackerId = attackerId;
-    }
-
-    public int getStartsAt() {
-        return startsAt;
-    }
-
-    public void setStartsAt(int startsAt) {
-        this.startsAt = startsAt;
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public int getEndsAt() {

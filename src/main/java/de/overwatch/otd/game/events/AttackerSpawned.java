@@ -5,8 +5,11 @@ public class AttackerSpawned extends GameEvent{
 
     private int time;
     private String attackerType;
-    private Integer id;
     private int x,y;
+
+    public AttackerSpawned(int elementId) {
+        super(elementId);
+    }
 
     @Override
     public String getType() {
@@ -18,7 +21,6 @@ public class AttackerSpawned extends GameEvent{
         return "AttackerSpawned{" +
                 "time=" + time +
                 ", attackerType='" + attackerType + '\'' +
-                ", id=" + id +
                 ", x=" + x +
                 ", y=" + y +
                 "} " + super.toString();
@@ -38,14 +40,6 @@ public class AttackerSpawned extends GameEvent{
 
     public String getAttackerType() {
         return attackerType;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getX() {

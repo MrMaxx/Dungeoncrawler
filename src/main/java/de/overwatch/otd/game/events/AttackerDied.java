@@ -5,8 +5,10 @@ public class AttackerDied extends GameEvent {
 
 
     private int time;
-    private Integer attackerId;
 
+    public AttackerDied(int elementId) {
+        super(elementId);
+    }
 
     @Override
     public String getType() {
@@ -16,7 +18,6 @@ public class AttackerDied extends GameEvent {
     @Override
     public String toString() {
         return "AttackerDied{" +
-                "attackerId=" + attackerId +
                 ", time=" + time +
                 "} " + super.toString();
     }
@@ -27,13 +28,5 @@ public class AttackerDied extends GameEvent {
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public Integer getAttackerId() {
-        return attackerId;
-    }
-
-    public void setAttackerId(Integer attackerId) {
-        this.attackerId = attackerId;
     }
 }

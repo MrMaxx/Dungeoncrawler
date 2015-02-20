@@ -26,7 +26,7 @@ public class CustomFightRepositoryImpl implements CustomFightRepository{
                 "       SUM(CASE WHEN defender_id = CAST(:userId AS INTEGER) && outcome = 'DEFENDER_WON' THEN 1 ELSE 0 END) as defendsWon" +
                 "   FROM fight" +
                 "   WHERE attacker_id = :userId OR defender_id = :userId" +
-                "   ORDER BY attacker_id, defender_id";
+                "   GROUP BY attacker_id, defender_id";
 
         Query query = em.createNativeQuery(sql);
         query.setParameter("userId", userId);

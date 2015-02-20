@@ -4,8 +4,11 @@ package de.overwatch.otd.game.events;
 public class AttackerSucceeded extends GameEvent{
 
     private int time;
-    private Integer id;
     private int x,y;
+
+    public AttackerSucceeded(int elementId) {
+        super(elementId);
+    }
 
     @Override
     public String getType() {
@@ -16,7 +19,6 @@ public class AttackerSucceeded extends GameEvent{
     public String toString() {
         return "AttackerSucceeded{" +
                 "time=" + time +
-                ", id=" + id +
                 ", x=" + x +
                 ", y=" + y +
                 "} " + super.toString();
@@ -28,14 +30,6 @@ public class AttackerSucceeded extends GameEvent{
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getX() {

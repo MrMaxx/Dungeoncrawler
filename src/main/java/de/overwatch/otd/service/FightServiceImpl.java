@@ -68,6 +68,9 @@ public class FightServiceImpl implements FightService{
         fight.setAttackerId(attackingUserId);
         fight.setDefenderId(defendingUserId);
 
+        fight.setDungeonBlueprintId(dungeon.getDungeonBlueprintId());
+        fight.setAttackForcePatternId(attackForce.getAttackForcePatternId());
+
         fightRepository.save(fight);
 
         return new PublicFight(fight);
@@ -82,6 +85,9 @@ public class FightServiceImpl implements FightService{
         fight.setAttackForce(attackForce);
         fight.setFightState(Fight.FightState.ISSUED);
         fight.setCreated(new Date());
+
+        fight.setDungeonBlueprintId(dungeon.getDungeonBlueprintId());
+        fight.setAttackForcePatternId(attackForce.getAttackForcePatternId());
 
         // Todo: uhhhh...lazy loading...prefetch please...later
         fight.setAttackerId(attackForce.getUser().getId());

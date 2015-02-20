@@ -29,6 +29,11 @@ public class Fight extends OtdEntity{
     private Integer attackerId;
     @Column(nullable = false)
     private Integer defenderId;
+    @Column(nullable = false)
+    private Integer dungeonBlueprintId;
+    @Column(nullable = false)
+    private Integer attackForcePatternId;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -53,6 +58,22 @@ public class Fight extends OtdEntity{
         ATTACKER_WON,
         DEFENDER_WON,
         DRAW
+    }
+
+    public Integer getDungeonBlueprintId() {
+        return dungeonBlueprintId;
+    }
+
+    public void setDungeonBlueprintId(Integer dungeonBlueprintId) {
+        this.dungeonBlueprintId = dungeonBlueprintId;
+    }
+
+    public Integer getAttackForcePatternId() {
+        return attackForcePatternId;
+    }
+
+    public void setAttackForcePatternId(Integer attackForcePatternId) {
+        this.attackForcePatternId = attackForcePatternId;
     }
 
     public Integer getAttackerId() {
@@ -133,6 +154,8 @@ public class Fight extends OtdEntity{
         if (outcome != fight.outcome) return false;
         if (attackerId != fight.attackerId) return false;
         if (defenderId != fight.defenderId) return false;
+        if (dungeonBlueprintId != fight.attackForcePatternId) return false;
+        if (attackForcePatternId != fight.attackForcePatternId) return false;
 
         return true;
     }
@@ -145,6 +168,8 @@ public class Fight extends OtdEntity{
         result = 31 * result + (outcome != null ? outcome.hashCode() : 0);
         result = 31 * result + (attackerId != null ? attackerId.hashCode() : 0);
         result = 31 * result + (defenderId != null ? defenderId.hashCode() : 0);
+        result = 31 * result + (dungeonBlueprintId != null ? dungeonBlueprintId.hashCode() : 0);
+        result = 31 * result + (attackForcePatternId != null ? attackForcePatternId.hashCode() : 0);
         return result;
     }
 
@@ -157,6 +182,8 @@ public class Fight extends OtdEntity{
                 ", created='" + created + '\'' +
                 ", attackerId='" + attackerId + '\'' +
                 ", defenderId='" + defenderId + '\'' +
+                ", dungeonBlueprintId='" + dungeonBlueprintId + '\'' +
+                ", attackForcePatternId='" + attackForcePatternId + '\'' +
                 '}';
     }
 }

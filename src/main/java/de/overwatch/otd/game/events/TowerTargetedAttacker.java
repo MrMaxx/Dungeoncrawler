@@ -9,7 +9,10 @@ public class TowerTargetedAttacker extends GameEvent {
 
     private int time;
     private Integer attackerId;
-    private Integer towerId;
+
+    public TowerTargetedAttacker(int elementId) {
+        super(elementId);
+    }
 
 
     @Override
@@ -21,7 +24,6 @@ public class TowerTargetedAttacker extends GameEvent {
     public String toString() {
         return "AttackerTargeted{" +
                 "attackerId=" + attackerId +
-                ", towerId=" + towerId +
                 ", time=" + time +
                 "} " + super.toString();
     }
@@ -42,11 +44,4 @@ public class TowerTargetedAttacker extends GameEvent {
         this.attackerId = attackerId;
     }
 
-    public Integer getTowerId() {
-        return towerId;
-    }
-
-    public void setTowerId(Integer towerId) {
-        this.towerId = towerId;
-    }
 }

@@ -20,8 +20,7 @@ public class DefenderSpawnProcessor {
             if( spawn.getExecuteAfterMillis() == tickInMilliseconds ){
                 Turret turret = spawn.getTurret();
 
-                DefenderSpawned event = new DefenderSpawned();
-                event.setId(spawn.getTurret().getId());
+                DefenderSpawned event = new DefenderSpawned(spawn.getTurret().getId());
                 event.setTowerType(spawn.getTurret().getType());
                 event.setTime(tickInMilliseconds);
                 event.setX(turret.getCoordinate().getX());

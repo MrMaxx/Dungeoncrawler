@@ -13,25 +13,25 @@
     <div class="row">
         <div class="col-md-8" style="height:600px;overflow:hidden;" id="dragContainer">
 
-            <div data-drag="true" jqyoui-draggable style="position:absolute;cursor:move;height:{{dungeonBlueprint.height}}px;width:{{dungeonBlueprint.width}}px;background-image:url(assets/gameimages/dungeons/{{dungeonBlueprint.name}}.png);">
+            <div data-drag="true" jqyoui-draggable style="position:absolute;cursor:move;height:{{dungeonBlueprint.height}}px;width:{{dungeonBlueprint.width}}px;background-image:url(assets/gameimages/dungeons/{{dungeonBlueprint.name}}.jpg);">
 
                 <div ng-repeat="(id, site) in constructionSites"
                      ng-click="constructionSiteClicked(site.id)"
-                     style="position:absolute;top:{{site.y}}px;left:{{site.x}}px;background-image:url(assets/gameimages/tower/TOWER_BASE.png);height:80px;width:80px;z-index:10;cursor:pointer;"   >
+                     style="position:absolute;top:{{site.y-25}}px;left:{{site.x-25}}px;background-image:url(assets/gameimages/tower/TOWER_BASE.png);height:50px;width:50px;z-index:10;cursor:pointer;" >
                 </div>
 
                 <div ng-repeat="(id, site) in constructionSites"
                      ng-class="{tower_selected: site.highlight}"
-                     style="top:{{site.y}}px;left:{{site.x}}px;z-index:5;"></div>
+                     style="top:{{site.y-40}}px;left:{{site.x-40}}px;z-index:5;"></div>
 
                 <div ng-repeat="(id, tower) in towers"
                      ng-click="towerClicked(tower.id, tower.constructionSiteId)"
-                     style="position:absolute;top:{{tower.y}}px;left:{{tower.x}}px;background-image:url(assets/gameimages/tower/TOWER_{{tower.type}}.png);height:80px;width:80px;z-index:15;cursor:pointer;"   >
+                     style="position:absolute;top:{{tower.y-60}}px;left:{{tower.x-60}}px;background-image:url(assets/gameimages/tower/{{tower.type}}.png);height:120px;width:120px;z-index:15;cursor:pointer;" >
                 </div>
 
                 <div ng-repeat="(id, tower) in towers"
                         class="tower_range"
-                        style="top:{{tower.y+40-towerBlueprints[tower.towerBlueprintId].attackRange}}px;left:{{tower.x+40-towerBlueprints[tower.towerBlueprintId].attackRange}}px;z-index:0;height:{{towerBlueprints[tower.towerBlueprintId].attackRange*2}}px;width:{{towerBlueprints[tower.towerBlueprintId].attackRange*2}}px;opacity:0.2;">
+                        style="top:{{tower.y-towerBlueprints[tower.towerBlueprintId].attackRange}}px;left:{{tower.x-towerBlueprints[tower.towerBlueprintId].attackRange}}px;z-index:0;height:{{towerBlueprints[tower.towerBlueprintId].attackRange*2}}px;width:{{towerBlueprints[tower.towerBlueprintId].attackRange*2}}px;opacity:0.2;">
 
                 </div>
 
@@ -52,7 +52,7 @@
                 width: 70px;
                 height: 70px;
                 background-color: green;opacity: 0.2;
-                position:absolute;top:5px;left:5px;
+                position:absolute;top:30px;left:10px;
             }
             .tower_range {
                 border-radius: 50%;
@@ -74,11 +74,11 @@
 
                 <div ng-show="showTowerDetails" style="position:relative;min-height: 100px;" ng-repeat="(id, blueprint) in towerBlueprints">
                     <h4 style="color: #656b79; padding-bottom: 5px; padding-left: 0px;">{{blueprint.type}}</h4>
-                    <div style="position:absolute;top:70px;height:80px;width:80px;">
+                    <div style="position:absolute;top:38px;height:120px;width:120px;">
 
                         <div ng-class="{tower_selected_right: blueprint.selected}"></div>
                         <div ng-click="chooseTower(blueprint.id)"
-                             style="cursor: pointer;position:absolute;top:0px;left:0px;background-image:url(assets/gameimages/tower/TOWER_{{blueprint.type}}.png);height:80px;width:80px;"></div>
+                             style="cursor: pointer;position:absolute;top:0px;left:-15px;background-image:url(assets/gameimages/tower/{{blueprint.type}}.png);height:120px;width:120px;"></div>
 
                     </div>
                     <div style="margin-left:100px;">

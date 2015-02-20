@@ -74,9 +74,8 @@ public class MoveToProcessor {
             attacker.setNextNodeVisit(nextNodeVisit);
 
 
-            MoveFromTo moveEvent = new MoveFromTo();
-            moveEvent.setAttackerId(attacker.getId());
-            moveEvent.setStartsAt(attacker.getLastNodeVisit().getVisitTime());
+            MoveFromTo moveEvent = new MoveFromTo(attacker.getId());
+            moveEvent.setTime(attacker.getLastNodeVisit().getVisitTime());
             moveEvent.setStartingCoordinate(attacker.getLastNodeVisit().getCoordinate());
             moveEvent.setEndsAt(nextNodeVisit.getVisitTime());
             moveEvent.setEndingCoordinate(nextNodeVisit.getCoordinate());

@@ -38,9 +38,8 @@ public class AttackerSucceededProcessor {
                     if(nextNode==null){
                         succeededAttackers.add(attacker);
 
-                        AttackerSucceeded event = new AttackerSucceeded();
+                        AttackerSucceeded event = new AttackerSucceeded(attacker.getId());
                         event.setTime(tickInMilliseconds);
-                        event.setId(attacker.getId());
                         event.setX(attacker.getCoordinate().getX());
                         event.setY(attacker.getCoordinate().getY());
 
@@ -109,9 +108,8 @@ public class AttackerSucceededProcessor {
             attacker.setNextNodeVisit(nextNodeVisit);
 
 
-            MoveFromTo moveEvent = new MoveFromTo();
-            moveEvent.setAttackerId(attacker.getId());
-            moveEvent.setStartsAt(attacker.getLastNodeVisit().getVisitTime());
+            MoveFromTo moveEvent = new MoveFromTo(attacker.getId());
+            moveEvent.setTime(attacker.getLastNodeVisit().getVisitTime());
             moveEvent.setStartingCoordinate(attacker.getLastNodeVisit().getCoordinate());
             moveEvent.setEndsAt(nextNodeVisit.getVisitTime());
             moveEvent.setEndingCoordinate(nextNodeVisit.getCoordinate());

@@ -93,7 +93,7 @@ public class UserController {
 
         // every User gets one Dungeon for now
         Dungeon dungeon = new Dungeon();
-        dungeon.setDungeonBlueprintId(1);
+        dungeon.setDungeonBlueprintId(2);
         dungeon.setUser(persistedUser);
         dungeonRepository.save(dungeon);
 

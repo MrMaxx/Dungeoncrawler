@@ -2,8 +2,9 @@
 
 angular
     .module('otd.controller.fights', [])
-    .controller('FightsController', ['$scope', '$log', 'FightService', 'ActiveUserService', 'AuthenticationService',
-        function ($scope, $log, FightService, ActiveUserService, AuthenticationService) {
+    .controller('FightsController',
+        ['$scope', '$log', '$interval', 'FightService', 'ActiveUserService', 'AuthenticationService',
+        function ($scope, $log, $interval, FightService, ActiveUserService, AuthenticationService) {
 
             $scope.activeUserId=0;
             ActiveUserService.getActiveUser().then(function(activeUser){$scope.activeUserId = activeUser.id;});
@@ -26,6 +27,9 @@ angular
 
             $scope.$on('Fight:created', function (event, newVal) {
                 $scope.initializeController();
+                $interval(function(){
+                    $scope.initializeController();
+                },30000);
             });
 
             $scope.fightsOptions = {
@@ -38,11 +42,11 @@ angular
                         cellTemplate: '' +
                             '<div class="ngCellText" ng-class="col.colIndex()">' +
                             '   <span ng-cell-text>' +
-                            '       <i style="display:{{row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'ATTACKER_WON\'?\'block\':\'none\'}};color:green;font-weight:bold;" class="fa fa-plus-square"></i>' +
-                            '       <i style="display:{{!row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'ATTACKER_WON\'?\'block\':\'none\'}};color:red;font-weight:bold;" class="fa fa-plus-square"></i>' +
-                            '       <i style="display:{{row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'DEFENDER_WON\'?\'block\':\'none\'}};color:green;font-weight:bold;" class="fa fa-minus-square"></i>' +
-                            '       <i style="display:{{!row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'DEFENDER_WON\'?\'block\':\'none\'}};color:red;font-weight:bold;" class="fa fa-minus-square"></i>' +
-                            '       <i style="display:{{!row.getProperty(\'outcome\')?\'block\':\'none\'}};font-weight:bold;" class="fa fa-square-o"></i>' +
+                            '       <i style="{{row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'ATTACKER_WON\'?\'\':\'display:none;\'}};color:green;font-weight:bold;" class="fa fa-plus-square"></i>' +
+                            '       <i style="{{!row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'ATTACKER_WON\'?\'\':\'display:none;\'}};color:red;font-weight:bold;" class="fa fa-plus-square"></i>' +
+                            '       <i style="{{row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'DEFENDER_WON\'?\'\':\'display:none;\'}};color:green;font-weight:bold;" class="fa fa-minus-square"></i>' +
+                            '       <i style="{{!row.getProperty(\'hasWon\') && row.getProperty(\'outcome\')==\'DEFENDER_WON\'?\'\':\'display:none;\'}};color:red;font-weight:bold;" class="fa fa-minus-square"></i>' +
+                            '       <i style="{{!row.getProperty(\'outcome\')?\'\':\'display:none;\'}};font-weight:bold;" class="fa fa-spinner fa-spin"></i>' +
                             '   </span>' +
                             '</div>'
                     },

@@ -14,11 +14,13 @@ public abstract class GameEvent {
 
     // Todo: verify if Jackson renders json by looking at fields or getter, then perhaps remove this field
     private String type;
+    private int elementId;
 
-    public GameEvent(){
+    public GameEvent(int elementId){
         type = getType();
+        this.elementId = elementId;
     }
 
     public abstract String getType();
-
+    public int getElementId(){return elementId;}
 }

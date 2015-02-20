@@ -15,6 +15,8 @@ public class PublicFight {
     private Date createdAt;
     private Fight.FightState fightState;
     private Fight.Outcome outcome;
+    private Integer dungeonBlueprintId;
+    private Integer attackForcePatternId;
 
     public PublicFight(Fight fight) {
         this.id = fight.getId();
@@ -29,10 +31,20 @@ public class PublicFight {
             this.defendingUserName = fight.getDungeon().getUser().getUsername();
         }
         this.outcome = fight.getOutcome();
+        this.dungeonBlueprintId = fight.getDungeonBlueprintId();
+        this.attackForcePatternId = fight.getAttackForcePatternId();
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getDungeonBlueprintId() {
+        return dungeonBlueprintId;
+    }
+
+    public Integer getAttackForcePatternId() {
+        return attackForcePatternId;
     }
 
     public Fight.FightState getFightState() {
