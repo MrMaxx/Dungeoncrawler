@@ -21,7 +21,7 @@ public class AttackerSucceededProcessor {
 
     public static void process(GameState gameState, int tickInMilliseconds){
 
-        LOGGER.debug("START AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
+        //LOGGER.debug("START AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
         try {
             List<Attacker> succeededAttackers = new LinkedList<Attacker>();
             for (Attacker attacker : gameState.getAttackers()) {
@@ -43,7 +43,7 @@ public class AttackerSucceededProcessor {
                         event.setX(attacker.getCoordinate().getX());
                         event.setY(attacker.getCoordinate().getY());
 
-                        gameState.getEvents().add(event);
+                        gameState.addEvent(tickInMilliseconds, event);
 
                         gameState.increaseAttackerScore(attacker.getPrice());
 
@@ -61,63 +61,14 @@ public class AttackerSucceededProcessor {
             }
 
             gameState.getAttackers().removeAll(succeededAttackers);
+            gameState.getDeadAttackers().addAll(succeededAttackers);
 
         }catch(IllegalArgumentException iae){
             LOGGER.error(gameState.getCheckPointToDungeonNodeMap());
             throw new RuntimeException(iae);
         }
-        LOGGER.debug("END AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
+        //LOGGER.debug("END AttackerSucceededProcessor => tickInMilliseconds = "+tickInMilliseconds);
 
-    }
-
-
-    private static void moveAttacker(Attacker attacker, int tickInMilliseconds){
-
-        if(attacker.getNextNodeVisit() == null){ return; }
-
-        if(tickInMilliseconds == attacker.getNextNodeVisit().getVisitTime()){
-            attacker.moveTo(attacker.getNextNodeVisit().getCoordinate());
-            attacker.setLastDungeonNodeVisit(attacker.getNextNodeVisit(), attacker.getLastDungeonNodeIndex()+1);
-            attacker.setNextNodeVisit(null);
-            return;
-        }
-
-        attacker.moveTo(
-                attacker.getLastNodeVisit().getCurrentTransitCoordinate(
-                        attacker.getNextNodeVisit(), tickInMilliseconds));
-    }
-
-    private static List<GameEvent> checkForMoveFromToEvents(Attacker attacker, GameState gameState, int tickInMilliseconds){
-
-        List<GameEvent> result = new LinkedList<GameEvent>();
-        if(attacker.getNextNodeVisit() == null ){
-
-            int nextNodeIndex = Integer.valueOf(attacker.getLastDungeonNodeIndex()+1);
-            DungeonNode nextNode = gameState.getCheckPointToDungeonNodeMap().get(nextNodeIndex);
-
-            // if nextNode is null the Attacker reached the last DungeonNode and thus succeeds
-            if(nextNode == null){return result;}
-            Coordinate nextCoordinate = new Coordinate(nextNode.getX(), nextNode.getY());
-
-            int nextVisitTime = attacker.getLastNodeVisit().getTransitTimeInMillis(nextCoordinate, attacker.getSpeed()) +
-                    attacker.getLastNodeVisit().getVisitTime();
-
-            NodeVisit nextNodeVisit = new NodeVisit(
-                    nextCoordinate,
-                    nextVisitTime);
-            attacker.setNextNodeVisit(nextNodeVisit);
-
-
-            MoveFromTo moveEvent = new MoveFromTo(attacker.getId());
-            moveEvent.setTime(attacker.getLastNodeVisit().getVisitTime());
-            moveEvent.setStartingCoordinate(attacker.getLastNodeVisit().getCoordinate());
-            moveEvent.setEndsAt(nextNodeVisit.getVisitTime());
-            moveEvent.setEndingCoordinate(nextNodeVisit.getCoordinate());
-
-            result.add(moveEvent);
-        }
-
-        return result;
     }
 
 }

@@ -17,6 +17,26 @@ angular
             $scope.constructionSiteIdSelected = null;
             $scope.towerIdSelected = null;
 
+            $scope.dragMap = function(event, ui){
+                $log.debug("New Position: "+ui.position.left+" - "+ui.position.top);
+
+                var containerHeight = $('#dragContainer').height();
+                var containerWidth = $('#dragContainer').width();
+
+                if( ui.position.left > 0){
+                    ui.position.left = 0;
+                }
+                if( ui.position.top > 0){
+                    ui.position.top = 0;
+                }
+                if( ui.position.top < (containerHeight - this.dungeonBlueprint.height)){
+                    ui.position.top = containerHeight - this.dungeonBlueprint.height;
+                }
+                if( ui.position.left < (containerWidth - this.dungeonBlueprint.width)){
+                    ui.position.left = containerWidth - this.dungeonBlueprint.width;
+                }
+            };
+
             $scope.inititlizeController = function(dungeonBlueprintId){
                 $scope.dungeonBlueprint = {};
                 $scope.constructionSites = {};

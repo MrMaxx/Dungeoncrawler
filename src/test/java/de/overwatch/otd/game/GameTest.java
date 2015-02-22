@@ -59,6 +59,16 @@ public class GameTest {
         return blueprint;
     }
 
+    public AttackerBlueprint nearDeadAttackerBlueprint(){
+        AttackerBlueprint blueprint = new AttackerBlueprint();
+        blueprint.setId(1);
+        blueprint.setMaxHealth(1);
+        blueprint.setPrice(100);
+        blueprint.setSpeed(100);
+        blueprint.setType("NEAR_DEAD__ATTACKER");
+        return blueprint;
+    }
+
     public TowerBlueprint defaultTowerBlueprint(){
         TowerBlueprint blueprint = new TowerBlueprint();
         blueprint.setId(1);
@@ -67,6 +77,21 @@ public class GameTest {
         blueprint.setDamage(100);
         blueprint.setAttackRange(100);
         blueprint.setTimeToReload(10);
+        blueprint.setTowerEffect(TowerBlueprint.TowerEffect.SINGLE_DAMAGE);
+        return blueprint;
+    }
+
+    public TowerBlueprint effectTowerBlueprint(){
+        TowerBlueprint blueprint = new TowerBlueprint();
+        blueprint.setId(1);
+        blueprint.setType("EFFECT_TOWER");
+        blueprint.setPrice(100);
+        blueprint.setDamage(100);
+        blueprint.setAttackRange(100);
+        blueprint.setTimeToReload(10);
+        blueprint.setTowerEffect(TowerBlueprint.TowerEffect.SINGLE_EFFECT);
+        blueprint.setSlowsDownToPercent(50);
+        blueprint.setEffectWearsOffInMilliseconds(20);
         return blueprint;
     }
 

@@ -25,6 +25,7 @@ public class Attacker {
     private NodeVisit lastNodeVisit;
     private int lastDungeonNodeIndex;
     private NodeVisit nextNodeVisit;
+    private List<NodeVisit> nodeVisits = new LinkedList<NodeVisit>();
 
     private List<Turret> beingTargetedBy = new LinkedList<Turret>();
 
@@ -51,12 +52,57 @@ public class Attacker {
     public void setLastDungeonNodeVisit(NodeVisit lastDungeonNodeVisit, int dungeonNodeIndex ) {
         this.lastNodeVisit = lastDungeonNodeVisit;
         this.lastDungeonNodeIndex = dungeonNodeIndex;
+
+        this.nodeVisits.add(lastDungeonNodeVisit);
     }
 
     public void setNextNodeVisit(NodeVisit nextNodeVisit) {
         this.nextNodeVisit = nextNodeVisit;
     }
 
+
+    private Integer effectWearsOffAt = null;
+    public boolean hasNoEffect() {
+        return effectWearsOffAt == null;
+    }
+
+    public int getEffectWearsOffAt() {
+        return effectWearsOffAt==null?0:effectWearsOffAt.intValue();
+    }
+
+    private int originalSpeed;
+    public void setEffectStarted(int tickInMilliseconds, int slowDownToPercent, Integer effectWearsOffAt) {
+        this.effectWearsOffAt = effectWearsOffAt;
+
+        this.originalSpeed = this.speed;
+        this.speed = (int)((originalSpeed / 100.0) * slowDownToPercent);
+        insertIntermediateNodeVisitWithNewSpeed(tickInMilliseconds);
+    }
+    public void setEffectEnded(int tickInMilliseconds) {
+        this.effectWearsOffAt = null;
+        this.speed = this.originalSpeed;
+        insertIntermediateNodeVisitWithNewSpeed(tickInMilliseconds);
+    }
+    public void lengthenEffect(int effectWearsOffAt) {
+        this.effectWearsOffAt = effectWearsOffAt;
+    }
+    private void insertIntermediateNodeVisitWithNewSpeed(int tickInMilliseconds){
+        NodeVisit intermediateVisit = new NodeVisit(new Coordinate(coordinate), tickInMilliseconds);
+        this.nodeVisits.add(intermediateVisit);
+        this.lastNodeVisit = intermediateVisit;
+        // correction of Time to next NodeVisit with new Speed
+        int timeToNext = intermediateVisit.getTransitTimeInMillis(nextNodeVisit.getCoordinate(), this.speed);
+        NodeVisit newNextNodeVisit = new NodeVisit(
+                this.nextNodeVisit.getCoordinate(),
+                tickInMilliseconds + timeToNext);
+
+        this.nextNodeVisit = newNextNodeVisit;
+    }
+
+
+    public List<NodeVisit> getNodeVisits() {
+        return nodeVisits;
+    }
 
     public int getPrice() {
         return price;
@@ -130,4 +176,5 @@ public class Attacker {
     public int hashCode() {
         return id.hashCode();
     }
+
 }

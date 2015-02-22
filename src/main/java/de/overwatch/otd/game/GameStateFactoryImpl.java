@@ -1,7 +1,6 @@
 package de.overwatch.otd.game;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
 import de.overwatch.otd.domain.Fight;
 import de.overwatch.otd.domain.attack.AttackForcePattern;
@@ -17,11 +16,11 @@ import de.overwatch.otd.repository.AttackForcePatternRepository;
 import de.overwatch.otd.repository.AttackerBlueprintRepository;
 import de.overwatch.otd.repository.DungeonBlueprintRepository;
 import de.overwatch.otd.repository.TowerBlueprintRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +29,9 @@ import java.util.Map;
  * that are needed to compute the result of a {link Fight}
  */
 @Service
-public class GameEngineFactoryImpl implements GameEngineFactory {
+public class GameStateFactoryImpl implements GameStateFactory {
 
+    private static final Logger LOGGER = Logger.getLogger(GameStateFactoryImpl.class);
     @Autowired
     private DungeonBlueprintRepository dungeonBlueprintRepository;
     @Autowired
@@ -43,7 +43,7 @@ public class GameEngineFactoryImpl implements GameEngineFactory {
     private AttackForcePatternRepository attackForcePatternRepository;
 
     @Override
-    public GameState createGameEngine(Fight fight) {
+    public GameState createGameState(Fight fight) {
 
         List<AttackerBlueprint> attackerBlueprints = attackerBlueprintRepository.findAll();
         List<TowerBlueprint> defenderBlueprints = towerBlueprintRepository.findAll();

@@ -11,9 +11,11 @@
 <div class="container-fluid" ng-controller="DungeonController">
 
     <div class="row">
-        <div class="col-md-8" style="height:600px;overflow:hidden;" id="dragContainer">
+        <div class="col-md-8" style="height:600px;overflow:hidden;padding:0px" id="dragContainer">
 
-            <div data-drag="true" jqyoui-draggable style="position:absolute;cursor:move;height:{{dungeonBlueprint.height}}px;width:{{dungeonBlueprint.width}}px;background-image:url(assets/gameimages/dungeons/{{dungeonBlueprint.name}}.jpg);">
+            <div data-drag="true"
+                 jqyoui-draggable="{onDrag: 'dragMap'}"
+                 style="position:absolute;cursor:move;height:{{dungeonBlueprint.height}}px;width:{{dungeonBlueprint.width}}px;background-image:url(assets/gameimages/dungeons/{{dungeonBlueprint.name}}.jpg);">
 
                 <div ng-repeat="(id, site) in constructionSites"
                      ng-click="constructionSiteClicked(site.id)"

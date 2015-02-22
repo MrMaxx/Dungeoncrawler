@@ -1,6 +1,10 @@
 package de.overwatch.otd.game;
 
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 import de.overwatch.otd.domain.defend.DungeonNode;
 import de.overwatch.otd.domain.defend.Tower;
 import de.overwatch.otd.game.events.GameEvent;
@@ -20,11 +24,12 @@ public class GameState {
     private List<AttackerSpawn> attackerSpawnes;
     private List<DefenderSpawn> defenderSpawnes;
     private List<Attacker> attackers = new LinkedList<Attacker>();
+    private List<Attacker> deadAttackers = new LinkedList<Attacker>();
     private List<Turret> turrets = new LinkedList<Turret>();
 
     private Map<Integer, DungeonNode> checkPointToDungeonNodeMap;
 
-    List<GameEvent> events = new LinkedList<GameEvent>();
+    ListMultimap<Integer, GameEvent> tickToEventsMap = ArrayListMultimap.create();
 
     public GameState(List<AttackerSpawn> attackerSpawnes, List<DefenderSpawn> defenderSpawnes, Map<Integer, DungeonNode> checkPointToDungeonNodeMap) {
         this.attackerSpawnes = attackerSpawnes;
@@ -32,8 +37,8 @@ public class GameState {
         this.checkPointToDungeonNodeMap = checkPointToDungeonNodeMap;
     }
 
-    public List<GameEvent> getEvents() {
-        return events;
+    public void addEvent(Integer tickInMilliSeconds, GameEvent gameEvent) {
+        tickToEventsMap.put(tickInMilliSeconds, gameEvent);
     }
 
     public List<AttackerSpawn> getAttackerSpawnes() {
@@ -48,6 +53,10 @@ public class GameState {
         return attackers;
     }
 
+    public List<Attacker> getDeadAttackers() {
+        return deadAttackers;
+    }
+
     public List<Turret> getTurrets() {
         return turrets;
     }
@@ -58,6 +67,10 @@ public class GameState {
 
     public int getAttackerScore() {
         return attackerScore;
+    }
+
+    public ListMultimap<Integer, GameEvent> getTickToEventsMap() {
+        return tickToEventsMap;
     }
 
     public void increaseAttackerScore(int delta) {

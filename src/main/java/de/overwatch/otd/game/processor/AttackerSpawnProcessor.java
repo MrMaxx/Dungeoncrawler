@@ -25,7 +25,7 @@ public class AttackerSpawnProcessor {
                 event.setX(attacker.getCoordinate().getX());
                 event.setY(attacker.getCoordinate().getY());
 
-                gameState.getEvents().add(event);
+                gameState.addEvent(tickInMilliseconds, event);
 
                 gameState.getAttackers().add(spawn.getAttacker());
             }

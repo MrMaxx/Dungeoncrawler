@@ -26,7 +26,7 @@ public class DefenderSpawnProcessor {
                 event.setX(turret.getCoordinate().getX());
                 event.setY(turret.getCoordinate().getY());
 
-                gameState.getEvents().add(event);
+                gameState.addEvent(tickInMilliseconds, event);
 
                 gameState.getTurrets().add(turret);
             }

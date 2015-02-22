@@ -7,8 +7,9 @@ import de.overwatch.otd.domain.Fight;
 import de.overwatch.otd.domain.attack.AttackForce;
 import de.overwatch.otd.domain.defend.Dungeon;
 import de.overwatch.otd.domain.defend.TowerBlueprint;
-import de.overwatch.otd.game.GameEngineFactory;
+import de.overwatch.otd.game.GameStateFactory;
 import de.overwatch.otd.game.GameState;
+import de.overwatch.otd.game.events.GameEvent;
 import de.overwatch.otd.game.processor.*;
 import de.overwatch.otd.repository.*;
 import org.apache.log4j.Logger;
@@ -43,12 +44,8 @@ public class FightServiceImpl implements FightService{
     private AttackForceRepository attackForceRepository;
 
     @Autowired
-    private GameEngineFactory gameEngineFactory;
+    private GameStateFactory gameStateFactory;
 
-    private Map<Integer, TowerBlueprint> getTowerBlueprintIdToTowerBlueprintMap(){
-
-        return null;
-    }
 
     @Override
     public PublicFight createFightAgainst(Integer attackingUserId, Integer defendingUserId) {
@@ -108,7 +105,7 @@ public class FightServiceImpl implements FightService{
         for(Fight fight : outstandingFights){
 
             try {
-                GameState gameState = gameEngineFactory.createGameEngine(fight);
+                GameState gameState = gameStateFactory.createGameState(fight);
 
                 int milliSeconds = 0;
                 /* a Fight has to be finished in 10 Minutes */
@@ -120,15 +117,26 @@ public class FightServiceImpl implements FightService{
                     AttackerSpawnProcessor.process(gameState, milliSeconds);
                     // 3. calculate the movements of the Attackers
                     MoveToProcessor.process(gameState, milliSeconds);
-                    // 4. Turrets need to inflict damage...that is what they were build for
-                    DefenderTargetingProcessor.process(gameState, milliSeconds);
+                    // 4.1 Turrets need to inflict damage...that is what they were build for
+                    SingleDamageTargetingProcessor.process(gameState, milliSeconds);
+                    // 4.2 Turrets need to apply Effects...that is what they were build for
+                    SingleEffectTowerTargetingProcessor.process(gameState, milliSeconds);
                     // 5. Sometimes Attackers run through the whole Dungeon ands succeed
                     AttackerSucceededProcessor.process(gameState, milliSeconds);
 
                     milliSeconds++;
                 }
 
-                String eventStream = gson.toJson(gameState.getEvents());
+                ExtractMoveToEventsProcessor.process(gameState);
+
+                List<GameEvent> result = new LinkedList<GameEvent>();
+                milliSeconds = 0;
+                while( milliSeconds < 600000 ){
+                    result.addAll(gameState.getTickToEventsMap().get(milliSeconds));
+                    milliSeconds++;
+                }
+
+                String eventStream = gson.toJson(result);
 
                 if(gameState.getAttackerScore() > 0){
                     fight.setOutcome(Fight.Outcome.ATTACKER_WON);

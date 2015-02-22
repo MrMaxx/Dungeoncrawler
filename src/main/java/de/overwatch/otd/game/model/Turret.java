@@ -17,6 +17,12 @@ public class Turret {
     private int timeToReload;
     private int range;
 
+    private TowerBlueprint.TowerEffect towerEffect;
+
+    private int slowsDownToPercent;
+
+    private int effectWearsOffInMilliseconds;
+
     private Attacker currentTarget;
     private int lastShot = 0;
 
@@ -27,7 +33,11 @@ public class Turret {
         this.damage = towerBlueprint.getDamage();
         this.timeToReload = towerBlueprint.getTimeToReload();
         this.range = towerBlueprint.getAttackRange();
+        this.towerEffect = towerBlueprint.getTowerEffect();
+        this.slowsDownToPercent = towerBlueprint.getSlowsDownToPercent();
+        this.effectWearsOffInMilliseconds = towerBlueprint.getEffectWearsOffInMilliseconds();
     }
+
 
     public int getLastShot() {
         return lastShot;
@@ -35,6 +45,18 @@ public class Turret {
 
     public void setLastShot(int lastShot) {
         this.lastShot = lastShot;
+    }
+
+    public TowerBlueprint.TowerEffect getTowerEffect() {
+        return towerEffect;
+    }
+
+    public int getEffectWearsOffInMilliseconds() {
+        return effectWearsOffInMilliseconds;
+    }
+
+    public int getSlowsDownToPercent() {
+        return slowsDownToPercent;
     }
 
     public Integer getId() {
