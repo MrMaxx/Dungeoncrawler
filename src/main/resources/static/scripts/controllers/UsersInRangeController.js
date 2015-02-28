@@ -22,7 +22,6 @@ angular
 
             $scope.getPagedDataAsync = function (pageSize, page) {
                 UserService.getUserPage(page,pageSize).then(function(userPage){
-                    $scope.usersInRange = userPage.users;
                     $scope.totalServerItems = userPage.totalSize;
                     $scope.usersInRange = $scope.prepareData(userPage.users);
                     if (!$scope.$$phase) {
@@ -32,7 +31,7 @@ angular
             };
 
             $scope.prepareData = function(userList){
-                angular.forEach($scope.usersInRange, function(data, index){
+                angular.forEach(userList, function(data, index){
                     data['isOther'] = (data.id != $scope.activeUserId);
                 });
                 return userList;

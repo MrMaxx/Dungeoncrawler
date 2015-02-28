@@ -7,18 +7,20 @@ insert into authorities (user_id, authority) values (1, 'ADMIN');
 insert into authorities (user_id, authority) values (2, 'ADMIN');
 
 
-insert into attacker_blueprint (id, type, price, speed, max_health) values (1,'GRUNT', 200, 30, 2000);
-insert into attacker_blueprint (id, type, price, speed, max_health) values (2,'RUNNER', 250, 50, 1000);
+insert into attacker_blueprint (id, type, price, speed, max_health, slots) values (1,'GRUNT', 200, 30, 1000, 1);
+insert into attacker_blueprint (id, type, price, speed, max_health, slots) values (2,'RUNNER', 250, 50, 600,1 );
+insert into attacker_blueprint (id, type, price, speed, max_health, slots) values (3,'BOT', 400, 20, 5000, 3);
+insert into attacker_blueprint (id, type, price, speed, max_health, slots) values (4,'GUNCAR', 850, 20, 15000, 4);
 
 insert into attack_force_pattern (id, pattern_name) values (1, 'EARLY_SURPRISE');
 
 
 insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (1, 1000, 1, 6, 1000);
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (2, 5000, 1, 10, 1200);
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (3, 10000, 1, 12, 2000);
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (4, 15000, 1, 9, 1000);
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (5, 12000, 1, 10, 2500);
-insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (6, 20000, 1, 20, 1200);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (2, 10000, 1, 10, 1200);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (3, 25000, 1, 12, 2000);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (4, 50000, 1, 9, 1000);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (5, 60000, 1, 10, 2500);
+insert into wave_blueprint (id, dispatches_after, attack_force_pattern_id, slots, delay_between_spawns) values (6, 84000, 1, 20, 1200);
 
 
 insert into dungeon_blueprint (id, name, height, width) values (1, 'SNAIL', 840, 1080);
@@ -71,36 +73,36 @@ insert into construction_site (id, dungeon_blueprint_id, x, y) values (12, 2, 52
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (13, 2, 260, 620);
 insert into construction_site (id, dungeon_blueprint_id, x, y) values (14, 2, 260, 820);
 
-insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (1, 'GATTLING', 20, 100, 200, 100, 'SINGLE_DAMAGE', 100, 0);
-insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (2, 'PLASMA', 30, 120, 320, 200, 'SINGLE_DAMAGE', 100, 0);
-insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (3, 'DISRUPTOR', 0, 1500, 200, 500, 'SINGLE_EFFECT', 40, 5000);
-insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (4, 'ROCKETLAUNCHER', 800, 3000, 250, 1500, 'SINGLE_DAMAGE', 100, 0);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (1, 'GATTLING', 20, 200, 200, 100, 'SINGLE_DAMAGE', 100, 0);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (2, 'PLASMA', 100, 800, 200, 150, 'SINGLE_DAMAGE', 100, 0);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (3, 'DISRUPTOR', 0, 1500, 250, 500, 'SINGLE_EFFECT', 40, 5000);
+insert into tower_blueprint (id, tower_type, damage, time_to_reload, attack_range, price, tower_effect, slows_down_to_percent, effect_wears_off_in_milliseconds) values (4, 'ROCKETLAUNCHER', 350, 3000, 350, 1500, 'SINGLE_DAMAGE', 100, 0);
 
 insert into attack_force (id, user_id, attack_force_pattern_id) values (1, 1, 1);
 insert into attack_force (id, user_id, attack_force_pattern_id) values (2, 2, 1);
 
 insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (1, 1, 1, 1);
 --insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (2, 1, 2, 2);
-insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (3, 2, 2, 1);
---insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (4, 2, 2, 2);
---insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (5, 2, 1, 3);
---insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (6, 2, 1, 4);
---insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (7, 2, 2, 5);
---insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (8, 2, 2, 6);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (3, 2, 4, 1);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (4, 2, 3, 2);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (5, 2, 4, 3);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (6, 2, 1, 4);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (7, 2, 2, 5);
+insert into wave (id, attack_force_id, attacker_blueprint_id, wave_blueprint_id) values (8, 2, 2, 6);
 
 insert into dungeon (id, user_id, dungeon_blueprint_id) values (1, 1, 2);
 
 insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (1, 1, 4, 4);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (2, 1, 5, 3);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 1, 6, 4);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 1, 7, 2);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (5, 1, 8, 1);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (6, 1, 9, 3);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (7, 1, 10, 2);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (8, 1, 11, 1);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (9, 1, 12, 1);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (10, 1, 13, 2);
---insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (11, 1, 14, 1);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (2, 1, 5, 1);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (3, 1, 6, 4);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (4, 1, 7, 3);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (5, 1, 8, 1);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (6, 1, 9, 3);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (7, 1, 10, 2);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (8, 1, 11, 1);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (9, 1, 12, 4);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (10, 1, 13, 2);
+insert into tower (id, dungeon_id, construction_site_id, tower_blueprint_id) values (11, 1, 14, 1);
 
 insert into fight (id, dungeon_id, attack_force_id, created, fight_state, outcome, attacker_id, defender_id, events, dungeon_blueprint_id, attack_force_pattern_id) values (1,1,2,'2015-01-16 09:42:01','ISSUED',null, 1, 2, null, 2, 1);
 

@@ -5,7 +5,7 @@ angular
     .controller('AttackForceController',
         ['$scope', '$log', 'AttackForceService', 'AttackerBlueprintService', 'AttackForcePatternService',
         function ($scope, $log, AttackForceService, AttackerBlueprintService, AttackForcePatternService) {
-
+            $scope.Math = Math;
             $scope.attackForcePatternId = 1;
 
             $scope.waveBlueprintsByWaveBlueprintId = {};

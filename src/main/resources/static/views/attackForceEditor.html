@@ -39,6 +39,11 @@
     .waveTime {
         margin-top:55px;
     }
+    .GRUNT {height:40px;width:40px;}
+    .RUNNER {height:40px;width:40px;}
+    .BOT {height:34px;width:44px;}
+    .GUNCAR {height:66px;width:33px;}
+
 </style>
 
 <div class="container-fluid" ng-controller="AttackForceController">
@@ -68,12 +73,15 @@
                             <div class="tiles-body">
                                 <div class="pull-left"><i class="fa fa-group"></i></div>
                                 <div class="pull-right">
-                                    <span class="badge ng-binding"  tooltip-placement="right" tooltip="count of spawns">+{{waveBlueprint.slots}}</span><br>
+                                    <span class="badge ng-binding"  tooltip-placement="right" tooltip="count of slots">+{{waveBlueprint.slots}}</span><br>
                                     <span class="badge ng-binding" style="margin-top:3px" tooltip-placement="right" tooltip="delay in ms between spawns">{{waveBlueprint.delayBetweenSpawns}}ms</span>
                                 </div>
                             </div>
-                            <div class="tiles-footer ng-binding">
-                                <img src="assets/gameimages/attacker/{{waveByWaveBlueprintId[waveBlueprint.id]?attackerBlueprintsById[waveByWaveBlueprintId[waveBlueprint.id].attackerBlueprintId].type:'NONE'}}.png">
+                            <div style="height:54px;" class="tiles-footer ng-binding">
+                                <span ng-show="waveByWaveBlueprintId[waveBlueprint.id]">
+                                    {{Math.floor(waveBlueprint.slots/attackerBlueprintsById[waveByWaveBlueprintId[waveBlueprint.id].attackerBlueprintId].slots)}}x
+                                </span>
+                                <img src="assets/gameimages/attacker/{{waveByWaveBlueprintId[waveBlueprint.id]?attackerBlueprintsById[waveByWaveBlueprintId[waveBlueprint.id].attackerBlueprintId].type:'NONE'}}_EAST.png">
                             </div>
                         </a>
                     </div>
@@ -111,7 +119,8 @@
 
                         <div ng-class="{attacker_selected: blueprint.id == waveByWaveBlueprintId[selectedWaveBlueprintId].attackerBlueprintId}"></div>
                         <div ng-click="chooseAttacker(blueprint.id)"
-                             style="cursor: pointer;position:absolute;top:10px;left:10px;background-image:url(assets/gameimages/attacker/{{blueprint.type}}.png);height:40px;width:40px;"></div>
+                             class="{{blueprint.type}}"
+                             style="cursor: pointer;position:absolute;top:10px;left:10px;background-image:url(assets/gameimages/attacker/{{blueprint.type}}.png);"></div>
 
                     </div>
                     <div style="margin-left:100px;">
@@ -119,12 +128,16 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr>
-                                <td>Speed</td>
+                                <td>speed</td>
                                 <td>{{blueprint.speed}}</td>
                             </tr>
                             <tr>
-                                <td>Health</td>
+                                <td>health</td>
                                 <td>{{blueprint.maxHealth}}</td>
+                            </tr>
+                            <tr>
+                                <td>slots</td>
+                                <td>{{blueprint.slots}}</td>
                             </tr>
                             <tr>
                                 <td>price</td>

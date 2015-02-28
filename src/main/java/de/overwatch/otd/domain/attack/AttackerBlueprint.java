@@ -17,6 +17,16 @@ public class AttackerBlueprint  extends OtdEntity {
     private int speed;
     @Column(nullable = false)
     private int maxHealth;
+    @Column(nullable = false)
+    private int slots;
+
+    public int getSlots() {
+        return slots;
+    }
+
+    public void setSlots(int slots) {
+        this.slots = slots;
+    }
 
     public String getType() {
         return type;
@@ -61,6 +71,7 @@ public class AttackerBlueprint  extends OtdEntity {
         if (price != that.price) return false;
         if (speed != that.speed) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (slots != that.slots) return false;
 
         return true;
     }
@@ -72,6 +83,7 @@ public class AttackerBlueprint  extends OtdEntity {
         result = 31 * result + price;
         result = 31 * result + speed;
         result = 31 * result + maxHealth;
+        result = 31 * result + slots;
         return result;
     }
 
@@ -83,6 +95,7 @@ public class AttackerBlueprint  extends OtdEntity {
                 ", price=" + price +
                 ", speed=" + speed +
                 ", maxHealth=" + maxHealth +
+                ", slots=" + slots +
                 '}';
     }
 }

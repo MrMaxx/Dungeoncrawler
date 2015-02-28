@@ -9,9 +9,7 @@ import de.overwatch.otd.game.model.*;
 import de.overwatch.otd.game.util.IdGenerator;
 import de.overwatch.otd.game.model.NodeVisit;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AttackerSpawnBuilder {
 
@@ -47,15 +45,24 @@ public class AttackerSpawnBuilder {
 
             WaveBlueprint waveBlueprint = idToWaveBlueprintMap.get(wave.getWaveBlueprintId());
 
+            AttackerBlueprint attackerBlueprint = idToAttackerBlueprintMap.get(wave.getAttackerBlueprintId());;
+
+            int unitCount = (int)(waveBlueprint.getSlots() / attackerBlueprint.getSlots());
+
             for(int i = 0; i < waveBlueprint.getSlots(); i++){
+
+                // we omit all slots that are already filled
+                if(i%attackerBlueprint.getSlots()!=0 || unitCount < i / (float)attackerBlueprint.getSlots()){
+                    continue;
+                }
 
                 Attacker attacker = new Attacker(
                         idGenerator.getNextId(),
-                        idToAttackerBlueprintMap.get(wave.getAttackerBlueprintId()));
+                        attackerBlueprint);
 
                 DungeonNode start = checkPointToDungeonNodeMap.get(Integer.valueOf(0));
 
-                int spawnsAt = waveBlueprint.getDispatchesAfter()+(waveBlueprint.getDelayBetweenSpawns()*i);
+                int spawnsAt = waveBlueprint.getDispatchesAfter() + (waveBlueprint.getDelayBetweenSpawns()*i);
 
                 attacker.moveTo(new Coordinate(start.getX(), start.getY()));
                 attacker.setLastDungeonNodeVisit(
